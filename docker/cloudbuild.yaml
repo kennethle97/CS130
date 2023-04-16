@@ -1,0 +1,26 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    docker pull gcr.io/$PROJECT_ID/projects:base || exit 0
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'build',
+    '-f', 'docker/base.Dockerfile',
+    '-t', 'projects:base',
+    '-t', 'gcr.io/$PROJECT_ID/projects:base',
+    '--cache-from', 'gcr.io/$PROJECT_ID/projects:base',
+    '.'
+  ]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/projects:base']
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'build',
+    '-f', 'docker/Dockerfile',
+    '-t', 'gcr.io/$PROJECT_ID/projects:latest',
+    '.'
+  ]
+images: ['gcr.io/$PROJECT_ID/projects:base', 'gcr.io/$PROJECT_ID/projects:latest']
