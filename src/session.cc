@@ -1,5 +1,6 @@
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
+#include <iostream>
 
 #include "session.h"
 
@@ -17,7 +18,9 @@ tcp::socket& session::socket()
 
 void session::start()
 {
-    socket_.async_read_some(boost::asio::buffer(data_, max_length),
+   boost::asio::async_read_until( socket_, 
+        boost::asio::dynamic_buffer(data_),
+        "\r\n\r\n",
         boost::bind(&session::handle_read, this,
             boost::asio::placeholders::error,
             boost::asio::placeholders::bytes_transferred));
@@ -28,8 +31,11 @@ void session::handle_read(const boost::system::error_code& error,
 {
     if (!error)
     {
+      std::string header = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\n";
+      std::string full_response = header + data_;
+      std::cout << full_response << std::endl;
       boost::asio::async_write(socket_,
-          boost::asio::buffer(data_, bytes_transferred),
+          boost::asio::buffer(full_response.c_str(), full_response.length()),
           boost::bind(&session::handle_write, this,
             boost::asio::placeholders::error));
     }
@@ -43,10 +49,16 @@ void session::handle_write(const boost::system::error_code& error)
 {
     if (!error)
     {
-      socket_.async_read_some(boost::asio::buffer(data_, max_length),
-          boost::bind(&session::handle_read, this,
-            boost::asio::placeholders::error,
-            boost::asio::placeholders::bytes_transferred));
+    boost::system::error_code shutdown_error;
+    socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, shutdown_error);
+    // session::reset_data();
+    // boost::asio::async_read_until(socket_,
+    //  boost::asio::dynamic_buffer(data_),
+    //       "\r\n\r\n",
+    //       boost::bind(&session::handle_read, this,
+    //       boost::asio::placeholders::error,
+    //       boost::asio::placeholders::bytes_transferred));
+    // }
     }
     else
     {
