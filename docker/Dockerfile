@@ -1,6 +1,6 @@
 ### Build/test container ###
 # Define builder stage
-FROM projects:base as builder
+FROM echo_server:base as builder
 
 # Share work directory
 COPY . /usr/src/project
@@ -11,21 +11,32 @@ RUN cmake ..
 RUN make
 RUN ctest --output-on_failure
 
+# To build, run the commands:
+#   docker build -f docker/base.Dockerfile -t echo_server:base .
+#   docker build -f docker/Dockerfile -t echo_server .
+
+# To run the latest variant of echo_server as echo_run, removing the container after it stops, 
+# mapping your server’s port to a port on your loopback network interface (127.0.0.1)
+#   docker run --rm -p 127.0.0.1:80:80 --name echo_run echo_server:latest
+
+# To stop the container:
+#   docker container stop echo_run
 
 ### Deploy container ###
 # Define deploy stage
 FROM ubuntu:jammy as deploy
 
 # TODO(!): Copy server output binary to "."
-# COPY --from=builder /usr/src/project/build/bin/example_server .
+COPY --from=builder /usr/src/project/build/bin/server .
+COPY --from=builder /usr/src/project/conf/server.conf .
 
 # TODO(!): Expose some port(s)
-# EXPOSE 80
+EXPOSE 80
 
 # Use ENTRYPOINT to specify the binary name
 # TODO(!): Update with real server name
-# ENTRYPOINT ["./example_server"]
+ENTRYPOINT ["./server"]
 
 # Use CMD to specify arguments to ENTRYPOINT
 # TODO(!): Update with real server args
-# CMD [""]
+CMD ["server.conf"]
