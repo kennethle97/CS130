@@ -12,15 +12,15 @@ RUN make
 RUN ctest --output-on_failure
 
 # To build, run the commands:
-#   docker build -f docker/base.Dockerfile -t echo_server:base .
-#   docker build -f docker/Dockerfile -t echo_server .
+#   docker build -f docker/base.Dockerfile -t echo_server:base . --no-cache
+#   docker build -f docker/Dockerfile -t echo_server . --no-cache
 
 # To run the latest variant of echo_server as echo_run, removing the container after it stops, 
 # mapping your server’s port to a port on your loopback network interface (127.0.0.1)
 #   docker run --rm -p 127.0.0.1:80:80 --name echo_run echo_server:latest
 
 # To stop the container:
-#   docker container stop echo_run
+#   docker stop echo_run
 
 ### Deploy container ###
 # Define deploy stage

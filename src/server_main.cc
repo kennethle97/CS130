@@ -13,6 +13,7 @@
 #include <boost/asio.hpp>
 
 #include "server.h"
+#include "config_parser.h"
 
 int main(int argc, char* argv[])
 {
@@ -26,8 +27,21 @@ int main(int argc, char* argv[])
 
     boost::asio::io_service io_service;
 
-    using namespace std; // For atoi.
-    server s(io_service, atoi(argv[1]));
+    NginxConfigParser parser;
+    NginxConfig config;
+
+    if (!parser.Parse(argv[1], &config)) {
+      std::cerr << "Failed to parse config file" << std::endl;
+      return 1;
+    }
+    int port = config.GetServerPort();
+    if (port == -1) {
+      std::cerr << "Failed to get port from config file" << std::endl;
+      return 1;
+    }
+
+    server s(io_service, port);
+    // std::cout << "Server started at port " << port << std::endl;
 
     io_service.run();
   }
