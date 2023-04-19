@@ -1,6 +1,6 @@
 ### Build/test container ###
 # Define builder stage
-FROM echo_server:base as builder
+FROM projects:base as builder
 
 # Share work directory
 COPY . /usr/src/project
@@ -12,17 +12,17 @@ RUN make
 RUN ctest --output-on_failure
 
 # To build, run the commands:
-#   docker build -f docker/base.Dockerfile -t echo_server:base . --no-cache
-#   docker build -f docker/Dockerfile -t echo_server . --no-cache
+#   docker build -f docker/base.Dockerfile -t projects:base . --no-cache
+#   docker build -f docker/Dockerfile -t projects . --no-cache
 
-# To run the latest variant of echo_server as echo_run, removing the container after it stops, 
+# To run the latest variant of projects as echo_run, removing the container after it stops, 
 # mapping your server’s port to a port on your loopback network interface (127.0.0.1)
 #   docker run --rm -p 127.0.0.1:80:80 --name echo_run echo_server:latest
 
 # To stop the container:
 #   docker stop echo_run
 
-### Deploy container ###
+### Deploy hcontainer ###
 # Define deploy stage
 FROM ubuntu:jammy as deploy
 
