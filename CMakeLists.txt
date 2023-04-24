@@ -51,15 +51,28 @@ target_link_libraries(server server_main_lib server_lib session_lib config_parse
 # add_executable(example_lib_test tests/example_lib_test.cc)
 # target_link_libraries(example_lib_test example_lib gtest_main)
 
-#doesn't need it now
+add_executable(server_lib_test tests/server_test.cc)
+target_link_libraries(server_lib_test server_lib gtest_main)
+
+add_executable(session_lib_test tests/session_test.cc)
+target_link_libraries(session_lib_test session_lib gtest_main)
+
+add_executable(config_parser_lib_test tests/config_parser_test.cc)
+target_link_libraries(config_parser_lib_test config_parser_lib gtest_main)
 
 # TODO(!): Update with test binary
 # gtest_discover_tests(example_lib_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
-
-#doesn't need it now
+gtest_discover_tests(server_lib_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+gtest_discover_tests(session_lib_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+gtest_discover_tests(config_parser_lib_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 
 # TODO(!): Update with target/test targets
 # include(cmake/CodeCoverageReportConfig.cmake)
 # generate_coverage_report(TARGETS example_server example_lib TESTS example_lib_test)
+include(cmake/CodeCoverageReportConfig.cmake)
+generate_coverage_report(TARGETS server server_lib session_lib config_parser_lib TESTS server_lib_test session_lib_test config_parser_lib_test)
 
-#doesn't need it now
+
+# paste local path
+#          ${REPO}/build_coverage/report/index.html
+# to see coverage report

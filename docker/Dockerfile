@@ -17,7 +17,7 @@ RUN ctest --output-on_failure
 
 # To run the latest variant of projects as echo_run, removing the container after it stops, 
 # mapping your server’s port to a port on your loopback network interface (127.0.0.1)
-#   docker run --rm -p 127.0.0.1:80:80 --name echo_run echo_server:latest
+#   docker run --rm -p 127.0.0.1:80:80 --name echo_run projects:latest
 
 # To stop the container:
 #   docker stop echo_run
