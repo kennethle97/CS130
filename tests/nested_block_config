@@ -1,0 +1,17 @@
+http {
+    server {
+        listen 200;
+        server_name foo;
+        path /some/path/to/foo;
+    }
+    
+    server {
+        location  {
+            path /some/path;
+        }
+
+        location {
+            path /some/other/path;
+        }
+    }
+}

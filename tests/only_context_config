@@ -1,0 +1,5 @@
+http {
+  listen   80;
+  website_name foo.com;
+  root /home/ubuntu/sites/foo/;
+}

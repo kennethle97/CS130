@@ -1,0 +1,9 @@
+# comment
+foo "bar";
+# another comment
+server {
+  listen   80;
+  server_name foo.com;
+  root /home/ubuntu/sites/foo/;
+}
+# and one last comment
