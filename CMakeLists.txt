@@ -76,3 +76,5 @@ generate_coverage_report(TARGETS server server_lib session_lib config_parser_lib
 # paste local path
 #          ${REPO}/build_coverage/report/index.html
 # to see coverage report
+add_test(NAME integration_tests COMMAND bash ${CMAKE_SOURCE_DIR}/tests/integration_tests.sh 
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/tests)
