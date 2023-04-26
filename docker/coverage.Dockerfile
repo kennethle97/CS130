@@ -6,13 +6,6 @@ FROM projects:base as builder
 COPY . /usr/src/project
 WORKDIR /usr/src/project/build
 
-# Build and test
-#not sure if these are needed will tes
-RUN cmake ..
-RUN make
-RUN ctest --output-on_failure
-
-
-# Generate coverage report
-RUN cd /usr/src/project
-RUN gcovr
+RUN cmake -DCMAKE_BUILD_TYPE=Coverage ..
+RUN make coverage
+RUN gcovr -r ..
