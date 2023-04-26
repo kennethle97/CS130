@@ -20,9 +20,9 @@ echo "Server process ID: $PID_SERVER"
 sleep 1
 #Test 1 should pass as it has correct return format
 echo -e "Test 1:should succeed \n "
-echo -e "GET /test HTTP/1.1\nHost: www.integration_test.com\nAccept: */*\r\n\r\n" | nc 127.0.0.1 8080 > test_response2
+echo -e "GET /test HTTP/1.1\nHost: www.integration_test.com\nAccept: */*\r\n\r\n" | nc 127.0.0.1 8080 > test_response1
 
-diff -q expected_response2 test_response2
+diff -q expected_response1 test_response1
 
 DIFF_EXIT_CODE=$?
 #expected and test response should be both blank
@@ -36,11 +36,11 @@ fi
 #Test 2 should fail given that the return type is \n
 echo -e "Test 3:should return nothing with wrong message format\n "
 #Times out after 1 second with nc -w flag
-echo -e "GET /test HTTP/1.1\nHost: www.integration_test.com\nAccept: */*\n" | nc -w 1 127.0.0.1 8080 > test_response3
+echo -e "GET /test HTTP/1.1\nHost: www.integration_test.com\nAccept: */*\n" | nc -w 1 127.0.0.1 8080 > test_response2
 
 sleep 1
 
-diff -q expected_response3 test_response3
+diff -q expected_response2 test_response2
 
 DIFF_EXIT_CODE=$?
 
