@@ -9,6 +9,11 @@ class server
 public:
   server(boost::asio::io_service& io_service, short port);
 
+  // using friend class that has functions to take in pointer to server class
+  // and then use that server pointer to call its private functions seems to be
+  // only way I can think of currently to test private methods.
+  friend class testserver;
+
 private:
   void start_accept();
 
@@ -17,4 +22,15 @@ private:
 
   boost::asio::io_service& io_service_;
   tcp::acceptor acceptor_;
+};
+
+class testserver {
+  public:
+    void friend_start_accept(server* serv) {
+      serv->start_accept();
+    }
+
+    void friend_handle_accept(server* serv, session* new_session, const boost::system::error_code& error) {
+      serv->handle_accept(new_session, error);
+    }
 };

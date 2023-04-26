@@ -52,7 +52,7 @@ target_link_libraries(server server_main_lib server_lib session_lib config_parse
 # target_link_libraries(example_lib_test example_lib gtest_main)
 
 add_executable(server_lib_test tests/server_test.cc)
-target_link_libraries(server_lib_test server_lib gtest_main)
+target_link_libraries(server_lib_test server_lib session_lib gtest_main)
 
 add_executable(session_lib_test tests/session_test.cc)
 target_link_libraries(session_lib_test session_lib gtest_main)
