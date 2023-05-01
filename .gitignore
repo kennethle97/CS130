@@ -3,3 +3,10 @@
 build
 build_*
 mirror
+
+# random scripts
+gs
+mcv
+mlog
+mlogl
+gitrev
