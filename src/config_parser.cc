@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 
-#include "config_parser.h"
+#include "../include/config_parser.h"
 
 std::string NginxConfig::ToString(int depth) {
   std::string serialized_config;
@@ -39,7 +39,7 @@ int NginxConfig::GetServerPort() {
     }
   }
 
-  // look for listen directives in nested blocks recursively
+  // look for listen directives in child blocks
   for (const auto& statement : statements_) {
     if (statement->child_block_.get() != nullptr) {
       for (const auto& child_statement : statement->child_block_->statements_) {

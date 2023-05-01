@@ -3,7 +3,7 @@
 build
 build_*
 mirror
-
+logs
 # random scripts
 gs
 mcv

@@ -41,25 +41,36 @@ add_library(session_lib src/session.cc)
 add_library(config_parser_lib src/config_parser.cc)
 add_library(server_main_lib src/server_main.cc)
 add_library(logger_lib src/logger.cc)
+add_library(http_lib
+                src/http/mime_types.cpp
+                src/http/reply.cpp
+                src/http/request_parser.cpp)
+add_library(request_handler_lib 
+                src/request_handler_dispatcher.cc
+                src/request_handler/request_handler_echo.cc
+                src/request_handler/request_handler_static.cc
+                )
 
 # TODO(!): Update executable name, srcs, and deps
 # add_executable(example_server src/example_server_main.cc)
 # target_link_libraries(example_server example_lib Boost::system)
 add_executable(server src/server_main.cc)
+
 target_link_libraries(server server_main_lib server_lib session_lib 
-                      config_parser_lib logger_lib Boost::system pthread
+                      config_parser_lib logger_lib request_handler_lib http_lib Boost::system pthread
                       Boost::regex Boost::log_setup Boost::log)
+
 
 # TODO(!): Update test executable name, srcs, and deps
 # add_executable(example_lib_test tests/example_lib_test.cc)
 # target_link_libraries(example_lib_test example_lib gtest_main)
 
 add_executable(server_lib_test tests/server_test.cc)
-target_link_libraries(server_lib_test server_lib session_lib logger_lib gtest_main
+target_link_libraries(server_lib_test server_lib session_lib request_handler_lib http_lib  config_parser_lib logger_lib gtest_main
                       Boost::log_setup Boost::log)
 
 add_executable(session_lib_test tests/session_test.cc)
-target_link_libraries(session_lib_test session_lib logger_lib gtest_main
+target_link_libraries(session_lib_test server_lib session_lib request_handler_lib http_lib  config_parser_lib logger_lib gtest_main
                       Boost::log_setup Boost::log)
 
 add_executable(config_parser_lib_test tests/config_parser_test.cc)
@@ -86,5 +97,5 @@ generate_coverage_report(TARGETS server server_lib session_lib config_parser_lib
 # paste local path
 #          ${REPO}/build_coverage/report/index.html
 # to see coverage report
-add_test(NAME integration_tests COMMAND bash ${CMAKE_SOURCE_DIR}/tests/integration_tests.sh 
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/tests)
+add_test(NAME integration_tests COMMAND bash ${CMAKE_SOURCE_DIR}/tests/integration_tests/integration_tests.sh 
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/tests/integration_tests)

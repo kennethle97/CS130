@@ -1,72 +1,91 @@
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
 #include <iostream>
-
 #include "session.h"
+#include "http/request.hpp"
+#include "http/reply.hpp"
+#include "http/request_parser.hpp"
 #include "logger.h"
 
 using boost::asio::ip::tcp;
+using http::server::request;
+using http::server::reply;
+using http::server::request_parser;
 
-session::session(boost::asio::io_service& io_service)
-    : socket_(io_service) {
-      
+session::session(boost::asio::io_service& io_service,std::shared_ptr<const Request_Handler_Dispatcher> dispatcher)
+    : socket_(io_service),dispatcher(dispatcher)
+{
 }
 
 tcp::socket& session::socket() {
     return socket_;
 }
 
-void session::start() {
-   boost::asio::async_read_until( socket_, 
-        boost::asio::dynamic_buffer(data_),
-        "\r\n\r\n",
-        boost::bind(&session::handle_read, this,
-            boost::asio::placeholders::error,
-            boost::asio::placeholders::bytes_transferred));
+void session::start()
+{
+    auto self(shared_from_this());
+    boost::asio::async_read_until( socket_, 
+        boost::asio::dynamic_buffer(data_),"\r\n\r\n",
+        boost::bind(&session::handle_read, this,self,
+        boost::asio::placeholders::error,
+        boost::asio::placeholders::bytes_transferred));
 }
 
-void session::handle_read(const boost::system::error_code& error,
-      size_t bytes_transferred) {
-    // fetch logger instance
-    ServerLogger *server_logger = ServerLogger::get_server_logger();
-    if (!error) {
-      std::string header = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\n";
-      std::string full_response = header + data_;
-      std::cout << full_response << std::endl;
-      boost::asio::async_write(socket_,
-          boost::asio::buffer(full_response.c_str(), full_response.length()),
-          boost::bind(&session::handle_write, this,
-            boost::asio::placeholders::error));
-      try {
-        server_logger->log_request(socket_);
-      } catch (std::exception& e) {}
-      server_logger->log_debug("session::handle_read()");
+void session::handle_read(std::shared_ptr<session> self,const boost::system::error_code& error, size_t bytes_transferred)
+{
+    if (!error)
+    {
+        // Parse the HTTP request
+        // Obtain a pointer to the internal character array of the std::string object
+        const char* data_begin = data_.data();
+        // Pass the pointer as the begin iterator and data_ + bytes_transferred as the end iterator
+        auto [result, unused_begin] = http_parser.parse(http_request, data_begin, data_begin + bytes_transferred);
+        // Dispatch the request to the appropriate handler
+        if(result == true){
+            /*LOG GOOD REQUEST HERE*/
+            std::shared_ptr<Request_Handler> handler = dispatcher->get_request_handler(http_request);
+            if (handler == nullptr) {
+            /*LOG NULL PTR*/
+            http_reply = reply::stock_reply(reply::bad_request);
+            return;
+            }
+             // Handle the request and generate a response
+            try {
+                handler->handle_request(http_request, &http_reply);
+            } catch (const std::exception& e) {
+                std::cerr << "Error handling request: " << e.what() << std::endl;
+                return;
+            }
+            boost::asio::async_write(
+            socket_, http_reply.to_buffers(),
+            boost::bind(&session::handle_write, shared_from_this(),boost::asio::placeholders::error));
+        }
+
+        else if (result == false){
+            // Create a response indicating that the request was bad
+            http_reply = reply::stock_reply(reply::bad_request);
+            boost::asio::async_write(
+            socket_, http_reply.to_buffers(),
+            boost::bind(&session::handle_write, shared_from_this(),boost::asio::placeholders::error));
+            }
+
+        }
+        else {
+        std::cerr << "Error reading from socket: " << error.message() << std::endl;
+        delete this;
+        }
     }
-    else {
-      server_logger->log_error("session::handle_read() error");
-      delete this;
-    }
-}
+    
 
 
-void session::handle_write(const boost::system::error_code& error) {
-    // fetch logger instance
-    ServerLogger *server_logger = ServerLogger::get_server_logger();
-    if (!error) {
-      boost::system::error_code shutdown_error;
-      socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, shutdown_error);
-      // session::reset_data();
-      // boost::asio::async_read_until(socket_,
-      //  boost::asio::dynamic_buffer(data_),
-      //       "\r\n\r\n",
-      //       boost::bind(&session::handle_read, this,
-      //       boost::asio::placeholders::error,
-      //       boost::asio::placeholders::bytes_transferred));
-      // }
-      server_logger->log_debug("session::handle_write()");
+void session::handle_write(const boost::system::error_code& error)
+{
+    if (!error){
+    boost::system::error_code shutdown_error;
+    socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, shutdown_error);
     }
-    else {
-      server_logger->log_error("session::handle_write() error");
+
+    else{
       delete this;
     }
 }

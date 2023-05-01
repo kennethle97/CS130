@@ -1,7 +1,1 @@
-[2023-05-02 06:14:39.332534]:[0x00007f6fda855740]:[trace]: Parsing config file
-[2023-05-02 06:14:39.340188]:[0x00007f6fda855740]:[trace]: Config file parsed
-[2023-05-02 06:14:39.341109]:[0x00007f6fda855740]:[trace]: Server started at port 8080
-[2023-05-02 06:14:40.321029]:[0x00007f6fda855740]:[trace]: IP Address: 127.0.0.1
-[2023-05-02 06:14:40.322613]:[0x00007f6fda855740]:[debug]: session::handle_read()
-[2023-05-02 06:14:40.323794]:[0x00007f6fda855740]:[debug]: session::handle_write()
-[2023-05-02 06:14:41.339054]:[0x00007f6fda855740]:[error]: session::handle_read() error
+[2023-05-03 03:33:30.874821]:[0x00007f4b9a770740]:[fatal]: Logged fatal severity message

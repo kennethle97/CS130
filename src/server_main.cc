@@ -61,8 +61,9 @@ int main(int argc, char* argv[]) {
     }
     server_logger->log_trace("Config file parsed");
 
-    server s(io_service, port);
+    server s(io_service, port,config);
     server_logger->log_trace("Server started at port " + std::to_string(port));
+
     io_service.run();
   }
   catch (std::exception& e) {
