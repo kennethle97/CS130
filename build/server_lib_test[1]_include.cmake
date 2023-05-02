@@ -1,0 +1,5 @@
+if(EXISTS "/root/CS130/Team-404/build/server_lib_test[1]_tests.cmake")
+  include("/root/CS130/Team-404/build/server_lib_test[1]_tests.cmake")
+else()
+  add_test(server_lib_test_NOT_BUILT server_lib_test_NOT_BUILT)
+endif()

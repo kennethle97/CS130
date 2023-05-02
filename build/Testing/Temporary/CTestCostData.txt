@@ -1,0 +1,27 @@
+ServerTest.StartTest 1 0.00171014
+ServerTest.AcceptTest 1 0.00146437
+ServerTest.HandleTest 1 0.00182635
+SessionTest.make_session 1 0.00191843
+SessionTest.return_socket 1 0.00218415
+SessionTest.start_session 1 0.00243148
+SessionTest.handle_read_session 1 0.0021092
+SessionTest.handle_write_session 1 0.00244738
+NginxConfigParserTest.SimpleConfig 1 0.001548
+NginxConfigParserTest.NestedBlockConfig 1 0.00174839
+NginxConfigParserTest.CommentConfig 1 0.00151904
+NginxConfigParserTest.MissingEndBlockConfig 1 0.00152925
+NginxConfigParserTest.MissingEndOfStatementConfig 1 0.00195466
+NginxConfigParserTest.NormalAtEOFConfig 1 0.00149647
+NginxConfigParserTest.NoNormalBeforeStartConfig 1 0.00208194
+NginxConfigParserTest.CorrectQuoteConfig 1 0.00186455
+NginxConfigParserTest.IncorrectQuoteConfig 1 0.00192265
+NginxConfigParserTest.MyConfig 1 0.00214917
+NginxConfigParserTest.EmptyConfig 1 0.00151839
+NginxConfigParserTest.EmptyBlockConfig 1 0.00146102
+NginxConfigParserTest.MissingStartBlockConfig 1 0.00148265
+NginxConfigParserTest.ListenPortNumber 1 0.00149169
+NginxConfigParserTest.NoListenPort 1 0.00207657
+NginxConfigParserTest.ToStringConfig 1 0.00192858
+NginxConfigParserTest.SingleQuoteConfig 1 0.00191745
+integration_tests 1 3.02272
+---

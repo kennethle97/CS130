@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/server.dir/src/server_main.cc.o -o bin/server  libserver_main_lib.a libserver_lib.a libsession_lib.a libconfig_parser_lib.a librequest_handler_lib.a /usr/lib/x86_64-linux-gnu/libboost_system.a -lpthread 
