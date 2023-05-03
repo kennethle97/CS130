@@ -19,7 +19,6 @@ void Request_Handler_Static::handle_request(const request &http_request, reply *
         server_logger->log_info("Bad request -- prefix not found");
         return;
     }
-    // boost::filesystem::current_path().string()
     uri = "../.." + uri;
     // std::cout << "Static Request Handler Serving file: " << uri << std::endl;
 
