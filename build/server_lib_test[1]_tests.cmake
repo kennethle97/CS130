@@ -1,7 +1,0 @@
-add_test( ServerTest.StartTest /root/CS130/Team-404/build/bin/server_lib_test [==[--gtest_filter=ServerTest.StartTest]==] --gtest_also_run_disabled_tests)
-set_tests_properties( ServerTest.StartTest PROPERTIES WORKING_DIRECTORY /root/CS130/Team-404/tests SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-add_test( ServerTest.AcceptTest /root/CS130/Team-404/build/bin/server_lib_test [==[--gtest_filter=ServerTest.AcceptTest]==] --gtest_also_run_disabled_tests)
-set_tests_properties( ServerTest.AcceptTest PROPERTIES WORKING_DIRECTORY /root/CS130/Team-404/tests SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-add_test( ServerTest.HandleTest /root/CS130/Team-404/build/bin/server_lib_test [==[--gtest_filter=ServerTest.HandleTest]==] --gtest_also_run_disabled_tests)
-set_tests_properties( ServerTest.HandleTest PROPERTIES WORKING_DIRECTORY /root/CS130/Team-404/tests SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-set( server_lib_test_TESTS ServerTest.StartTest ServerTest.AcceptTest ServerTest.HandleTest)

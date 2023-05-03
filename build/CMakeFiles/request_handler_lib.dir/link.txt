@@ -1,2 +1,0 @@
-/usr/bin/ar qc librequest_handler_lib.a CMakeFiles/request_handler_lib.dir/src/request_handler_dispatcher.cc.o CMakeFiles/request_handler_lib.dir/src/request_handler/request_handler_echo.cc.o CMakeFiles/request_handler_lib.dir/src/request_handler/request_handler_static.cc.o
-/usr/bin/ranlib librequest_handler_lib.a
