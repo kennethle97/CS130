@@ -1,10 +1,10 @@
-Start testing: Apr 30 18:57 PDT
+Start testing: May 02 20:22 PDT
 ----------------------------------------------------------
-1/26 Testing: ServerTest.StartTest
-1/26 Test: ServerTest.StartTest
+1/32 Testing: ServerTest.StartTest
+1/32 Test: ServerTest.StartTest
 Command: "/root/CS130/Team-404/build/bin/server_lib_test" "--gtest_filter=ServerTest.StartTest" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"ServerTest.StartTest" start time: Apr 30 18:57 PDT
+"ServerTest.StartTest" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Running main() from /usr/src/googletest/googletest/src/gtest_main.cc
@@ -23,15 +23,15 @@ Note: Google Test filter = ServerTest.StartTest
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"ServerTest.StartTest" end time: Apr 30 18:57 PDT
+"ServerTest.StartTest" end time: May 02 20:22 PDT
 "ServerTest.StartTest" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-2/26 Testing: ServerTest.AcceptTest
-2/26 Test: ServerTest.AcceptTest
+2/32 Testing: ServerTest.AcceptTest
+2/32 Test: ServerTest.AcceptTest
 Command: "/root/CS130/Team-404/build/bin/server_lib_test" "--gtest_filter=ServerTest.AcceptTest" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"ServerTest.AcceptTest" start time: Apr 30 18:57 PDT
+"ServerTest.AcceptTest" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Running main() from /usr/src/googletest/googletest/src/gtest_main.cc
@@ -50,15 +50,15 @@ Note: Google Test filter = ServerTest.AcceptTest
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"ServerTest.AcceptTest" end time: Apr 30 18:57 PDT
+"ServerTest.AcceptTest" end time: May 02 20:22 PDT
 "ServerTest.AcceptTest" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-3/26 Testing: ServerTest.HandleTest
-3/26 Test: ServerTest.HandleTest
+3/32 Testing: ServerTest.HandleTest
+3/32 Test: ServerTest.HandleTest
 Command: "/root/CS130/Team-404/build/bin/server_lib_test" "--gtest_filter=ServerTest.HandleTest" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"ServerTest.HandleTest" start time: Apr 30 18:57 PDT
+"ServerTest.HandleTest" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Running main() from /usr/src/googletest/googletest/src/gtest_main.cc
@@ -67,25 +67,31 @@ Note: Google Test filter = ServerTest.HandleTest
 [----------] Global test environment set-up.
 [----------] 1 test from ServerTest
 [ RUN      ] ServerTest.HandleTest
-[       OK ] ServerTest.HandleTest (0 ms)
+unknown file: Failure
+C++ exception with description "bad_weak_ptr" thrown in the test body.
+[  FAILED  ] ServerTest.HandleTest (0 ms)
 [----------] 1 test from ServerTest (0 ms total)
 
 [----------] Global test environment tear-down
 [==========] 1 test from 1 test suite ran. (0 ms total)
-[  PASSED  ] 1 test.
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] ServerTest.HandleTest
+
+ 1 FAILED TEST
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
-Test Passed.
-"ServerTest.HandleTest" end time: Apr 30 18:57 PDT
+Test Failed.
+"ServerTest.HandleTest" end time: May 02 20:22 PDT
 "ServerTest.HandleTest" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-4/26 Testing: SessionTest.make_session
-4/26 Test: SessionTest.make_session
+4/32 Testing: SessionTest.make_session
+4/32 Test: SessionTest.make_session
 Command: "/root/CS130/Team-404/build/bin/session_lib_test" "--gtest_filter=SessionTest.make_session" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"SessionTest.make_session" start time: Apr 30 18:57 PDT
+"SessionTest.make_session" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Running main() from /usr/src/googletest/googletest/src/gtest_main.cc
@@ -104,15 +110,15 @@ Note: Google Test filter = SessionTest.make_session
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SessionTest.make_session" end time: Apr 30 18:57 PDT
+"SessionTest.make_session" end time: May 02 20:22 PDT
 "SessionTest.make_session" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-5/26 Testing: SessionTest.return_socket
-5/26 Test: SessionTest.return_socket
+5/32 Testing: SessionTest.return_socket
+5/32 Test: SessionTest.return_socket
 Command: "/root/CS130/Team-404/build/bin/session_lib_test" "--gtest_filter=SessionTest.return_socket" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"SessionTest.return_socket" start time: Apr 30 18:57 PDT
+"SessionTest.return_socket" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Running main() from /usr/src/googletest/googletest/src/gtest_main.cc
@@ -131,15 +137,15 @@ Note: Google Test filter = SessionTest.return_socket
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SessionTest.return_socket" end time: Apr 30 18:57 PDT
+"SessionTest.return_socket" end time: May 02 20:22 PDT
 "SessionTest.return_socket" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-6/26 Testing: SessionTest.start_session
-6/26 Test: SessionTest.start_session
+6/32 Testing: SessionTest.start_session
+6/32 Test: SessionTest.start_session
 Command: "/root/CS130/Team-404/build/bin/session_lib_test" "--gtest_filter=SessionTest.start_session" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"SessionTest.start_session" start time: Apr 30 18:57 PDT
+"SessionTest.start_session" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Running main() from /usr/src/googletest/googletest/src/gtest_main.cc
@@ -148,25 +154,31 @@ Note: Google Test filter = SessionTest.start_session
 [----------] Global test environment set-up.
 [----------] 1 test from SessionTest
 [ RUN      ] SessionTest.start_session
-[       OK ] SessionTest.start_session (0 ms)
+unknown file: Failure
+C++ exception with description "bad_weak_ptr" thrown in the test body.
+[  FAILED  ] SessionTest.start_session (0 ms)
 [----------] 1 test from SessionTest (0 ms total)
 
 [----------] Global test environment tear-down
 [==========] 1 test from 1 test suite ran. (0 ms total)
-[  PASSED  ] 1 test.
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] SessionTest.start_session
+
+ 1 FAILED TEST
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
-Test Passed.
-"SessionTest.start_session" end time: Apr 30 18:57 PDT
+Test Failed.
+"SessionTest.start_session" end time: May 02 20:22 PDT
 "SessionTest.start_session" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-7/26 Testing: SessionTest.handle_read_session
-7/26 Test: SessionTest.handle_read_session
+7/32 Testing: SessionTest.handle_read_session
+7/32 Test: SessionTest.handle_read_session
 Command: "/root/CS130/Team-404/build/bin/session_lib_test" "--gtest_filter=SessionTest.handle_read_session" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"SessionTest.handle_read_session" start time: Apr 30 18:57 PDT
+"SessionTest.handle_read_session" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Running main() from /usr/src/googletest/googletest/src/gtest_main.cc
@@ -175,10 +187,6 @@ Note: Google Test filter = SessionTest.handle_read_session
 [----------] Global test environment set-up.
 [----------] 1 test from SessionTest
 [ RUN      ] SessionTest.handle_read_session
-HTTP/1.1 200 OK
-Content-Type: text/plain
-
-
 [       OK ] SessionTest.handle_read_session (0 ms)
 [----------] 1 test from SessionTest (0 ms total)
 
@@ -189,15 +197,15 @@ Content-Type: text/plain
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SessionTest.handle_read_session" end time: Apr 30 18:57 PDT
+"SessionTest.handle_read_session" end time: May 02 20:22 PDT
 "SessionTest.handle_read_session" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-8/26 Testing: SessionTest.handle_write_session
-8/26 Test: SessionTest.handle_write_session
+8/32 Testing: SessionTest.handle_write_session
+8/32 Test: SessionTest.handle_write_session
 Command: "/root/CS130/Team-404/build/bin/session_lib_test" "--gtest_filter=SessionTest.handle_write_session" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"SessionTest.handle_write_session" start time: Apr 30 18:57 PDT
+"SessionTest.handle_write_session" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Running main() from /usr/src/googletest/googletest/src/gtest_main.cc
@@ -216,15 +224,15 @@ Note: Google Test filter = SessionTest.handle_write_session
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SessionTest.handle_write_session" end time: Apr 30 18:57 PDT
+"SessionTest.handle_write_session" end time: May 02 20:22 PDT
 "SessionTest.handle_write_session" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-9/26 Testing: NginxConfigParserTest.SimpleConfig
-9/26 Test: NginxConfigParserTest.SimpleConfig
+9/32 Testing: NginxConfigParserTest.SimpleConfig
+9/32 Test: NginxConfigParserTest.SimpleConfig
 Command: "/root/CS130/Team-404/build/bin/config_parser_lib_test" "--gtest_filter=NginxConfigParserTest.SimpleConfig" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"NginxConfigParserTest.SimpleConfig" start time: Apr 30 18:57 PDT
+"NginxConfigParserTest.SimpleConfig" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NginxConfigParserTest.SimpleConfig
@@ -242,15 +250,15 @@ Note: Google Test filter = NginxConfigParserTest.SimpleConfig
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NginxConfigParserTest.SimpleConfig" end time: Apr 30 18:57 PDT
+"NginxConfigParserTest.SimpleConfig" end time: May 02 20:22 PDT
 "NginxConfigParserTest.SimpleConfig" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-10/26 Testing: NginxConfigParserTest.NestedBlockConfig
-10/26 Test: NginxConfigParserTest.NestedBlockConfig
+10/32 Testing: NginxConfigParserTest.NestedBlockConfig
+10/32 Test: NginxConfigParserTest.NestedBlockConfig
 Command: "/root/CS130/Team-404/build/bin/config_parser_lib_test" "--gtest_filter=NginxConfigParserTest.NestedBlockConfig" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"NginxConfigParserTest.NestedBlockConfig" start time: Apr 30 18:57 PDT
+"NginxConfigParserTest.NestedBlockConfig" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NginxConfigParserTest.NestedBlockConfig
@@ -268,15 +276,15 @@ Note: Google Test filter = NginxConfigParserTest.NestedBlockConfig
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NginxConfigParserTest.NestedBlockConfig" end time: Apr 30 18:57 PDT
+"NginxConfigParserTest.NestedBlockConfig" end time: May 02 20:22 PDT
 "NginxConfigParserTest.NestedBlockConfig" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-11/26 Testing: NginxConfigParserTest.CommentConfig
-11/26 Test: NginxConfigParserTest.CommentConfig
+11/32 Testing: NginxConfigParserTest.CommentConfig
+11/32 Test: NginxConfigParserTest.CommentConfig
 Command: "/root/CS130/Team-404/build/bin/config_parser_lib_test" "--gtest_filter=NginxConfigParserTest.CommentConfig" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"NginxConfigParserTest.CommentConfig" start time: Apr 30 18:57 PDT
+"NginxConfigParserTest.CommentConfig" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NginxConfigParserTest.CommentConfig
@@ -294,15 +302,15 @@ Note: Google Test filter = NginxConfigParserTest.CommentConfig
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NginxConfigParserTest.CommentConfig" end time: Apr 30 18:57 PDT
+"NginxConfigParserTest.CommentConfig" end time: May 02 20:22 PDT
 "NginxConfigParserTest.CommentConfig" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-12/26 Testing: NginxConfigParserTest.MissingEndBlockConfig
-12/26 Test: NginxConfigParserTest.MissingEndBlockConfig
+12/32 Testing: NginxConfigParserTest.MissingEndBlockConfig
+12/32 Test: NginxConfigParserTest.MissingEndBlockConfig
 Command: "/root/CS130/Team-404/build/bin/config_parser_lib_test" "--gtest_filter=NginxConfigParserTest.MissingEndBlockConfig" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"NginxConfigParserTest.MissingEndBlockConfig" start time: Apr 30 18:57 PDT
+"NginxConfigParserTest.MissingEndBlockConfig" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NginxConfigParserTest.MissingEndBlockConfig
@@ -321,15 +329,15 @@ Bad transition from TOKEN_TYPE_STATEMENT_END to TOKEN_TYPE_EOF
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NginxConfigParserTest.MissingEndBlockConfig" end time: Apr 30 18:57 PDT
+"NginxConfigParserTest.MissingEndBlockConfig" end time: May 02 20:22 PDT
 "NginxConfigParserTest.MissingEndBlockConfig" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-13/26 Testing: NginxConfigParserTest.MissingEndOfStatementConfig
-13/26 Test: NginxConfigParserTest.MissingEndOfStatementConfig
+13/32 Testing: NginxConfigParserTest.MissingEndOfStatementConfig
+13/32 Test: NginxConfigParserTest.MissingEndOfStatementConfig
 Command: "/root/CS130/Team-404/build/bin/config_parser_lib_test" "--gtest_filter=NginxConfigParserTest.MissingEndOfStatementConfig" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"NginxConfigParserTest.MissingEndOfStatementConfig" start time: Apr 30 18:57 PDT
+"NginxConfigParserTest.MissingEndOfStatementConfig" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NginxConfigParserTest.MissingEndOfStatementConfig
@@ -348,15 +356,15 @@ Bad transition from TOKEN_TYPE_NORMAL to TOKEN_TYPE_END_BLOCK
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NginxConfigParserTest.MissingEndOfStatementConfig" end time: Apr 30 18:57 PDT
+"NginxConfigParserTest.MissingEndOfStatementConfig" end time: May 02 20:22 PDT
 "NginxConfigParserTest.MissingEndOfStatementConfig" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-14/26 Testing: NginxConfigParserTest.NormalAtEOFConfig
-14/26 Test: NginxConfigParserTest.NormalAtEOFConfig
+14/32 Testing: NginxConfigParserTest.NormalAtEOFConfig
+14/32 Test: NginxConfigParserTest.NormalAtEOFConfig
 Command: "/root/CS130/Team-404/build/bin/config_parser_lib_test" "--gtest_filter=NginxConfigParserTest.NormalAtEOFConfig" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"NginxConfigParserTest.NormalAtEOFConfig" start time: Apr 30 18:57 PDT
+"NginxConfigParserTest.NormalAtEOFConfig" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NginxConfigParserTest.NormalAtEOFConfig
@@ -375,15 +383,15 @@ Failed to open config file: normal_at_config
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NginxConfigParserTest.NormalAtEOFConfig" end time: Apr 30 18:57 PDT
+"NginxConfigParserTest.NormalAtEOFConfig" end time: May 02 20:22 PDT
 "NginxConfigParserTest.NormalAtEOFConfig" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-15/26 Testing: NginxConfigParserTest.NoNormalBeforeStartConfig
-15/26 Test: NginxConfigParserTest.NoNormalBeforeStartConfig
+15/32 Testing: NginxConfigParserTest.NoNormalBeforeStartConfig
+15/32 Test: NginxConfigParserTest.NoNormalBeforeStartConfig
 Command: "/root/CS130/Team-404/build/bin/config_parser_lib_test" "--gtest_filter=NginxConfigParserTest.NoNormalBeforeStartConfig" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"NginxConfigParserTest.NoNormalBeforeStartConfig" start time: Apr 30 18:57 PDT
+"NginxConfigParserTest.NoNormalBeforeStartConfig" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NginxConfigParserTest.NoNormalBeforeStartConfig
@@ -402,15 +410,15 @@ Bad transition from TOKEN_TYPE_STATEMENT_END to TOKEN_TYPE_START_BLOCK
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NginxConfigParserTest.NoNormalBeforeStartConfig" end time: Apr 30 18:57 PDT
+"NginxConfigParserTest.NoNormalBeforeStartConfig" end time: May 02 20:22 PDT
 "NginxConfigParserTest.NoNormalBeforeStartConfig" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-16/26 Testing: NginxConfigParserTest.CorrectQuoteConfig
-16/26 Test: NginxConfigParserTest.CorrectQuoteConfig
+16/32 Testing: NginxConfigParserTest.CorrectQuoteConfig
+16/32 Test: NginxConfigParserTest.CorrectQuoteConfig
 Command: "/root/CS130/Team-404/build/bin/config_parser_lib_test" "--gtest_filter=NginxConfigParserTest.CorrectQuoteConfig" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"NginxConfigParserTest.CorrectQuoteConfig" start time: Apr 30 18:57 PDT
+"NginxConfigParserTest.CorrectQuoteConfig" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NginxConfigParserTest.CorrectQuoteConfig
@@ -428,15 +436,15 @@ Note: Google Test filter = NginxConfigParserTest.CorrectQuoteConfig
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NginxConfigParserTest.CorrectQuoteConfig" end time: Apr 30 18:57 PDT
+"NginxConfigParserTest.CorrectQuoteConfig" end time: May 02 20:22 PDT
 "NginxConfigParserTest.CorrectQuoteConfig" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-17/26 Testing: NginxConfigParserTest.IncorrectQuoteConfig
-17/26 Test: NginxConfigParserTest.IncorrectQuoteConfig
+17/32 Testing: NginxConfigParserTest.IncorrectQuoteConfig
+17/32 Test: NginxConfigParserTest.IncorrectQuoteConfig
 Command: "/root/CS130/Team-404/build/bin/config_parser_lib_test" "--gtest_filter=NginxConfigParserTest.IncorrectQuoteConfig" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"NginxConfigParserTest.IncorrectQuoteConfig" start time: Apr 30 18:57 PDT
+"NginxConfigParserTest.IncorrectQuoteConfig" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NginxConfigParserTest.IncorrectQuoteConfig
@@ -455,15 +463,15 @@ Bad transition from TOKEN_TYPE_START to TOKEN_TYPE_ERROR
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NginxConfigParserTest.IncorrectQuoteConfig" end time: Apr 30 18:57 PDT
+"NginxConfigParserTest.IncorrectQuoteConfig" end time: May 02 20:22 PDT
 "NginxConfigParserTest.IncorrectQuoteConfig" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-18/26 Testing: NginxConfigParserTest.MyConfig
-18/26 Test: NginxConfigParserTest.MyConfig
+18/32 Testing: NginxConfigParserTest.MyConfig
+18/32 Test: NginxConfigParserTest.MyConfig
 Command: "/root/CS130/Team-404/build/bin/config_parser_lib_test" "--gtest_filter=NginxConfigParserTest.MyConfig" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"NginxConfigParserTest.MyConfig" start time: Apr 30 18:57 PDT
+"NginxConfigParserTest.MyConfig" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NginxConfigParserTest.MyConfig
@@ -482,15 +490,15 @@ Failed to open config file: my_config
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NginxConfigParserTest.MyConfig" end time: Apr 30 18:57 PDT
+"NginxConfigParserTest.MyConfig" end time: May 02 20:22 PDT
 "NginxConfigParserTest.MyConfig" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-19/26 Testing: NginxConfigParserTest.EmptyConfig
-19/26 Test: NginxConfigParserTest.EmptyConfig
+19/32 Testing: NginxConfigParserTest.EmptyConfig
+19/32 Test: NginxConfigParserTest.EmptyConfig
 Command: "/root/CS130/Team-404/build/bin/config_parser_lib_test" "--gtest_filter=NginxConfigParserTest.EmptyConfig" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"NginxConfigParserTest.EmptyConfig" start time: Apr 30 18:57 PDT
+"NginxConfigParserTest.EmptyConfig" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NginxConfigParserTest.EmptyConfig
@@ -508,15 +516,15 @@ Note: Google Test filter = NginxConfigParserTest.EmptyConfig
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NginxConfigParserTest.EmptyConfig" end time: Apr 30 18:57 PDT
+"NginxConfigParserTest.EmptyConfig" end time: May 02 20:22 PDT
 "NginxConfigParserTest.EmptyConfig" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-20/26 Testing: NginxConfigParserTest.EmptyBlockConfig
-20/26 Test: NginxConfigParserTest.EmptyBlockConfig
+20/32 Testing: NginxConfigParserTest.EmptyBlockConfig
+20/32 Test: NginxConfigParserTest.EmptyBlockConfig
 Command: "/root/CS130/Team-404/build/bin/config_parser_lib_test" "--gtest_filter=NginxConfigParserTest.EmptyBlockConfig" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"NginxConfigParserTest.EmptyBlockConfig" start time: Apr 30 18:57 PDT
+"NginxConfigParserTest.EmptyBlockConfig" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NginxConfigParserTest.EmptyBlockConfig
@@ -534,15 +542,15 @@ Note: Google Test filter = NginxConfigParserTest.EmptyBlockConfig
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NginxConfigParserTest.EmptyBlockConfig" end time: Apr 30 18:57 PDT
+"NginxConfigParserTest.EmptyBlockConfig" end time: May 02 20:22 PDT
 "NginxConfigParserTest.EmptyBlockConfig" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-21/26 Testing: NginxConfigParserTest.MissingStartBlockConfig
-21/26 Test: NginxConfigParserTest.MissingStartBlockConfig
+21/32 Testing: NginxConfigParserTest.MissingStartBlockConfig
+21/32 Test: NginxConfigParserTest.MissingStartBlockConfig
 Command: "/root/CS130/Team-404/build/bin/config_parser_lib_test" "--gtest_filter=NginxConfigParserTest.MissingStartBlockConfig" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"NginxConfigParserTest.MissingStartBlockConfig" start time: Apr 30 18:57 PDT
+"NginxConfigParserTest.MissingStartBlockConfig" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NginxConfigParserTest.MissingStartBlockConfig
@@ -561,15 +569,15 @@ Bad transition from TOKEN_TYPE_STATEMENT_END to TOKEN_TYPE_END_BLOCK
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NginxConfigParserTest.MissingStartBlockConfig" end time: Apr 30 18:57 PDT
+"NginxConfigParserTest.MissingStartBlockConfig" end time: May 02 20:22 PDT
 "NginxConfigParserTest.MissingStartBlockConfig" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-22/26 Testing: NginxConfigParserTest.ListenPortNumber
-22/26 Test: NginxConfigParserTest.ListenPortNumber
+22/32 Testing: NginxConfigParserTest.ListenPortNumber
+22/32 Test: NginxConfigParserTest.ListenPortNumber
 Command: "/root/CS130/Team-404/build/bin/config_parser_lib_test" "--gtest_filter=NginxConfigParserTest.ListenPortNumber" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"NginxConfigParserTest.ListenPortNumber" start time: Apr 30 18:57 PDT
+"NginxConfigParserTest.ListenPortNumber" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NginxConfigParserTest.ListenPortNumber
@@ -587,15 +595,15 @@ Note: Google Test filter = NginxConfigParserTest.ListenPortNumber
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NginxConfigParserTest.ListenPortNumber" end time: Apr 30 18:57 PDT
+"NginxConfigParserTest.ListenPortNumber" end time: May 02 20:22 PDT
 "NginxConfigParserTest.ListenPortNumber" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-23/26 Testing: NginxConfigParserTest.NoListenPort
-23/26 Test: NginxConfigParserTest.NoListenPort
+23/32 Testing: NginxConfigParserTest.NoListenPort
+23/32 Test: NginxConfigParserTest.NoListenPort
 Command: "/root/CS130/Team-404/build/bin/config_parser_lib_test" "--gtest_filter=NginxConfigParserTest.NoListenPort" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"NginxConfigParserTest.NoListenPort" start time: Apr 30 18:57 PDT
+"NginxConfigParserTest.NoListenPort" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NginxConfigParserTest.NoListenPort
@@ -613,15 +621,15 @@ Note: Google Test filter = NginxConfigParserTest.NoListenPort
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NginxConfigParserTest.NoListenPort" end time: Apr 30 18:57 PDT
+"NginxConfigParserTest.NoListenPort" end time: May 02 20:22 PDT
 "NginxConfigParserTest.NoListenPort" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-24/26 Testing: NginxConfigParserTest.ToStringConfig
-24/26 Test: NginxConfigParserTest.ToStringConfig
+24/32 Testing: NginxConfigParserTest.ToStringConfig
+24/32 Test: NginxConfigParserTest.ToStringConfig
 Command: "/root/CS130/Team-404/build/bin/config_parser_lib_test" "--gtest_filter=NginxConfigParserTest.ToStringConfig" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"NginxConfigParserTest.ToStringConfig" start time: Apr 30 18:57 PDT
+"NginxConfigParserTest.ToStringConfig" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NginxConfigParserTest.ToStringConfig
@@ -639,15 +647,15 @@ Note: Google Test filter = NginxConfigParserTest.ToStringConfig
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NginxConfigParserTest.ToStringConfig" end time: Apr 30 18:57 PDT
+"NginxConfigParserTest.ToStringConfig" end time: May 02 20:22 PDT
 "NginxConfigParserTest.ToStringConfig" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-25/26 Testing: NginxConfigParserTest.SingleQuoteConfig
-25/26 Test: NginxConfigParserTest.SingleQuoteConfig
+25/32 Testing: NginxConfigParserTest.SingleQuoteConfig
+25/32 Test: NginxConfigParserTest.SingleQuoteConfig
 Command: "/root/CS130/Team-404/build/bin/config_parser_lib_test" "--gtest_filter=NginxConfigParserTest.SingleQuoteConfig" "--gtest_also_run_disabled_tests"
 Directory: /root/CS130/Team-404/tests
-"NginxConfigParserTest.SingleQuoteConfig" start time: Apr 30 18:57 PDT
+"NginxConfigParserTest.SingleQuoteConfig" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NginxConfigParserTest.SingleQuoteConfig
@@ -665,46 +673,202 @@ Note: Google Test filter = NginxConfigParserTest.SingleQuoteConfig
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NginxConfigParserTest.SingleQuoteConfig" end time: Apr 30 18:57 PDT
+"NginxConfigParserTest.SingleQuoteConfig" end time: May 02 20:22 PDT
 "NginxConfigParserTest.SingleQuoteConfig" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-26/26 Testing: integration_tests
-26/26 Test: integration_tests
+26/32 Testing: LoggerTest.LogTrace
+26/32 Test: LoggerTest.LogTrace
+Command: "/root/CS130/Team-404/build/bin/logger_test" "--gtest_filter=LoggerTest.LogTrace" "--gtest_also_run_disabled_tests"
+Directory: /root/CS130/Team-404/tests
+"LoggerTest.LogTrace" start time: May 02 20:22 PDT
+Output:
+----------------------------------------------------------
+Running main() from /usr/src/googletest/googletest/src/gtest_main.cc
+Note: Google Test filter = LoggerTest.LogTrace
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LoggerTest
+[ RUN      ] LoggerTest.LogTrace
+[2023-05-02 20:22:57.306752]:[0x00007f1d8a67a740]:[trace]: Logged trace severity message
+[       OK ] LoggerTest.LogTrace (0 ms)
+[----------] 1 test from LoggerTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LoggerTest.LogTrace" end time: May 02 20:22 PDT
+"LoggerTest.LogTrace" time elapsed: 00:00:00
+----------------------------------------------------------
+
+27/32 Testing: LoggerTest.LogDebug
+27/32 Test: LoggerTest.LogDebug
+Command: "/root/CS130/Team-404/build/bin/logger_test" "--gtest_filter=LoggerTest.LogDebug" "--gtest_also_run_disabled_tests"
+Directory: /root/CS130/Team-404/tests
+"LoggerTest.LogDebug" start time: May 02 20:22 PDT
+Output:
+----------------------------------------------------------
+Running main() from /usr/src/googletest/googletest/src/gtest_main.cc
+Note: Google Test filter = LoggerTest.LogDebug
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LoggerTest
+[ RUN      ] LoggerTest.LogDebug
+[2023-05-02 20:22:57.309905]:[0x00007f55609ee740]:[debug]: Logged debug severity message
+[       OK ] LoggerTest.LogDebug (3 ms)
+[----------] 1 test from LoggerTest (3 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (3 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"LoggerTest.LogDebug" end time: May 02 20:22 PDT
+"LoggerTest.LogDebug" time elapsed: 00:00:00
+----------------------------------------------------------
+
+28/32 Testing: LoggerTest.LogInfo
+28/32 Test: LoggerTest.LogInfo
+Command: "/root/CS130/Team-404/build/bin/logger_test" "--gtest_filter=LoggerTest.LogInfo" "--gtest_also_run_disabled_tests"
+Directory: /root/CS130/Team-404/tests
+"LoggerTest.LogInfo" start time: May 02 20:22 PDT
+Output:
+----------------------------------------------------------
+Running main() from /usr/src/googletest/googletest/src/gtest_main.cc
+Note: Google Test filter = LoggerTest.LogInfo
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LoggerTest
+[ RUN      ] LoggerTest.LogInfo
+[2023-05-02 20:22:57.316443]:[0x00007f2c056b2740]:[info]: Logged info severity message
+[       OK ] LoggerTest.LogInfo (0 ms)
+[----------] 1 test from LoggerTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LoggerTest.LogInfo" end time: May 02 20:22 PDT
+"LoggerTest.LogInfo" time elapsed: 00:00:00
+----------------------------------------------------------
+
+29/32 Testing: LoggerTest.LogWarning
+29/32 Test: LoggerTest.LogWarning
+Command: "/root/CS130/Team-404/build/bin/logger_test" "--gtest_filter=LoggerTest.LogWarning" "--gtest_also_run_disabled_tests"
+Directory: /root/CS130/Team-404/tests
+"LoggerTest.LogWarning" start time: May 02 20:22 PDT
+Output:
+----------------------------------------------------------
+Running main() from /usr/src/googletest/googletest/src/gtest_main.cc
+Note: Google Test filter = LoggerTest.LogWarning
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LoggerTest
+[ RUN      ] LoggerTest.LogWarning
+[2023-05-02 20:22:57.320113]:[0x00007fec27643740]:[warning]: Logged warning severity message
+[       OK ] LoggerTest.LogWarning (0 ms)
+[----------] 1 test from LoggerTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LoggerTest.LogWarning" end time: May 02 20:22 PDT
+"LoggerTest.LogWarning" time elapsed: 00:00:00
+----------------------------------------------------------
+
+30/32 Testing: LoggerTest.LogError
+30/32 Test: LoggerTest.LogError
+Command: "/root/CS130/Team-404/build/bin/logger_test" "--gtest_filter=LoggerTest.LogError" "--gtest_also_run_disabled_tests"
+Directory: /root/CS130/Team-404/tests
+"LoggerTest.LogError" start time: May 02 20:22 PDT
+Output:
+----------------------------------------------------------
+Running main() from /usr/src/googletest/googletest/src/gtest_main.cc
+Note: Google Test filter = LoggerTest.LogError
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LoggerTest
+[ RUN      ] LoggerTest.LogError
+[2023-05-02 20:22:57.323048]:[0x00007fd5f48de740]:[error]: Logged error severity message
+[       OK ] LoggerTest.LogError (0 ms)
+[----------] 1 test from LoggerTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LoggerTest.LogError" end time: May 02 20:22 PDT
+"LoggerTest.LogError" time elapsed: 00:00:00
+----------------------------------------------------------
+
+31/32 Testing: LoggerTest.LogFatal
+31/32 Test: LoggerTest.LogFatal
+Command: "/root/CS130/Team-404/build/bin/logger_test" "--gtest_filter=LoggerTest.LogFatal" "--gtest_also_run_disabled_tests"
+Directory: /root/CS130/Team-404/tests
+"LoggerTest.LogFatal" start time: May 02 20:22 PDT
+Output:
+----------------------------------------------------------
+Running main() from /usr/src/googletest/googletest/src/gtest_main.cc
+Note: Google Test filter = LoggerTest.LogFatal
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LoggerTest
+[ RUN      ] LoggerTest.LogFatal
+[2023-05-02 20:22:57.326571]:[0x00007ff0127d9740]:[fatal]: Logged fatal severity message
+[       OK ] LoggerTest.LogFatal (0 ms)
+[----------] 1 test from LoggerTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LoggerTest.LogFatal" end time: May 02 20:22 PDT
+"LoggerTest.LogFatal" time elapsed: 00:00:00
+----------------------------------------------------------
+
+32/32 Testing: integration_tests
+32/32 Test: integration_tests
 Command: "/usr/bin/bash" "/root/CS130/Team-404/tests/integration_tests.sh"
 Directory: /root/CS130/Team-404/tests
-"integration_tests" start time: Apr 30 18:57 PDT
+"integration_tests" start time: May 02 20:22 PDT
 Output:
 ----------------------------------------------------------
 server: no process found
-Server process ID: 3058
+Server process ID: 3263
+[2023-05-02 20:22:57.334330]:[0x00007f0d0fe24740]:[trace]: Parsing config file
+[2023-05-02 20:22:57.334572]:[0x00007f0d0fe24740]:[trace]: Config file parsed
+[2023-05-02 20:22:57.334624]:[0x00007f0d0fe24740]:[trace]: Server started at port 8080
 Test 1:should succeed 
  
-HTTP/1.1 200 OK
-Content-Type: text/plain
+Files expected_response1 and test_response1 differ
+Failure. Expected Reponse != Test Response
 
-GET /test HTTP/1.1
-Host: www.integration_test.com
-Accept: */*
-
-
-
-Success! Expected Response = Test Response
-
-Test 3:should return nothing with wrong message format
- 
-Success! Expected Response = Test Response
-
-Killing Server 3058
-
-Tests Completed!
-
+/root/CS130/Team-404/tests/integration_tests.sh: line 33: kill: (3263) - No such process
 <end of output>
-Test time =   3.02 sec
+Test time =   1.23 sec
 ----------------------------------------------------------
-Test Passed.
-"integration_tests" end time: Apr 30 18:58 PDT
-"integration_tests" time elapsed: 00:00:03
+Test Failed.
+"integration_tests" end time: May 02 20:22 PDT
+"integration_tests" time elapsed: 00:00:01
 ----------------------------------------------------------
 
-End testing: Apr 30 18:58 PDT
+End testing: May 02 20:22 PDT

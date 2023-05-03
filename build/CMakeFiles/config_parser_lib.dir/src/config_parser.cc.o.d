@@ -174,4 +174,4 @@ CMakeFiles/config_parser_lib.dir/src/config_parser.cc.o: \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_vector.h \
  /usr/include/c++/11/bits/stl_bvector.h \
  /usr/include/c++/11/bits/vector.tcc \
- /root/CS130/Team-404/include/config_parser.h
+ /root/CS130/Team-404/src/../include/config_parser.h

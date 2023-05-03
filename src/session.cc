@@ -1,19 +1,15 @@
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
 #include <iostream>
-<<<<<<< Updated upstream
 #include "session.h"
-#include "http/reply.h"
-
-=======
-#include <boost/beast/version.hpp>
-#include <boost/beast/core/flat_buffer.hpp>
-#include <boost/beast/http.hpp>
-#include <boost/beast/http/message.hpp>
-#include "../include/session.h"
->>>>>>> Stashed changes
+#include "http/request.hpp"
+#include "http/reply.hpp"
+#include "http/request_parser.hpp"
 
 using boost::asio::ip::tcp;
+using http::server::request;
+using http::server::reply;
+using http::server::request_parser;
 
 session::session(boost::asio::io_service& io_service,std::shared_ptr<const Request_Handler_Dispatcher> dispatcher)
     : socket_(io_service),dispatcher(dispatcher)
@@ -28,20 +24,11 @@ tcp::socket& session::socket()
 void session::start()
 {
     auto self(shared_from_this());
-<<<<<<< Updated upstream
     boost::asio::async_read_until( socket_, 
         boost::asio::dynamic_buffer(data_),"\r\n\r\n",
         boost::bind(&session::handle_read, this,self,
         boost::asio::placeholders::error,
         boost::asio::placeholders::bytes_transferred));
-=======
-   boost::asio::async_read_until( socket_, 
-        boost::asio::dynamic_buffer(data_),
-        "\r\n\r\n",
-        boost::bind(&session::handle_read, this,self,
-            boost::asio::placeholders::error,
-            boost::asio::placeholders::bytes_transferred));
->>>>>>> Stashed changes
 }
 
 void session::handle_read(std::shared_ptr<session> self,const boost::system::error_code& error, size_t bytes_transferred)
@@ -49,56 +36,41 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
     if (!error)
     {
         // Parse the HTTP request
-       //boost::beast::http::request<boost::beast::http::dynamic_body> request;
-        http_parser<true> request_parser;
-        boost::beast::error_code parse_error;
-        request_parser.put(boost::asio::buffer(data_, bytes_transferred), parse_error);
-        request_parser.on_finish_impl(parse_error);
 
-        if (parse_error && parse_error != boost::beast::http::error::need_more) {
-        std::cerr << "Error parsing HTTP request: " << parse_error.message() << std::endl;
-        return;
-        }      
+        // Obtain a pointer to the internal character array of the std::string object
+        const char* data_begin = data_.data();
 
+        // Pass the pointer as the begin iterator and data_ + bytes_transferred as the end iterator
+        auto [result, unused_begin] = http_parser.parse(http_request, data_begin, data_begin + bytes_transferred);
 
-
-        auto& request = request_parser.get();
-        auto& result = request.result();
         // Dispatch the request to the appropriate handler
-        if(result == http::status::ok){
-            std::shared_ptr<const Request_Handler> handler = dispatcher->get_request_handler(request);
+        if(result == true){
+
+            /*LOG GOOD REQUEST HERE*/
+            std::shared_ptr<Request_Handler> handler = dispatcher->get_request_handler(http_request);
             if (handler == nullptr) {
-            std::cerr << "No request handler found for URI: " << request.target() << std::endl;
+            /*LOG NULL PTR*/
+            http_reply = reply::stock_reply(reply::bad_request);
             return;
             }
              // Handle the request and generate a response
-            http::response<http::string_body> response;
             try {
-                handler->handle_request(request, &response);
+                handler->handle_request(http_request, &http_reply);
             } catch (const std::exception& e) {
                 std::cerr << "Error handling request: " << e.what() << std::endl;
                 return;
             }
-            boost::beast::http::async_write(
-            socket_, response,
-            boost::beast::bind_front_handler(&session::handle_write, shared_from_this()));
+            boost::asio::async_write(
+            socket_, http_reply.to_buffers(),
+            boost::bind(&session::handle_write, shared_from_this(),boost::asio::placeholders::error));
         }
 
-<<<<<<< Updated upstream
-        else if (result == bad_request){
-=======
-        else if (result == boost::beast::http::status::bad_request){
->>>>>>> Stashed changes
+        else if (result == false){
             // Create a response indicating that the request was bad
-            boost::beast::http::response<boost::beast::http::string_body> response{boost::beast::http::status::bad_request, request.version()};
-            response.set(boost::beast::http::field::server, BOOST_BEAST_VERSION_STRING);
-            response.set(boost::beast::http::field::content_type, "text/html");
-            response.keep_alive(request.keep_alive());
-            response.body() = "<html><body><h1>400 Bad Request</h1></body></html>";
-            response.prepare_payload();
-            boost::beast::http::async_write(
-            socket_, response,
-            boost::beast::bind_front_handler(&session::handle_write, shared_from_this()));
+            http_reply = reply::stock_reply(reply::bad_request);
+            boost::asio::async_write(
+            socket_, http_reply.to_buffers(),
+            boost::bind(&session::handle_write, shared_from_this(),boost::asio::placeholders::error));
             }
 
         }

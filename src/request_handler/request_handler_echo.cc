@@ -3,26 +3,25 @@
 
 
 
-Request_Handler_Echo::Request_Handler_Echo(){}
+void Request_Handler_Echo::handle_request(const request& http_request, reply* http_reply)noexcept {
+    std::ostringstream request_body;
+    request_body << http_request.method << " " << http_request.uri << " ";
+    request_body << "HTTP/" << http_request.http_version_major << "." << http_request.http_version_minor << "\r\n";
 
-void Request_Handler_Echo::handle_request(const request& request, response* response) {
+    for (const auto& header : http_request.headers) {
+        request_body << header.name << ": " << header.value << "\r\n";
+    }
 
-    // Get the request message body and add it to the response message body
-    response->body() = request.body();
+    request_body << "\r\n";
+    std::string request_body_str = request_body.str();
+    std::string request_body_length = std::to_string(request_body_str.length());
 
-    // Set the response status to OK (200)
-    response->result(http::status::ok);
-
-    // Set the response HTTP version to match the version of the incoming request
-    response->version(request.version());
-
-    // Set the content-type header of the response to "text/plain"
-    response->set(http::field::content_type, "text/plain");
-
-    // Set the content-length header of the response
-    response->set(http::field::content_length, std::to_string(response->body().size()));
-    
-    // Set the response headers to indicate that the connection should be closed
-    response->set(http::field::connection, "close");
+    http_reply->status = reply::ok;
+    http_reply->headers.resize(2);
+    http_reply->content = request_body.str();
+    http_reply->headers[0].name = "Content-Length";
+    http_reply->headers[0].value = request_body_length;
+    http_reply->headers[1].name = "Content-Type";
+    http_reply->headers[1].value = "text_plain";
 }
 

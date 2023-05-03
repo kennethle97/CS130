@@ -17,7 +17,9 @@ set(CMAKE_TARGET_LINKED_INFO_FILES
   "/root/CS130/Team-404/build/CMakeFiles/server_lib.dir/DependInfo.cmake"
   "/root/CS130/Team-404/build/CMakeFiles/session_lib.dir/DependInfo.cmake"
   "/root/CS130/Team-404/build/CMakeFiles/config_parser_lib.dir/DependInfo.cmake"
+  "/root/CS130/Team-404/build/CMakeFiles/logger_lib.dir/DependInfo.cmake"
   "/root/CS130/Team-404/build/CMakeFiles/request_handler_lib.dir/DependInfo.cmake"
+  "/root/CS130/Team-404/build/CMakeFiles/http_lib.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

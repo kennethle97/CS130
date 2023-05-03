@@ -16,7 +16,7 @@ public:
   friend class testserver;
 
 private:
-  void start_accept(session& new_session);
+  void start_accept();
 
   void handle_accept(session* new_session,
       const boost::system::error_code& error);
@@ -28,8 +28,8 @@ private:
 
 class testserver {
   public:
-    void friend_start_accept(server* serv,session& new_session) {
-      serv->start_accept(new_session);
+    void friend_start_accept(server* serv) {
+      serv->start_accept();
     }
 
     void friend_handle_accept(server* serv, session* new_session, const boost::system::error_code& error) {

@@ -588,6 +588,32 @@ server_main_lib/fast:
 .PHONY : server_main_lib/fast
 
 #=============================================================================
+# Target rules for targets named logger_lib
+
+# Build rule for target.
+logger_lib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 logger_lib
+.PHONY : logger_lib
+
+# fast build rule for target.
+logger_lib/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger_lib.dir/build.make CMakeFiles/logger_lib.dir/build
+.PHONY : logger_lib/fast
+
+#=============================================================================
+# Target rules for targets named http_lib
+
+# Build rule for target.
+http_lib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 http_lib
+.PHONY : http_lib
+
+# fast build rule for target.
+http_lib/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/http_lib.dir/build.make CMakeFiles/http_lib.dir/build
+.PHONY : http_lib/fast
+
+#=============================================================================
 # Target rules for targets named request_handler_lib
 
 # Build rule for target.
@@ -651,6 +677,19 @@ config_parser_lib_test: cmake_check_build_system
 config_parser_lib_test/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/config_parser_lib_test.dir/build.make CMakeFiles/config_parser_lib_test.dir/build
 .PHONY : config_parser_lib_test/fast
+
+#=============================================================================
+# Target rules for targets named logger_test
+
+# Build rule for target.
+logger_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 logger_test
+.PHONY : logger_test
+
+# fast build rule for target.
+logger_test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger_test.dir/build.make CMakeFiles/logger_test.dir/build
+.PHONY : logger_test/fast
 
 #=============================================================================
 # Target rules for targets named gmock
@@ -727,6 +766,102 @@ src/config_parser.s: src/config_parser.cc.s
 src/config_parser.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/config_parser_lib.dir/build.make CMakeFiles/config_parser_lib.dir/src/config_parser.cc.s
 .PHONY : src/config_parser.cc.s
+
+src/http/mime_types.o: src/http/mime_types.cpp.o
+.PHONY : src/http/mime_types.o
+
+# target to build an object file
+src/http/mime_types.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/http_lib.dir/build.make CMakeFiles/http_lib.dir/src/http/mime_types.cpp.o
+.PHONY : src/http/mime_types.cpp.o
+
+src/http/mime_types.i: src/http/mime_types.cpp.i
+.PHONY : src/http/mime_types.i
+
+# target to preprocess a source file
+src/http/mime_types.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/http_lib.dir/build.make CMakeFiles/http_lib.dir/src/http/mime_types.cpp.i
+.PHONY : src/http/mime_types.cpp.i
+
+src/http/mime_types.s: src/http/mime_types.cpp.s
+.PHONY : src/http/mime_types.s
+
+# target to generate assembly for a file
+src/http/mime_types.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/http_lib.dir/build.make CMakeFiles/http_lib.dir/src/http/mime_types.cpp.s
+.PHONY : src/http/mime_types.cpp.s
+
+src/http/reply.o: src/http/reply.cpp.o
+.PHONY : src/http/reply.o
+
+# target to build an object file
+src/http/reply.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/http_lib.dir/build.make CMakeFiles/http_lib.dir/src/http/reply.cpp.o
+.PHONY : src/http/reply.cpp.o
+
+src/http/reply.i: src/http/reply.cpp.i
+.PHONY : src/http/reply.i
+
+# target to preprocess a source file
+src/http/reply.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/http_lib.dir/build.make CMakeFiles/http_lib.dir/src/http/reply.cpp.i
+.PHONY : src/http/reply.cpp.i
+
+src/http/reply.s: src/http/reply.cpp.s
+.PHONY : src/http/reply.s
+
+# target to generate assembly for a file
+src/http/reply.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/http_lib.dir/build.make CMakeFiles/http_lib.dir/src/http/reply.cpp.s
+.PHONY : src/http/reply.cpp.s
+
+src/http/request_parser.o: src/http/request_parser.cpp.o
+.PHONY : src/http/request_parser.o
+
+# target to build an object file
+src/http/request_parser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/http_lib.dir/build.make CMakeFiles/http_lib.dir/src/http/request_parser.cpp.o
+.PHONY : src/http/request_parser.cpp.o
+
+src/http/request_parser.i: src/http/request_parser.cpp.i
+.PHONY : src/http/request_parser.i
+
+# target to preprocess a source file
+src/http/request_parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/http_lib.dir/build.make CMakeFiles/http_lib.dir/src/http/request_parser.cpp.i
+.PHONY : src/http/request_parser.cpp.i
+
+src/http/request_parser.s: src/http/request_parser.cpp.s
+.PHONY : src/http/request_parser.s
+
+# target to generate assembly for a file
+src/http/request_parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/http_lib.dir/build.make CMakeFiles/http_lib.dir/src/http/request_parser.cpp.s
+.PHONY : src/http/request_parser.cpp.s
+
+src/logger.o: src/logger.cc.o
+.PHONY : src/logger.o
+
+# target to build an object file
+src/logger.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger_lib.dir/build.make CMakeFiles/logger_lib.dir/src/logger.cc.o
+.PHONY : src/logger.cc.o
+
+src/logger.i: src/logger.cc.i
+.PHONY : src/logger.i
+
+# target to preprocess a source file
+src/logger.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger_lib.dir/build.make CMakeFiles/logger_lib.dir/src/logger.cc.i
+.PHONY : src/logger.cc.i
+
+src/logger.s: src/logger.cc.s
+.PHONY : src/logger.s
+
+# target to generate assembly for a file
+src/logger.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger_lib.dir/build.make CMakeFiles/logger_lib.dir/src/logger.cc.s
+.PHONY : src/logger.cc.s
 
 src/request_handler/request_handler_echo.o: src/request_handler/request_handler_echo.cc.o
 .PHONY : src/request_handler/request_handler_echo.o
@@ -899,6 +1034,30 @@ tests/config_parser_test.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/config_parser_lib_test.dir/build.make CMakeFiles/config_parser_lib_test.dir/tests/config_parser_test.cc.s
 .PHONY : tests/config_parser_test.cc.s
 
+tests/logger_test.o: tests/logger_test.cc.o
+.PHONY : tests/logger_test.o
+
+# target to build an object file
+tests/logger_test.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger_test.dir/build.make CMakeFiles/logger_test.dir/tests/logger_test.cc.o
+.PHONY : tests/logger_test.cc.o
+
+tests/logger_test.i: tests/logger_test.cc.i
+.PHONY : tests/logger_test.i
+
+# target to preprocess a source file
+tests/logger_test.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger_test.dir/build.make CMakeFiles/logger_test.dir/tests/logger_test.cc.i
+.PHONY : tests/logger_test.cc.i
+
+tests/logger_test.s: tests/logger_test.cc.s
+.PHONY : tests/logger_test.s
+
+# target to generate assembly for a file
+tests/logger_test.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/logger_test.dir/build.make CMakeFiles/logger_test.dir/tests/logger_test.cc.s
+.PHONY : tests/logger_test.cc.s
+
 tests/server_test.o: tests/server_test.cc.o
 .PHONY : tests/server_test.o
 
@@ -994,6 +1153,9 @@ help:
 	@echo "... gmock_main"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... http_lib"
+	@echo "... logger_lib"
+	@echo "... logger_test"
 	@echo "... request_handler_lib"
 	@echo "... server"
 	@echo "... server_lib"
@@ -1004,6 +1166,18 @@ help:
 	@echo "... src/config_parser.o"
 	@echo "... src/config_parser.i"
 	@echo "... src/config_parser.s"
+	@echo "... src/http/mime_types.o"
+	@echo "... src/http/mime_types.i"
+	@echo "... src/http/mime_types.s"
+	@echo "... src/http/reply.o"
+	@echo "... src/http/reply.i"
+	@echo "... src/http/reply.s"
+	@echo "... src/http/request_parser.o"
+	@echo "... src/http/request_parser.i"
+	@echo "... src/http/request_parser.s"
+	@echo "... src/logger.o"
+	@echo "... src/logger.i"
+	@echo "... src/logger.s"
 	@echo "... src/request_handler/request_handler_echo.o"
 	@echo "... src/request_handler/request_handler_echo.i"
 	@echo "... src/request_handler/request_handler_echo.s"
@@ -1025,6 +1199,9 @@ help:
 	@echo "... tests/config_parser_test.o"
 	@echo "... tests/config_parser_test.i"
 	@echo "... tests/config_parser_test.s"
+	@echo "... tests/logger_test.o"
+	@echo "... tests/logger_test.i"
+	@echo "... tests/logger_test.s"
 	@echo "... tests/server_test.o"
 	@echo "... tests/server_test.i"
 	@echo "... tests/server_test.s"

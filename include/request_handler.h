@@ -6,12 +6,18 @@
 #include <iostream>
 #include <boost/beast/http.hpp>
 #include "./config_parser.h"
+#include "http/request.hpp"
+#include "http/reply.hpp"
+#include "http/request_parser.hpp"
 
-namespace http = boost::beast::http;
+
+using http::server::request;
+using http::server::request_parser;
+using http::server::reply;
 
 class Request_Handler {
     public:
-        virtual void handle_request(const http::request<http::string_body>&request_ ,http::response<http::string_body> *response_) const = 0;
+        virtual void handle_request(const request & http_request,reply * http_reply) = 0;
 
     protected:
 

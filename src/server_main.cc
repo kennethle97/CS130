@@ -13,7 +13,6 @@
 #include <boost/asio.hpp>
 #include <signal.h>
 
-<<<<<<< Updated upstream
 #include "server.h"
 #include "config_parser.h"
 #include "logger.h"
@@ -42,17 +41,6 @@ int main(int argc, char* argv[]) {
 
     if (argc != 2) {
       server_logger->log_fatal("Usage: async_tcp_echo_server <port>");
-=======
-#include "../include/server.h"
-#include "../include/config_parser.h"
-int main(int argc, char* argv[])
-{
-  try
-  {
-    if (argc != 2)
-    {
-      std::cerr << "Usage: async_tcp_echo_server <port>\n";
->>>>>>> Stashed changes
       return 1;
     }
 
@@ -73,14 +61,9 @@ int main(int argc, char* argv[])
     }
     server_logger->log_trace("Config file parsed");
 
-<<<<<<< Updated upstream
-    server s(io_service, port);
-    server_logger->log_trace("Server started at port " + std::to_string(port));
-=======
     server s(io_service, port,config);
-    // std::cout << "Server started at port " << port << std::endl;
+    server_logger->log_trace("Server started at port " + std::to_string(port));
 
->>>>>>> Stashed changes
     io_service.run();
   }
   catch (std::exception& e) {

@@ -1119,14 +1119,12 @@ CMakeFiles/session_lib.dir/src/session.cc.o: \
  /usr/include/boost/asio/windows/stream_handle.hpp \
  /usr/include/boost/asio/write_at.hpp \
  /usr/include/boost/asio/impl/write_at.hpp /usr/include/c++/11/iostream \
- /usr/include/boost/beast/version.hpp \
+ /root/CS130/Team-404/include/session.h \
+ /root/CS130/Team-404/include/request_handler_dispatcher.h \
+ /root/CS130/Team-404/include/request_handler.h \
+ /usr/include/boost/beast/http.hpp \
  /usr/include/boost/beast/core/detail/config.hpp \
  /usr/include/boost/core/ignore_unused.hpp \
- /usr/include/boost/beast/core/flat_buffer.hpp \
- /usr/include/boost/beast/core/detail/allocator.hpp \
- /usr/include/boost/core/empty_value.hpp \
- /usr/include/boost/beast/core/impl/flat_buffer.hpp \
- /usr/include/boost/core/exchange.hpp /usr/include/boost/beast/http.hpp \
  /usr/include/boost/beast/http/basic_dynamic_body.hpp \
  /usr/include/boost/beast/core/buffer_traits.hpp \
  /usr/include/boost/beast/core/detail/buffer_traits.hpp \
@@ -1240,8 +1238,10 @@ CMakeFiles/session_lib.dir/src/session.cc.o: \
  /usr/include/boost/container_hash/hash_fwd.hpp \
  /usr/include/boost/beast/core/impl/string.ipp \
  /usr/include/boost/beast/core/detail/string.hpp \
+ /usr/include/boost/beast/core/detail/allocator.hpp \
  /usr/include/boost/beast/http/field.hpp \
  /usr/include/boost/beast/http/impl/field.ipp \
+ /usr/include/boost/core/empty_value.hpp \
  /usr/include/boost/intrusive/list.hpp \
  /usr/include/boost/intrusive/detail/config_begin.hpp \
  /usr/include/boost/intrusive/intrusive_fwd.hpp \
@@ -1325,6 +1325,7 @@ CMakeFiles/session_lib.dir/src/session.cc.o: \
  /usr/include/boost/beast/core/detail/static_string.hpp \
  /usr/include/boost/beast/core/detail/temporary_buffer.hpp \
  /usr/include/boost/beast/core/detail/impl/temporary_buffer.ipp \
+ /usr/include/boost/core/exchange.hpp \
  /usr/include/boost/beast/core/static_string.hpp \
  /usr/include/boost/beast/core/impl/static_string.hpp \
  /usr/include/boost/beast/http/verb.hpp \
@@ -1504,8 +1505,17 @@ CMakeFiles/session_lib.dir/src/session.cc.o: \
  /usr/include/boost/beast/http/write.hpp \
  /usr/include/boost/beast/http/impl/write.hpp \
  /usr/include/boost/beast/core/make_printable.hpp \
- /root/CS130/Team-404/src/../include/session.h \
- /root/CS130/Team-404/src/../include/request_handler_dispatcher.h \
- /root/CS130/Team-404/src/../include/request_handler.h \
- /root/CS130/Team-404/src/../include/./config_parser.h \
- /root/CS130/Team-404/src/../include/http_parser.h
+ /root/CS130/Team-404/include/./config_parser.h \
+ /root/CS130/Team-404/include/http/request.hpp \
+ /root/CS130/Team-404/include/http/header.hpp \
+ /root/CS130/Team-404/include/http/reply.hpp \
+ /root/CS130/Team-404/include/http/request_parser.hpp \
+ /usr/include/boost/logic/tribool.hpp \
+ /usr/include/boost/logic/tribool_fwd.hpp \
+ /usr/include/boost/tuple/tuple.hpp \
+ /usr/include/boost/tuple/detail/tuple_basic.hpp \
+ /usr/include/boost/type_traits/cv_traits.hpp \
+ /usr/include/boost/utility/swap.hpp \
+ /root/CS130/Team-404/include/http/request.hpp \
+ /root/CS130/Team-404/include/http/reply.hpp \
+ /root/CS130/Team-404/include/http/request_parser.hpp

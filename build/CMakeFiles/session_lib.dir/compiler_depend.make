@@ -1234,15 +1234,12 @@ CMakeFiles/session_lib.dir/src/session.cc.o: ../src/session.cc \
   /usr/include/boost/asio/write_at.hpp \
   /usr/include/boost/asio/impl/write_at.hpp \
   /usr/include/c++/11/iostream \
-  /usr/include/boost/beast/version.hpp \
+  ../include/session.h \
+  ../include/request_handler_dispatcher.h \
+  ../include/request_handler.h \
+  /usr/include/boost/beast/http.hpp \
   /usr/include/boost/beast/core/detail/config.hpp \
   /usr/include/boost/core/ignore_unused.hpp \
-  /usr/include/boost/beast/core/flat_buffer.hpp \
-  /usr/include/boost/beast/core/detail/allocator.hpp \
-  /usr/include/boost/core/empty_value.hpp \
-  /usr/include/boost/beast/core/impl/flat_buffer.hpp \
-  /usr/include/boost/core/exchange.hpp \
-  /usr/include/boost/beast/http.hpp \
   /usr/include/boost/beast/http/basic_dynamic_body.hpp \
   /usr/include/boost/beast/core/buffer_traits.hpp \
   /usr/include/boost/beast/core/detail/buffer_traits.hpp \
@@ -1359,8 +1356,10 @@ CMakeFiles/session_lib.dir/src/session.cc.o: ../src/session.cc \
   /usr/include/boost/container_hash/hash_fwd.hpp \
   /usr/include/boost/beast/core/impl/string.ipp \
   /usr/include/boost/beast/core/detail/string.hpp \
+  /usr/include/boost/beast/core/detail/allocator.hpp \
   /usr/include/boost/beast/http/field.hpp \
   /usr/include/boost/beast/http/impl/field.ipp \
+  /usr/include/boost/core/empty_value.hpp \
   /usr/include/boost/intrusive/list.hpp \
   /usr/include/boost/intrusive/detail/config_begin.hpp \
   /usr/include/boost/intrusive/intrusive_fwd.hpp \
@@ -1445,6 +1444,7 @@ CMakeFiles/session_lib.dir/src/session.cc.o: ../src/session.cc \
   /usr/include/boost/beast/core/detail/static_string.hpp \
   /usr/include/boost/beast/core/detail/temporary_buffer.hpp \
   /usr/include/boost/beast/core/detail/impl/temporary_buffer.ipp \
+  /usr/include/boost/core/exchange.hpp \
   /usr/include/boost/beast/core/static_string.hpp \
   /usr/include/boost/beast/core/impl/static_string.hpp \
   /usr/include/boost/beast/http/verb.hpp \
@@ -1624,18 +1624,33 @@ CMakeFiles/session_lib.dir/src/session.cc.o: ../src/session.cc \
   /usr/include/boost/beast/http/write.hpp \
   /usr/include/boost/beast/http/impl/write.hpp \
   /usr/include/boost/beast/core/make_printable.hpp \
-  ../include/session.h \
-  ../include/request_handler_dispatcher.h \
-  ../include/request_handler.h \
   ../include/config_parser.h \
-  ../include/http_parser.h
+  ../include/http/request.hpp \
+  ../include/http/header.hpp \
+  ../include/http/reply.hpp \
+  ../include/http/request_parser.hpp \
+  /usr/include/boost/logic/tribool.hpp \
+  /usr/include/boost/logic/tribool_fwd.hpp \
+  /usr/include/boost/tuple/tuple.hpp \
+  /usr/include/boost/tuple/detail/tuple_basic.hpp \
+  /usr/include/boost/type_traits/cv_traits.hpp \
+  /usr/include/boost/utility/swap.hpp \
+  ../include/http/request.hpp \
+  ../include/http/reply.hpp \
+  ../include/http/request_parser.hpp
 
 
-../include/http_parser.h:
+/usr/include/boost/tuple/detail/tuple_basic.hpp:
 
-../include/request_handler_dispatcher.h:
+/usr/include/boost/tuple/tuple.hpp:
 
-../include/session.h:
+../include/http/request_parser.hpp:
+
+../include/http/reply.hpp:
+
+../include/http/header.hpp:
+
+../include/http/request.hpp:
 
 /usr/include/boost/beast/core/make_printable.hpp:
 
@@ -1722,6 +1737,8 @@ CMakeFiles/session_lib.dir/src/session.cc.o: ../src/session.cc \
 /usr/include/boost/type_traits/has_less_equal.hpp:
 
 /usr/include/boost/type_traits/has_equal_to.hpp:
+
+/usr/include/boost/logic/tribool.hpp:
 
 /usr/include/boost/type_traits/has_divides_assign.hpp:
 
@@ -1821,6 +1838,8 @@ CMakeFiles/session_lib.dir/src/session.cc.o: ../src/session.cc \
 
 /usr/include/boost/beast/http/verb.hpp:
 
+/usr/include/boost/core/exchange.hpp:
+
 /usr/include/boost/beast/core/detail/impl/temporary_buffer.ipp:
 
 /usr/include/boost/beast/core/detail/temporary_buffer.hpp:
@@ -1916,6 +1935,8 @@ CMakeFiles/session_lib.dir/src/session.cc.o: ../src/session.cc \
 /usr/include/boost/intrusive/detail/assert.hpp:
 
 /usr/include/boost/intrusive/intrusive_fwd.hpp:
+
+/usr/include/boost/core/empty_value.hpp:
 
 /usr/include/boost/beast/http/impl/field.ipp:
 
@@ -2051,6 +2072,8 @@ CMakeFiles/session_lib.dir/src/session.cc.o: ../src/session.cc \
 
 /usr/include/boost/optional.hpp:
 
+/usr/include/boost/logic/tribool_fwd.hpp:
+
 /usr/include/boost/beast/core/impl/file_stdio.ipp:
 
 /usr/include/boost/beast/core/impl/error.ipp:
@@ -2083,13 +2106,13 @@ CMakeFiles/session_lib.dir/src/session.cc.o: ../src/session.cc \
 
 /usr/include/boost/beast/http/basic_dynamic_body.hpp:
 
+/usr/include/boost/core/ignore_unused.hpp:
+
 /usr/include/boost/beast/http.hpp:
 
-/usr/include/boost/core/exchange.hpp:
+../include/request_handler_dispatcher.h:
 
-/usr/include/boost/core/empty_value.hpp:
-
-/usr/include/boost/core/ignore_unused.hpp:
+../include/session.h:
 
 /usr/include/boost/asio/write_at.hpp:
 
@@ -2416,8 +2439,6 @@ CMakeFiles/session_lib.dir/src/session.cc.o: ../src/session.cc \
 /usr/include/boost/asio/detail/impl/null_event.ipp:
 
 /usr/include/asm-generic/ioctls.h:
-
-/usr/include/boost/beast/core/impl/flat_buffer.hpp:
 
 /usr/include/boost/get_pointer.hpp:
 
@@ -2892,8 +2913,6 @@ CMakeFiles/session_lib.dir/src/session.cc.o: ../src/session.cc \
 /usr/include/boost/asio/signal_set.hpp:
 
 /usr/include/c++/11/bits/atomic_futex.h:
-
-/usr/include/boost/beast/core/flat_buffer.hpp:
 
 /usr/include/boost/bind/bind_cc.hpp:
 
@@ -3703,6 +3722,8 @@ CMakeFiles/session_lib.dir/src/session.cc.o: ../src/session.cc \
 
 /usr/include/boost/bind/storage.hpp:
 
+/usr/include/boost/type_traits/cv_traits.hpp:
+
 /usr/include/boost/bind/placeholders.hpp:
 
 /usr/include/boost/asio/associated_allocator.hpp:
@@ -4086,6 +4107,8 @@ CMakeFiles/session_lib.dir/src/session.cc.o: ../src/session.cc \
 /usr/include/boost/date_time/posix_time/posix_time_config.hpp:
 
 /usr/include/boost/config/no_tr1/cmath.hpp:
+
+/usr/include/boost/utility/swap.hpp:
 
 /usr/include/boost/beast/http/field.hpp:
 
@@ -4750,8 +4773,6 @@ CMakeFiles/session_lib.dir/src/session.cc.o: ../src/session.cc \
 /usr/include/boost/asio/ip/impl/network_v6.hpp:
 
 /usr/include/boost/asio/ip/detail/impl/endpoint.ipp:
-
-/usr/include/boost/beast/version.hpp:
 
 /usr/include/x86_64-linux-gnu/asm/types.h:
 

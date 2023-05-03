@@ -1626,11 +1626,29 @@ CMakeFiles/server_lib.dir/src/server.cc.o: ../src/server.cc \
   /usr/include/boost/beast/http/impl/write.hpp \
   /usr/include/boost/beast/core/make_printable.hpp \
   ../include/config_parser.h \
-  ../include/http_parser.h \
-  /usr/include/boost/beast/version.hpp
+  ../include/http/request.hpp \
+  ../include/http/header.hpp \
+  ../include/http/reply.hpp \
+  ../include/http/request_parser.hpp \
+  /usr/include/boost/logic/tribool.hpp \
+  /usr/include/boost/logic/tribool_fwd.hpp \
+  /usr/include/boost/tuple/tuple.hpp \
+  /usr/include/boost/tuple/detail/tuple_basic.hpp \
+  /usr/include/boost/type_traits/cv_traits.hpp \
+  /usr/include/boost/utility/swap.hpp
 
 
-../include/http_parser.h:
+/usr/include/boost/tuple/detail/tuple_basic.hpp:
+
+/usr/include/boost/tuple/tuple.hpp:
+
+../include/http/request_parser.hpp:
+
+../include/http/reply.hpp:
+
+../include/http/header.hpp:
+
+../include/http/request.hpp:
 
 /usr/include/boost/beast/core/make_printable.hpp:
 
@@ -1717,6 +1735,8 @@ CMakeFiles/server_lib.dir/src/server.cc.o: ../src/server.cc \
 /usr/include/boost/type_traits/has_less_equal.hpp:
 
 /usr/include/boost/type_traits/has_equal_to.hpp:
+
+/usr/include/boost/logic/tribool.hpp:
 
 /usr/include/boost/type_traits/has_divides_assign.hpp:
 
@@ -2049,6 +2069,8 @@ CMakeFiles/server_lib.dir/src/server.cc.o: ../src/server.cc \
 /usr/include/boost/optional/optional.hpp:
 
 /usr/include/boost/optional.hpp:
+
+/usr/include/boost/logic/tribool_fwd.hpp:
 
 /usr/include/boost/beast/core/impl/file_stdio.ipp:
 
@@ -3684,6 +3706,8 @@ CMakeFiles/server_lib.dir/src/server.cc.o: ../src/server.cc \
 
 /usr/include/boost/bind/storage.hpp:
 
+/usr/include/boost/type_traits/cv_traits.hpp:
+
 /usr/include/boost/bind/placeholders.hpp:
 
 /usr/include/boost/asio/associated_allocator.hpp:
@@ -4079,6 +4103,8 @@ CMakeFiles/server_lib.dir/src/server.cc.o: ../src/server.cc \
 /usr/include/boost/date_time/posix_time/posix_time_config.hpp:
 
 /usr/include/boost/config/no_tr1/cmath.hpp:
+
+/usr/include/boost/utility/swap.hpp:
 
 /usr/include/boost/beast/http/field.hpp:
 
@@ -4747,8 +4773,6 @@ CMakeFiles/server_lib.dir/src/server.cc.o: ../src/server.cc \
 /usr/include/boost/asio/ip/impl/network_v6.hpp:
 
 /usr/include/boost/asio/ip/detail/impl/endpoint.ipp:
-
-/usr/include/boost/beast/version.hpp:
 
 /usr/include/x86_64-linux-gnu/asm/types.h:
 

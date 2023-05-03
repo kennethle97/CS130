@@ -3,18 +3,20 @@
 #ifndef REQUEST_HANDLER_STATIC_H
 #define REQUEST_HANDLER_STATIC_H
 
+#include <iostream>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include "../request_handler.h"
+#include "../request_handler_dispatcher.h"
 
 class Request_Handler_Static : public Request_Handler {
 public:
-    explicit Request_Handler_Static(const PathUri& root_, const PathUri& prefix_);
-    void handle_request(const request& request, response* response) noexcept override;
+    explicit Request_Handler_Static(const path_uri & root, const path_uri & prefix);
+    void handle_request(const request& http_request, reply* http_reply) noexcept override;
 
 private:
-    PathUri root;    // Root path to serve files from
-    PathUri prefix;  // Prefix in case no root
+    path_uri root;    // Root path to serve files from
+    path_uri prefix;  // Prefix in case no root
 };
 
 #endif

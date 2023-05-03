@@ -1,8 +1,16 @@
+#ifndef SESSION_H
+#define SESSION_H
+
 #include <boost/asio.hpp>
 #include "request_handler_dispatcher.h"
-#include "http_parser.h"
+#include "http/request.hpp"
+#include "http/reply.hpp"
+#include "http/request_parser.hpp"
 
 using boost::asio::ip::tcp;
+using http::server::request;
+using http::server::reply;
+using http::server::request_parser;
 
 class session :public std::enable_shared_from_this<session>
 {
@@ -13,6 +21,10 @@ public:
   tcp::socket& socket();
 
   void start();
+
+  request http_request;
+  reply http_reply;
+  request_parser http_parser;
 
   friend class testsession;
 
@@ -39,3 +51,5 @@ class testsession {
     sess->handle_write(error);
   }
 };
+
+#endif

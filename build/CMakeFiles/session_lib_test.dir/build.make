@@ -92,9 +92,21 @@ session_lib_test_EXTERNAL_OBJECTS =
 
 bin/session_lib_test: CMakeFiles/session_lib_test.dir/tests/session_test.cc.o
 bin/session_lib_test: CMakeFiles/session_lib_test.dir/build.make
+bin/session_lib_test: libserver_lib.a
 bin/session_lib_test: libsession_lib.a
+bin/session_lib_test: librequest_handler_lib.a
+bin/session_lib_test: libhttp_lib.a
+bin/session_lib_test: libconfig_parser_lib.a
+bin/session_lib_test: liblogger_lib.a
 bin/session_lib_test: lib/libgtest_main.a
+bin/session_lib_test: /usr/lib/x86_64-linux-gnu/libboost_log_setup.a
+bin/session_lib_test: /usr/lib/x86_64-linux-gnu/libboost_log.a
 bin/session_lib_test: lib/libgtest.a
+bin/session_lib_test: /usr/lib/x86_64-linux-gnu/libboost_chrono.a
+bin/session_lib_test: /usr/lib/x86_64-linux-gnu/libboost_filesystem.a
+bin/session_lib_test: /usr/lib/x86_64-linux-gnu/libboost_regex.a
+bin/session_lib_test: /usr/lib/x86_64-linux-gnu/libboost_thread.a
+bin/session_lib_test: /usr/lib/x86_64-linux-gnu/libboost_atomic.a
 bin/session_lib_test: CMakeFiles/session_lib_test.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/root/CS130/Team-404/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable bin/session_lib_test"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/session_lib_test.dir/link.txt --verbose=$(VERBOSE)

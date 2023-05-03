@@ -1,8 +1,11 @@
 #include "gtest/gtest.h"
 // #include "gmock/gmock.h"
 #include <boost/asio.hpp>
+#include <fstream>
 
 #include "server.h"
+#include "request_handler_dispatcher.h"
+#include "config_parser.h"
 
 using boost::asio::ip::tcp;
 
@@ -21,12 +24,23 @@ using boost::asio::ip::tcp;
 
 class ServerTest : public ::testing::Test {
     protected:
+    NginxConfigParser parser;
+    NginxConfig config;
+    std::shared_ptr<Request_Handler_Dispatcher> dispatcher;
+    
+    // Set up the test fixture
+    void SetUp() override {
+        std::string config_file_path = "/example_config"; // replace with your config file path
+        std::ifstream config_file(config_file_path);
+        parser.Parse(&config_file, &config);
+        dispatcher = std::make_shared<Request_Handler_Dispatcher>(config);
+    }
 };
 
 // testing whether creating a new server works
 TEST_F(ServerTest, StartTest) {
     boost::asio::io_service io_service;
-    server* new_server = new server(io_service, (short)8080);
+    server* new_server = new server(io_service, (short)8080, config);
     EXPECT_TRUE(true);
     delete new_server;
 }
@@ -35,7 +49,7 @@ TEST_F(ServerTest, StartTest) {
 TEST_F(ServerTest, AcceptTest) {
     // MockSession mock_session(io_service_);
     boost::asio::io_service io_service_;
-    server* new_server = new server(io_service_, (short)8080);
+    server* new_server = new server(io_service_, (short)8080, config);
     testserver new_test_server;
     new_test_server.friend_start_accept(new_server);
     EXPECT_TRUE(true);
@@ -45,9 +59,9 @@ TEST_F(ServerTest, AcceptTest) {
 TEST_F(ServerTest, HandleTest) {
     // MockSession mock_session(io_service_);
     boost::asio::io_service io_service_;
-    server* new_server = new server(io_service_, (short)8080);
+    server* new_server = new server(io_service_, (short)8080, config);
     testserver new_test_server;
-    session* new_session = new session(io_service_);
+    session* new_session = new session(io_service_, dispatcher);
     const boost::system::error_code error;
     new_test_server.friend_handle_accept(new_server, new_session, error);
     EXPECT_TRUE(true);
