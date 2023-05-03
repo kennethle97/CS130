@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
     NginxConfigParser parser;
     NginxConfig config;
 
-    server_logger->log_trace("Parsing config file");
+    server_logger->log_debug("Parsing config file");
     if (!parser.Parse(argv[1], &config)) {
       server_logger->log_fatal("Failed to parse config file");
       return 1;
@@ -59,10 +59,10 @@ int main(int argc, char* argv[]) {
       server_logger->log_fatal("Failed to get port from config file");
       return 1;
     }
-    server_logger->log_trace("Config file parsed");
+    server_logger->log_debug("Config file parsed");
 
     server s(io_service, port,config);
-    server_logger->log_trace("Server started at port " + std::to_string(port));
+    server_logger->log_debug("Server started at port " + std::to_string(port));
 
     io_service.run();
   }

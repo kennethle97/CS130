@@ -15,6 +15,7 @@
 #include <sstream>
 
 #include "logger.h"
+#include "http/request.hpp"
 
 namespace logging = boost::log;
 namespace src = boost::log::sources;
@@ -22,7 +23,9 @@ namespace sinks = boost::log::sinks;
 namespace keywords = boost::log::keywords;
 using namespace boost::log::trivial;
 using boost::asio::ip::tcp;
+using http::server::request;
 
+// initialize blank server_logger instance
 ServerLogger *ServerLogger::server_logger = 0;
 
 // Returns a static object server_loger so that
@@ -39,28 +42,42 @@ ServerLogger *ServerLogger::get_server_logger() {
 // - log file is rotated every 10 MB and at midnight
 ServerLogger::ServerLogger() {
   logging::add_file_log (
-    keywords::file_name = "../logs/trace_%N.log",
+    keywords::file_name = "log/SYSLOG_%N.log",
     keywords::rotation_size = 10 * 1024 * 1024,
     keywords::time_based_rotation = sinks::file::rotation_at_time_point(0, 0, 0),
-    keywords::format = "[%TimeStamp%]:[%ThreadID%]:[%Severity%]: %Message%",
+    keywords::format = "[%TimeStamp%]:[%ThreadID%]:[%ProcessID%]:[%Severity%]: %Message%",
     keywords::auto_flush = true
   );
   logging::add_common_attributes();
   logging::record rec = sev_logger.open_record();
   logging::add_console_log (
     std::cout,
-    keywords::format = "[%TimeStamp%]:[%ThreadID%]:[%Severity%]: %Message%"
+    keywords::format = "[%TimeStamp%]:[%ThreadID%]:[%ProcessID%]:[%Severity%]: %Message%"
   );
 }
 
+// Takes in an error message, then adds the line number of the
+// server_logger logcall to the beginning of the message.
+// NOTE: this DOES NOT add the line number of the error, so it's only
+// somewhat useful for debugging.
+// std::string ServerLogger::add_line_num(int line_num, std::string message) {
+//   std::stringstream sstream;
+//   sstream << "Line " << line_num << ": " << message;
+//   return sstream.str();
+// }
+
 // Called when logging info about each request
 // received by the server
-// TODO: implement after request handling 
-void ServerLogger::log_request(tcp::socket &socket) {
+void ServerLogger::log_request(request http_request, tcp::socket &socket) {
   std::stringstream sstream;
+  // TODO: log request information
+  sstream << http_request.method << " " << http_request.uri;
+  sstream << " HTTP/" << http_request.http_version_major << "." << http_request.http_version_minor;
 
+  // get ip address of the caller
   std::string remote_address = socket.remote_endpoint().address().to_string();
-  sstream << "IP Address: " << remote_address;
+  sstream << " - IP Address: " << remote_address;
+
   BOOST_LOG_SEV(sev_logger, trace) << sstream.str();
 }
 
@@ -90,28 +107,3 @@ void ServerLogger::log_error(std::string message) {
 void ServerLogger::log_fatal(std::string message) {
   BOOST_LOG_SEV(sev_logger, fatal) << message;
 }
-
-// trivial logging -- no longer needed
-// void ServerLogger::log_trivial_trace() {
-//   BOOST_LOG_TRIVIAL(trace) << "A trace severity message";
-// }
-
-// void ServerLogger::log_trivial_debug() {
-//   BOOST_LOG_TRIVIAL(debug) << "A debug severity message";
-// }
-
-// void ServerLogger::log_trivial_info() {
-//   BOOST_LOG_TRIVIAL(info) << "An informational severity message";
-// }
-
-// void ServerLogger::log_trivial_warning() {
-//   BOOST_LOG_TRIVIAL(warning) << "A warning severity message";
-// }
-
-// void ServerLogger::log_trivial_error() {
-//   BOOST_LOG_TRIVIAL(error) << "An error severity message";
-// }
-
-// void ServerLogger::log_trivial_fatal() {
-//   BOOST_LOG_TRIVIAL(fatal) << "A fatal severity message";
-// }

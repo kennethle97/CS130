@@ -33,6 +33,10 @@ FROM ubuntu:jammy as deploy
 COPY --from=builder /usr/src/project/build/bin/server .
 COPY --from=builder /usr/src/project/conf/server.conf .
 
+# Copy static files -- change
+COPY --from=builder /usr/src/project/folder1 ./folder1
+COPY --from=builder /usr/src/project/folder2 ./folder2
+
 # TODO(!): Expose some port(s)
 EXPOSE 80
 

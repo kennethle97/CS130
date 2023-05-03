@@ -1,6 +1,6 @@
 
 #include "../../include/request_handler/request_handler_echo.h"
-
+#include "logger.h"
 
 
 void Request_Handler_Echo::handle_request(const request& http_request, reply* http_reply)noexcept {
@@ -11,6 +11,9 @@ void Request_Handler_Echo::handle_request(const request& http_request, reply* ht
     for (const auto& header : http_request.headers) {
         request_body << header.name << ": " << header.value << "\r\n";
     }
+    
+    ServerLogger* server_logger = ServerLogger::get_server_logger();
+    server_logger->log_debug("Echo Request Handler: " + http_request.uri);
 
     request_body << "\r\n";
     std::string request_body_str = request_body.str();
@@ -22,6 +25,6 @@ void Request_Handler_Echo::handle_request(const request& http_request, reply* ht
     http_reply->headers[0].name = "Content-Length";
     http_reply->headers[0].value = request_body_length;
     http_reply->headers[1].name = "Content-Type";
-    http_reply->headers[1].value = "text_plain";
+    http_reply->headers[1].value = "text/plain";
 }
 

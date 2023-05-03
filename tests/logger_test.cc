@@ -15,23 +15,31 @@ class LoggerTest : public ::testing::Test {
   protected:
     ServerLogger *server_logger = ServerLogger::get_server_logger();
     std::ifstream file;
-    std::string log_filename = "../logs/trace_0.log";
+    std::string log_filename = "log/SYSLOG_0.log";
     std::string expected_severity_lvl;
     std::string expected_message;
 
+    // Returns the last line of the log file
     LogEntry getLogEntry() {
-
       file.open(log_filename);
-      std::vector<std::string> log_lines;
 
-      std::string line;
+      std::vector<std::string> log_lines;
+        
+      std::string line = "";
       while(std::getline(file, line)) {
         log_lines.push_back(line);
       }
 
       file.close();
 
-      line = log_lines.back();
+      if (log_lines.size() == 0) {
+        LogEntry log_entry;
+        log_entry.severity_lvl = "";
+        log_entry.message = "";
+        return log_entry;
+      } else {
+        line = log_lines.back();
+      }
 
       std::size_t severity_lvl_start = line.find_last_of("[") + 1;
       std::size_t severity_lvl_end = line.find_last_of("]");

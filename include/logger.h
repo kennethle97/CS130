@@ -9,6 +9,7 @@
 #include <boost/log/utility/setup/file.hpp>
 #include <boost/log/utility/setup/common_attributes.hpp>
 #include <string>
+#include "http/request.hpp"
 
 namespace logging = boost::log;
 namespace src = boost::log::sources;
@@ -16,18 +17,24 @@ namespace sinks = boost::log::sinks;
 namespace keywords = boost::log::keywords;
 using namespace boost::log::trivial;
 using boost::asio::ip::tcp;
+using http::server::request;
 
+// See logger.cc for implementation details
 class ServerLogger {
   public:
     ServerLogger();
     static ServerLogger *server_logger;
     static ServerLogger *get_server_logger();
     
+    // severity level logger
     src::severity_logger<severity_level> sev_logger;
+    
+    // Called when logging an error message
+    // std::string add_line_num(int line_num, std::string message);
     
     // Called when logging info about each request
     // received by the server
-    void log_request(tcp::socket &socket);
+    void log_request(request http_request, tcp::socket &socket);
 
     // Called when logging any info about the server
     // Severity level goes from best -> worst:
@@ -38,13 +45,5 @@ class ServerLogger {
     void log_warning(std::string message);
     void log_error(std::string message);
     void log_fatal(std::string message);
-
-    // trivial logging -- no longer needed
-    // static void log_trivial_trace();
-    // static void log_trivial_debug();
-    // static void log_trivial_info();
-    // static void log_trivial_warning();
-    // static void log_trivial_error();
-    // static void log_trivial_fatal();
 
 };

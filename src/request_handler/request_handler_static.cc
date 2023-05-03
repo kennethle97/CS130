@@ -1,12 +1,13 @@
 
 #include "../../include/request_handler/request_handler_static.h"
 #include "../../include/http/mime_types.hpp"
+#include "logger.h"
 
 Request_Handler_Static::Request_Handler_Static(const path_uri& root_, const path_uri& prefix_)
     : root(root_), prefix(prefix_) {}
 
 void Request_Handler_Static::handle_request(const request &http_request, reply *http_reply) noexcept {
-    
+    ServerLogger *server_logger = ServerLogger::get_server_logger();
     
     // Create the full path of the file requested by combining the prefix and the request target
     std::string uri = http_request.uri;
@@ -15,16 +16,21 @@ void Request_Handler_Static::handle_request(const request &http_request, reply *
         uri.replace(prefix_pos, prefix.length(), root);
     } else {
         *http_reply = reply::stock_reply(reply::not_found);
+        server_logger->log_info("Bad request -- prefix not found");
         return;
     }
     // boost::filesystem::current_path().string()
     uri = "../.." + uri;
-    std::cout << "Static Request Handler Serving file: " << uri << std::endl;
+    // std::cout << "Static Request Handler Serving file: " << uri << std::endl;
+
+    server_logger->log_debug("Static Request Handler Serving file: " + uri);
+
     // Check if the requested file exists and is a regular file
     boost::filesystem::path path(uri);
     
     if (!boost::filesystem::exists(path)||!boost::filesystem::is_regular_file(uri)) {
-       *http_reply = reply::stock_reply(reply::not_found);
+        *http_reply = reply::stock_reply(reply::not_found);
+        server_logger->log_info("Bad request -- file not found");
         return;
     }
 
