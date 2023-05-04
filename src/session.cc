@@ -55,7 +55,7 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
                 /*LOG NULL PTR*/
                 http_reply = reply::stock_reply(reply::bad_request);
                 server_logger->log_warning("Bad Request -- Request handler not found");
-                server_logger->log_debug("Response code: " + std::to_string(http_reply.status));
+                server_logger->log_info("Response code: " + std::to_string(http_reply.status));
                 return;
             }
             // Handle the request and generate a response
@@ -68,7 +68,7 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
             }
 
             // Log http response code
-            server_logger->log_debug("Response code: " + std::to_string(http_reply.status));
+            server_logger->log_info("Response code: " + std::to_string(http_reply.status));
             if (http_reply.status == reply::ok) {
                 server_logger->log_info("Good request");
             }

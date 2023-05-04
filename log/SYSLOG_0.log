@@ -1,47 +1,37 @@
-[2023-05-03 21:52:35.446324]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Parsing config file
-[2023-05-03 21:52:35.461329]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Config file parsed
-[2023-05-03 21:52:35.462833]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Server started at port 80
-[2023-05-03 21:52:44.816779]:[0x00007f1ba342c740]:[0x0000054b]:[trace]: GET /echo HTTP/1.1 - IP Address: 127.0.0.1
-[2023-05-03 21:52:44.818659]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Echo Request Handler: /echo
-[2023-05-03 21:52:44.820503]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Response code: 200
-[2023-05-03 21:52:44.822204]:[0x00007f1ba342c740]:[0x0000054b]:[info]: Good request
-[2023-05-03 21:52:44.824845]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: session::handle_read: async_write
-[2023-05-03 21:52:51.467722]:[0x00007f1ba342c740]:[0x0000054b]:[trace]: GET /nonexistent_path HTTP/1.1 - IP Address: 127.0.0.1
-[2023-05-03 21:52:51.469638]:[0x00007f1ba342c740]:[0x0000054b]:[warning]: Bad Request -- Request handler not found
-[2023-05-03 21:52:51.471589]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Response code: 400
-[2023-05-03 21:53:03.371029]:[0x00007f1ba342c740]:[0x0000054b]:[trace]: GET /echo HTTP/1.1 - IP Address: 172.17.0.2
-[2023-05-03 21:53:03.372840]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Echo Request Handler: /echo
-[2023-05-03 21:53:03.374534]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Response code: 200
-[2023-05-03 21:53:03.376200]:[0x00007f1ba342c740]:[0x0000054b]:[info]: Good request
-[2023-05-03 21:53:03.377850]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: session::handle_read: async_write
-[2023-05-03 21:53:13.259131]:[0x00007f1ba342c740]:[0x0000054b]:[trace]: GET /static1/random.txt HTTP/1.1 - IP Address: 172.17.0.2
-[2023-05-03 21:53:13.260818]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Static Request Handler Serving file: ../../folder1/random.txt
-[2023-05-03 21:53:13.264220]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Response code: 200
-[2023-05-03 21:53:13.265792]:[0x00007f1ba342c740]:[0x0000054b]:[info]: Good request
-[2023-05-03 21:53:13.267800]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: session::handle_read: async_write
-[2023-05-03 21:53:33.357670]:[0x00007f1ba342c740]:[0x0000054b]:[trace]: GET /static1/nonexistent_file.txt HTTP/1.1 - IP Address: 172.17.0.2
-[2023-05-03 21:53:33.360037]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Static Request Handler Serving file: ../../folder1/nonexistent_file.txt
-[2023-05-03 21:53:33.363348]:[0x00007f1ba342c740]:[0x0000054b]:[info]: Bad request -- file not found
-[2023-05-03 21:53:33.365097]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Response code: 404
-[2023-05-03 21:53:33.367250]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: session::handle_read: async_write
-[2023-05-03 21:53:42.137875]:[0x00007f1ba342c740]:[0x0000054b]:[trace]: GET /static2/random_zipped.zip HTTP/1.1 - IP Address: 172.17.0.2
-[2023-05-03 21:53:42.139680]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Static Request Handler Serving file: ../../folder2/random_zipped.zip
-[2023-05-03 21:53:42.143282]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Response code: 200
-[2023-05-03 21:53:42.145398]:[0x00007f1ba342c740]:[0x0000054b]:[info]: Good request
-[2023-05-03 21:53:42.147285]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: session::handle_read: async_write
-[2023-05-03 21:53:47.996742]:[0x00007f1ba342c740]:[0x0000054b]:[trace]: GET /static2/random_zipped.zip HTTP/1.1 - IP Address: 127.0.0.1
-[2023-05-03 21:53:47.998927]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Static Request Handler Serving file: ../../folder2/random_zipped.zip
-[2023-05-03 21:53:48.002760]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Response code: 200
-[2023-05-03 21:53:48.004721]:[0x00007f1ba342c740]:[0x0000054b]:[info]: Good request
-[2023-05-03 21:53:48.007228]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: session::handle_read: async_write
-[2023-05-03 21:54:09.802044]:[0x00007f1ba342c740]:[0x0000054b]:[trace]: GET /static2/random_zipped.bad_file_desc HTTP/1.1 - IP Address: 127.0.0.1
-[2023-05-03 21:54:09.803950]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Static Request Handler Serving file: ../../folder2/random_zipped.bad_file_desc
-[2023-05-03 21:54:09.810949]:[0x00007f1ba342c740]:[0x0000054b]:[info]: Bad request -- file not found
-[2023-05-03 21:54:09.813030]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Response code: 404
-[2023-05-03 21:54:09.815422]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: session::handle_read: async_write
-[2023-05-03 21:54:18.559411]:[0x00007f1ba342c740]:[0x0000054b]:[trace]: GET /echo HTTP/1.1 - IP Address: 172.17.0.2
-[2023-05-03 21:54:18.561230]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Echo Request Handler: /echo
-[2023-05-03 21:54:18.563033]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: Response code: 200
-[2023-05-03 21:54:18.564552]:[0x00007f1ba342c740]:[0x0000054b]:[info]: Good request
-[2023-05-03 21:54:18.566877]:[0x00007f1ba342c740]:[0x0000054b]:[debug]: session::handle_read: async_write
-[2023-05-03 21:55:01.553646]:[0x00007f1ba342c740]:[0x0000054b]:[warning]: Server has terminated
+[2023-05-04 05:22:21.085621]:[0x00007f88124ac740]:[0x00000d60]:[debug]: Parsing config file
+[2023-05-04 05:22:21.100632]:[0x00007f88124ac740]:[0x00000d60]:[debug]: Config file parsed
+[2023-05-04 05:22:21.101772]:[0x00007f88124ac740]:[0x00000d60]:[debug]: Server started at port 80
+[2023-05-04 05:22:35.382464]:[0x00007f88124ac740]:[0x00000d60]:[trace]: GET /echo HTTP/1.1 - IP Address: 172.17.0.2
+[2023-05-04 05:22:35.384155]:[0x00007f88124ac740]:[0x00000d60]:[debug]: Echo Request Handler: /echo
+[2023-05-04 05:22:35.385806]:[0x00007f88124ac740]:[0x00000d60]:[info]: Response code: 200
+[2023-05-04 05:22:35.387310]:[0x00007f88124ac740]:[0x00000d60]:[info]: Good request
+[2023-05-04 05:22:35.388813]:[0x00007f88124ac740]:[0x00000d60]:[debug]: session::handle_read: async_write
+[2023-05-04 05:22:46.731914]:[0x00007f88124ac740]:[0x00000d60]:[trace]: GET /static1/random.txt HTTP/1.1 - IP Address: 172.17.0.2
+[2023-05-04 05:22:46.733891]:[0x00007f88124ac740]:[0x00000d60]:[debug]: Static Request Handler Serving file: ../../folder1/random.txt
+[2023-05-04 05:22:46.738998]:[0x00007f88124ac740]:[0x00000d60]:[info]: Response code: 200
+[2023-05-04 05:22:46.741092]:[0x00007f88124ac740]:[0x00000d60]:[info]: Good request
+[2023-05-04 05:22:46.743109]:[0x00007f88124ac740]:[0x00000d60]:[debug]: session::handle_read: async_write
+[2023-05-04 05:22:59.501874]:[0x00007f88124ac740]:[0x00000d60]:[trace]: GET /static1/nonexistent_File.txt HTTP/1.1 - IP Address: 172.17.0.2
+[2023-05-04 05:22:59.503482]:[0x00007f88124ac740]:[0x00000d60]:[debug]: Static Request Handler Serving file: ../../folder1/nonexistent_File.txt
+[2023-05-04 05:22:59.506235]:[0x00007f88124ac740]:[0x00000d60]:[info]: Bad request -- file not found
+[2023-05-04 05:22:59.507594]:[0x00007f88124ac740]:[0x00000d60]:[info]: Response code: 404
+[2023-05-04 05:22:59.509185]:[0x00007f88124ac740]:[0x00000d60]:[debug]: session::handle_read: async_write
+[2023-05-04 05:23:20.552225]:[0x00007f88124ac740]:[0x00000d60]:[trace]: GET /nonexistent_path HTTP/1.1 - IP Address: 172.17.0.2
+[2023-05-04 05:23:20.554310]:[0x00007f88124ac740]:[0x00000d60]:[warning]: Bad Request -- Request handler not found
+[2023-05-04 05:23:20.555994]:[0x00007f88124ac740]:[0x00000d60]:[info]: Response code: 400
+[2023-05-04 05:24:29.490510]:[0x00007f88124ac740]:[0x00000d60]:[trace]: GET /static1/index.html HTTP/1.1 - IP Address: 172.17.0.2
+[2023-05-04 05:24:29.492164]:[0x00007f88124ac740]:[0x00000d60]:[debug]: Static Request Handler Serving file: ../../folder1/index.html
+[2023-05-04 05:24:29.499734]:[0x00007f88124ac740]:[0x00000d60]:[info]: Response code: 200
+[2023-05-04 05:24:29.501131]:[0x00007f88124ac740]:[0x00000d60]:[info]: Good request
+[2023-05-04 05:24:29.502686]:[0x00007f88124ac740]:[0x00000d60]:[debug]: session::handle_read: async_write
+[2023-05-04 05:24:35.124313]:[0x00007f88124ac740]:[0x00000d60]:[trace]: GET /static1/index.html HTTP/1.1 - IP Address: 127.0.0.1
+[2023-05-04 05:24:35.125951]:[0x00007f88124ac740]:[0x00000d60]:[debug]: Static Request Handler Serving file: ../../folder1/index.html
+[2023-05-04 05:24:35.130983]:[0x00007f88124ac740]:[0x00000d60]:[info]: Response code: 200
+[2023-05-04 05:24:35.133054]:[0x00007f88124ac740]:[0x00000d60]:[info]: Good request
+[2023-05-04 05:24:35.134991]:[0x00007f88124ac740]:[0x00000d60]:[debug]: session::handle_read: async_write
+[2023-05-04 05:25:04.572145]:[0x00007f88124ac740]:[0x00000d60]:[trace]: GET /static1/pic.png HTTP/1.1 - IP Address: 127.0.0.1
+[2023-05-04 05:25:04.573988]:[0x00007f88124ac740]:[0x00000d60]:[debug]: Static Request Handler Serving file: ../../folder1/pic.png
+[2023-05-04 05:25:04.580867]:[0x00007f88124ac740]:[0x00000d60]:[info]: Response code: 200
+[2023-05-04 05:25:04.582031]:[0x00007f88124ac740]:[0x00000d60]:[info]: Good request
+[2023-05-04 05:25:04.583568]:[0x00007f88124ac740]:[0x00000d60]:[debug]: session::handle_read: async_write
+[2023-05-04 05:25:11.474865]:[0x00007f88124ac740]:[0x00000d60]:[warning]: Server has terminated

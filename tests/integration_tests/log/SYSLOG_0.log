@@ -1,16 +1,16 @@
-[2023-05-03 20:46:57.107272]:[0x00007fda0f2cf740]:[0x00003c90]:[debug]: Parsing config file
-[2023-05-03 20:46:57.118813]:[0x00007fda0f2cf740]:[0x00003c90]:[debug]: Config file parsed
-[2023-05-03 20:46:57.119384]:[0x00007fda0f2cf740]:[0x00003c90]:[debug]: Server started at port 8080
-[2023-05-03 20:46:58.061625]:[0x00007fda0f2cf740]:[0x00003c90]:[trace]: GET /echo HTTP/1.1 - IP Address: 127.0.0.1
-[2023-05-03 20:46:58.062341]:[0x00007fda0f2cf740]:[0x00003c90]:[debug]: Echo Request Handler: /echo
-[2023-05-03 20:46:58.063021]:[0x00007fda0f2cf740]:[0x00003c90]:[debug]: Response code: 200
-[2023-05-03 20:46:58.063660]:[0x00007fda0f2cf740]:[0x00003c90]:[info]: Good request
-[2023-05-03 20:46:58.064324]:[0x00007fda0f2cf740]:[0x00003c90]:[debug]: session::handle_read: async_write
-[2023-05-03 20:46:58.090796]:[0x00007fda0f2cf740]:[0x00003c90]:[trace]: GET /this_does_not_exist HTTP/1.1 - IP Address: 127.0.0.1
-[2023-05-03 20:46:58.091367]:[0x00007fda0f2cf740]:[0x00003c90]:[info]: Bad request
-[2023-05-03 20:46:58.091960]:[0x00007fda0f2cf740]:[0x00003c90]:[debug]: session::handle_read: async_write
-[2023-05-03 20:46:58.117098]:[0x00007fda0f2cf740]:[0x00003c90]:[trace]: GET /static1/random.txt HTTP/1.1 - IP Address: 127.0.0.1
-[2023-05-03 20:46:58.117762]:[0x00007fda0f2cf740]:[0x00003c90]:[debug]: Static Request Handler Serving file: ../../folder1/random.txt
-[2023-05-03 20:46:58.133066]:[0x00007fda0f2cf740]:[0x00003c90]:[debug]: Response code: 200
-[2023-05-03 20:46:58.133629]:[0x00007fda0f2cf740]:[0x00003c90]:[info]: Good request
-[2023-05-03 20:46:58.134272]:[0x00007fda0f2cf740]:[0x00003c90]:[debug]: session::handle_read: async_write
+[2023-05-04 05:22:07.876681]:[0x00007fea2c5ca740]:[0x00000d55]:[debug]: Parsing config file
+[2023-05-04 05:22:07.882973]:[0x00007fea2c5ca740]:[0x00000d55]:[debug]: Config file parsed
+[2023-05-04 05:22:07.904859]:[0x00007fea2c5ca740]:[0x00000d55]:[debug]: Server started at port 8080
+[2023-05-04 05:22:08.862799]:[0x00007fea2c5ca740]:[0x00000d55]:[trace]: GET /echo HTTP/1.1 - IP Address: 127.0.0.1
+[2023-05-04 05:22:08.863890]:[0x00007fea2c5ca740]:[0x00000d55]:[debug]: Echo Request Handler: /echo
+[2023-05-04 05:22:08.865157]:[0x00007fea2c5ca740]:[0x00000d55]:[info]: Response code: 200
+[2023-05-04 05:22:08.866234]:[0x00007fea2c5ca740]:[0x00000d55]:[info]: Good request
+[2023-05-04 05:22:08.867410]:[0x00007fea2c5ca740]:[0x00000d55]:[debug]: session::handle_read: async_write
+[2023-05-04 05:22:08.880750]:[0x00007fea2c5ca740]:[0x00000d55]:[trace]: GET /this_does_not_exist HTTP/1.1 - IP Address: 127.0.0.1
+[2023-05-04 05:22:08.882250]:[0x00007fea2c5ca740]:[0x00000d55]:[info]: Bad request
+[2023-05-04 05:22:08.883617]:[0x00007fea2c5ca740]:[0x00000d55]:[debug]: session::handle_read: async_write
+[2023-05-04 05:22:08.901071]:[0x00007fea2c5ca740]:[0x00000d55]:[trace]: GET /static1/random.txt HTTP/1.1 - IP Address: 127.0.0.1
+[2023-05-04 05:22:08.902444]:[0x00007fea2c5ca740]:[0x00000d55]:[debug]: Static Request Handler Serving file: ../../folder1/random.txt
+[2023-05-04 05:22:08.906703]:[0x00007fea2c5ca740]:[0x00000d55]:[info]: Response code: 200
+[2023-05-04 05:22:08.907642]:[0x00007fea2c5ca740]:[0x00000d55]:[info]: Good request
+[2023-05-04 05:22:08.908851]:[0x00007fea2c5ca740]:[0x00000d55]:[debug]: session::handle_read: async_write

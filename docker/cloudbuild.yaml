@@ -27,7 +27,7 @@ steps:
   args: [
     'build',
     '-f', 'docker/coverage.Dockerfile',
-    '-t', 'gcr.io/$PROJECT_ID/projects:latest',
+    '-t', 'gcr.io/$PROJECT_ID/projects:coverage',
     '.'
   ]
-images: ['gcr.io/$PROJECT_ID/projects:base', 'gcr.io/$PROJECT_ID/projects:latest']
+images: ['gcr.io/$PROJECT_ID/projects:base', 'gcr.io/$PROJECT_ID/projects:latest', 'gcr.io/$PROJECT_ID/projects:coverage']

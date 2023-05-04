@@ -16,7 +16,7 @@ RUN ctest --output-on_failure
 #   docker build -f docker/Dockerfile -t projects . --no-cache
 
 # To build coverage:
-#   docker build -f docker/coverage.Dockerfile -t projects . --no-cache 
+#   docker build -f docker/coverage.Dockerfile -t projects:coverage . --no-cache 
 
 # To run the latest variant of projects as echo_run, removing the container after it stops, 
 # mapping your server’s port to a port on your loopback network interface (127.0.0.1)
