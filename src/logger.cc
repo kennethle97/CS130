@@ -13,6 +13,7 @@
 #include <boost/log/utility/setup/common_attributes.hpp>
 #include <string>
 #include <sstream>
+#include <iostream>
 
 #include "logger.h"
 #include "http/request.hpp"
@@ -52,7 +53,8 @@ ServerLogger::ServerLogger() {
   logging::record rec = sev_logger.open_record();
   logging::add_console_log (
     std::cout,
-    keywords::format = "[%TimeStamp%]:[%ThreadID%]:[%ProcessID%]:[%Severity%]: %Message%"
+    keywords::format = "[%TimeStamp%]:[%ThreadID%]:[%ProcessID%]:[%Severity%]: %Message%",
+    keywords::auto_flush = true
   );
 }
 
