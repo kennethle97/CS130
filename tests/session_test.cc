@@ -17,7 +17,7 @@ class SessionTest : public ::testing::Test {
     
     // Set up the test fixture
     void SetUp() override {
-        std::string config_file_path = "/example_config"; // replace with your config file path
+        std::string config_file_path = "./config_test"; // replace with your config file path
         std::ifstream config_file(config_file_path);
         parser.Parse(&config_file, &config);
         dispatcher = std::make_shared<Request_Handler_Dispatcher>(config);

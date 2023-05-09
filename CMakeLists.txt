@@ -71,6 +71,9 @@ target_link_libraries(request_handler_echo_test http_lib request_handler_lib log
 add_executable(request_handler_static_test tests/request_handler_static_test.cc)
 target_link_libraries(request_handler_static_test gtest_main request_handler_lib http_lib logger_lib Boost::filesystem Boost::log Boost::log_setup )
 
+add_executable(request_handler_dispatcher_test tests/request_handler_dispatcher_test.cc)
+target_link_libraries(request_handler_dispatcher_test gtest_main request_handler_lib http_lib config_parser_lib logger_lib Boost::filesystem Boost::log Boost::log_setup )
+
 add_executable(reply_lib_test tests/reply_test.cc)
 target_link_libraries(reply_lib_test http_lib gtest_main)
 
@@ -97,13 +100,14 @@ gtest_discover_tests(logger_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/t
 gtest_discover_tests(reply_lib_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(request_handler_echo_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(request_handler_static_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+gtest_discover_tests(request_handler_dispatcher_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 
 # TODO(!): Update with target/test targets
 # include(cmake/CodeCoverageReportConfig.cmake)
 # generate_coverage_report(TARGETS example_server example_lib TESTS example_lib_test)
 include(cmake/CodeCoverageReportConfig.cmake)
 generate_coverage_report(TARGETS server server_lib session_lib config_parser_lib logger_lib
-                         TESTS server_lib_test session_lib_test config_parser_lib_test logger_test reply_lib_test request_handler_echo_test request_handler_static_test)
+                         TESTS server_lib_test session_lib_test config_parser_lib_test logger_test reply_lib_test request_handler_echo_test request_handler_static_test request_handler_dispatcher_test)
 
 
 # paste local path
