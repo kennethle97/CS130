@@ -9,6 +9,8 @@ class Request_Handler_Echo: public Request_Handler {
     public:
         Request_Handler_Echo() {};
         void handle_request(const request &http_request, reply *http_reply)noexcept override;
+    private:
+        std::string get_request_body(const request &http_request);
 };
 
 

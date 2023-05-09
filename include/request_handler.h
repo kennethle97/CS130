@@ -4,7 +4,6 @@
 #define REQUEST_HANDLER_H
 
 #include <iostream>
-#include <boost/beast/http.hpp>
 #include "./config_parser.h"
 #include "http/request.hpp"
 #include "http/reply.hpp"

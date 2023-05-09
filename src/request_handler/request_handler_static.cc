@@ -34,20 +34,26 @@ void Request_Handler_Static::handle_request(const request &http_request, reply *
     }
 
     // If the requested file exists, open it and read its contents
-    boost::filesystem::ifstream file(path);
-    std::stringstream file_stream;
-    file_stream << file.rdbuf();
-    std::string file_contents = file_stream.str();
+    std::string file_contents = get_file(path);
+    std::string file_size = std::to_string(file_contents.length()); 
 
     // Get the extension for the mimetype
-    boost::filesystem::path boost_path(uri);
-    std::string extension = boost_path.extension().string();
+    std::string extension = path.extension().string();
 
     http_reply->status = reply::ok;
     http_reply->headers.resize(2);
     http_reply->content = file_contents;
     http_reply->headers[0].name = "Content-Length";
-    http_reply->headers[0].value = std::to_string(file_contents.length());
+    http_reply->headers[0].value = file_size;
     http_reply->headers[1].name = "Content-Type";
     http_reply->headers[1].value = http::server::mime_types::extension_to_type(extension);
+}
+/*get_file gets the file given the path of the file*/
+std::string Request_Handler_Static::get_file(boost::filesystem::path path){
+    boost::filesystem::ifstream file(path);
+    std::stringstream file_stream;
+    file_stream << file.rdbuf();
+    std::string file_contents = file_stream.str();
+    return file_contents;
+
 }

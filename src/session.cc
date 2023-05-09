@@ -40,8 +40,12 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
         // Obtain a pointer to the internal character array of the std::string object
         const char* data_begin = data_.data();
         // Pass the pointer as the begin iterator and data_ + bytes_transferred as the end iterator
+        
+        /*result returns a tribool where we ignore the right side of the tuple and only care about the result boolean value returning 
+        true if its a valid http request and false if it is a bad request*/
         auto [result, unused_begin] = http_parser.parse(http_request, data_begin, data_begin + bytes_transferred);
-        // Dispatch the request to the appropriate handler
+        
+        /* Dispatch the request to the appropriate handler */
 
         try {
             server_logger->log_request(http_request, socket_);
@@ -52,7 +56,7 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
         if(result == true){
             std::shared_ptr<Request_Handler> handler = dispatcher->get_request_handler(http_request);
             if (handler == nullptr) {
-                /*LOG NULL PTR*/
+                /*If handler is a nullptr then a handler is not found for the request and reply with a bad request*/
                 http_reply = reply::stock_reply(reply::bad_request);
                 server_logger->log_warning("Bad Request -- Request handler not found");
                 server_logger->log_info("Response code: " + std::to_string(http_reply.status));

@@ -15,8 +15,9 @@ public:
     void handle_request(const request& http_request, reply* http_reply) noexcept override;
 
 private:
+    std::string get_file(boost::filesystem::path path);
     path_uri root;    // Root path to serve files from
-    path_uri prefix;  // Prefix in case no root
+    path_uri prefix;  // Prefix to match with root directory
 };
 
 #endif
