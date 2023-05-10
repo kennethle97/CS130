@@ -48,7 +48,7 @@ void Request_Handler_Static::handle_request(const request &http_request, reply *
     http_reply->headers[1].name = "Content-Type";
     http_reply->headers[1].value = http::server::mime_types::extension_to_type(extension);
 }
-/*get_file gets the file given the path of the file*/
+/*get_file gets the file given the path of the file taking in a boost::filesystem::path path variable*/
 std::string Request_Handler_Static::get_file(boost::filesystem::path path){
     boost::filesystem::ifstream file(path);
     std::stringstream file_stream;

@@ -36,13 +36,13 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
     ServerLogger *server_logger = ServerLogger::get_server_logger();
     if (!error)
     {
-        // Parse the HTTP request
-        // Obtain a pointer to the internal character array of the std::string object
+        // Obtain a pointer to the internal character array of the std::string object of the buffer containing the request
         const char* data_begin = data_.data();
         // Pass the pointer as the begin iterator and data_ + bytes_transferred as the end iterator
         
-        /*result returns a tribool where we ignore the right side of the tuple and only care about the result boolean value returning 
-        true if its a valid http request and false if it is a bad request*/
+        /*result returns a tribool where we ignore the right side of the tuple and only care about the 
+        result boolean value returning true if its a valid http request and false if it is a bad request*/
+
         auto [result, unused_begin] = http_parser.parse(http_request, data_begin, data_begin + bytes_transferred);
         
         /* Dispatch the request to the appropriate handler */
@@ -52,7 +52,7 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
         } catch (const std::exception& e) {
             std::cout << "Error logging request: " << e.what() << std::endl;
         }
-
+        /*If the request object is a valid request i.e. result == true then call the dispatcher to get the appropiate request_handler*/
         if(result == true){
             std::shared_ptr<Request_Handler> handler = dispatcher->get_request_handler(http_request);
             if (handler == nullptr) {
@@ -76,13 +76,13 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
             if (http_reply.status == reply::ok) {
                 server_logger->log_info("Good request");
             }
-
+            /*Bind the reply to the buffer associated with handle_write*/
             boost::asio::async_write(
                 socket_, http_reply.to_buffers(),
                 boost::bind(&session::handle_write, shared_from_this(),boost::asio::placeholders::error));
             server_logger->log_debug("session::handle_read: async_write");
         }
-
+        /*If the request is not a valid request i.e. result == false. Then we set the reply object to a default bad_request and write to buffer.*/
         else if (result == false) {
             server_logger->log_info("Bad request");
 
@@ -96,7 +96,7 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
 
     }
     else {
-        // std::cerr << "Error reading from socket: " << error.message() << std::endl;
+        /*If the there is an error reading from the socket then we log the information and delete the session object.*/
         server_logger->log_error("Error reading from socket: " + std::string(error.message()));
         delete this;
     }

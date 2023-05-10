@@ -3,10 +3,18 @@
 #include "../include/request_handler/request_handler_echo.h"
 #include "../include/request_handler/request_handler_static.h"
 
+/*Constructor calls parse_config_handlers to initialize the map of handlers*/
+
 Request_Handler_Dispatcher::Request_Handler_Dispatcher(const NginxConfig & config){
     parse_config_handlers(config);
 }
+/*
+The function parse_config_handlers takes in a NginxConfig type object and parses it to create the list of request handlers specificed
+in the config file by checking to see if there contains a statement with a "location" token as its first argument and sets the second
+token as the path. If the statement has its own child block then it looks for a root directive and to create a static request_handler.
+All the request_handlers are paired with their respective path variable name and are set in the member variable map_handlers()
 
+*/
 void Request_Handler_Dispatcher::parse_config_handlers(const NginxConfig& config) {
     for (const auto& statement : config.statements_) {
         if (statement->child_block_.get() != nullptr) {
@@ -45,7 +53,11 @@ void Request_Handler_Dispatcher::parse_config_handlers(const NginxConfig& config
         }
     }
 }
-
+/*
+The function get_request_handler(const request &http_request) takes in a http_request and returns the shared_ptr for the request_handler
+if it exists in the dispatcher's member variable map_handlers. If it doesn't find a match it returns a nullptr of which will result in a reply
+of a bad request.
+*/
 std::shared_ptr<Request_Handler> Request_Handler_Dispatcher::get_request_handler(const request &http_request) const{
     // Extract URI from request
     path_uri uri = http_request.uri;

@@ -34,7 +34,7 @@ message(STATUS "Boost version: ${Boost_VERSION}")
 
 include_directories(include)
 
-# TODO(!): Update name and srcs
+# Update name and srcs
 # add_library(example_lib src/example_lib.cc)
 add_library(server_lib src/server.cc)
 add_library(session_lib src/session.cc)
@@ -51,7 +51,7 @@ add_library(request_handler_lib
                 src/request_handler/request_handler_static.cc
                 )
 
-# TODO(!): Update executable name, srcs, and deps
+# Update executable name, srcs, and deps
 # add_executable(example_server src/example_server_main.cc)
 # target_link_libraries(example_server example_lib Boost::system)
 add_executable(server src/server_main.cc)
@@ -61,7 +61,7 @@ target_link_libraries(server server_main_lib server_lib session_lib
                       Boost::regex Boost::log_setup Boost::log)
 
 
-# TODO(!): Update test executable name, srcs, and deps
+# Update test executable name, srcs, and deps
 # add_executable(example_lib_test tests/example_lib_test.cc)
 # target_link_libraries(example_lib_test example_lib gtest_main)
 
@@ -91,7 +91,7 @@ target_link_libraries(config_parser_lib_test config_parser_lib gtest_main)
 add_executable(logger_test tests/logger_test.cc)
 target_link_libraries(logger_test logger_lib gtest_main Boost::log_setup Boost::log)
 
-# TODO(!): Update with test binary
+# Update with test binary
 # gtest_discover_tests(example_lib_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(server_lib_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(session_lib_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
@@ -102,7 +102,7 @@ gtest_discover_tests(request_handler_echo_test WORKING_DIRECTORY ${CMAKE_CURRENT
 gtest_discover_tests(request_handler_static_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(request_handler_dispatcher_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 
-# TODO(!): Update with target/test targets
+# Update with target/test targets
 # include(cmake/CodeCoverageReportConfig.cmake)
 # generate_coverage_report(TARGETS example_server example_lib TESTS example_lib_test)
 include(cmake/CodeCoverageReportConfig.cmake)

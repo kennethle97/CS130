@@ -72,7 +72,6 @@ ServerLogger::ServerLogger() {
 // received by the server
 void ServerLogger::log_request(request http_request, tcp::socket &socket) {
   std::stringstream sstream;
-  // TODO: log request information
   sstream << http_request.method << " " << http_request.uri;
   sstream << " HTTP/" << http_request.http_version_major << "." << http_request.http_version_minor;
 
