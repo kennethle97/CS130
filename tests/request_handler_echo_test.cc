@@ -22,7 +22,7 @@ TEST_F(RequestHandlerEchoTest, EchoRequest) {
 
     http::server::reply test_reply;
 
-    Request_Handler_Echo request_echo_handler;
+    Request_Handler_Echo request_echo_handler = Request_Handler_Echo("/echo");
     request_echo_handler.handle_request(test_request, &test_reply);
     EXPECT_EQ(http::server::reply::status_type::ok, test_reply.status);
     EXPECT_EQ("GET /echo HTTP/1.1\r\nContent-Type: text/plain\r\n: \r\n\r\n", test_reply.content);

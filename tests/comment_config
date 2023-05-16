@@ -2,7 +2,7 @@
 foo "bar";
 # another comment
 server {
-  listen   8080;
+  port   8080;
   server_name foo.com;
   root /home/ubuntu/sites/foo/;
 }

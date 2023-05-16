@@ -109,7 +109,7 @@ TEST_F(NginxConfigParserTest, MissingStartBlockConfig) {
   EXPECT_FALSE(success);
 }
 
-// testing for listen port # directive in not nested block
+// testing for port # directive in not nested block
 TEST_F(NginxConfigParserTest, ListenPortNumber) {
   bool success = parser.Parse("listen_port_config", &out_config);
   int server_port = out_config.GetServerPort();
@@ -118,7 +118,7 @@ TEST_F(NginxConfigParserTest, ListenPortNumber) {
   EXPECT_EQ(server_port, 80);
 }
 
-// testing for listen port # in a nested block
+// testing for port # in a nested block
 // TEST_F(NginxConfigParserTest, ListenPortNumberNested) {
 //   bool success = parser.Parse("listen_port_nested_config", &out_config);
 //   int server_port = out_config.GetServerPort();

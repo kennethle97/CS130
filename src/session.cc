@@ -80,7 +80,7 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
             boost::asio::async_write(
                 socket_, http_reply.to_buffers(),
                 boost::bind(&session::handle_write, shared_from_this(),boost::asio::placeholders::error));
-            server_logger->log_debug("session::handle_read: async_write");
+            server_logger->log_trace("session::handle_read: async_write");
         }
         /*If the request is not a valid request i.e. result == false. Then we set the reply object to a default bad_request and write to buffer.*/
         else if (result == false) {
@@ -91,7 +91,7 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
             boost::asio::async_write(
                 socket_, http_reply.to_buffers(),
                 boost::bind(&session::handle_write, shared_from_this(),boost::asio::placeholders::error));
-            server_logger->log_debug("session::handle_read: async_write");
+            server_logger->log_trace("session::handle_read: async_write");
         }
 
     }

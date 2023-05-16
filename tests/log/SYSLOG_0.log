@@ -1,1 +1,8 @@
-[2023-05-04 05:22:07.776624]:[0x00007fa5f516c740]:[0x00000d52]:[info]: Bad request -- prefix not found
+[2023-05-16 15:57:35.781671]:[0x00007ff980847740]:[0x00002c25]:[trace]: Parsed handler EchoHandler for path: /echo
+[2023-05-16 15:57:35.781897]:[0x00007ff980847740]:[0x00002c25]:[trace]: Dispatch echo handler at path: /echo
+[2023-05-16 15:57:35.781962]:[0x00007ff980847740]:[0x00002c25]:[trace]: Parsed handler StaticHandler for path: /static1
+[2023-05-16 15:57:35.782021]:[0x00007ff980847740]:[0x00002c25]:[trace]: Dispatch static handler at path: /static1 with root: ../../public/folder1///
+[2023-05-16 15:57:35.782077]:[0x00007ff980847740]:[0x00002c25]:[trace]: Parsed handler StaticHandler for path: /static2
+[2023-05-16 15:57:35.782154]:[0x00007ff980847740]:[0x00002c25]:[trace]: Dispatch static handler at path: /static2 with root: ../../public/folder2//
+[2023-05-16 15:57:35.782218]:[0x00007ff980847740]:[0x00002c25]:[trace]: Parsed handler ErrorHandler for path: 
+[2023-05-16 15:57:35.782271]:[0x00007ff980847740]:[0x00002c25]:[debug]: Error Handler init

@@ -25,12 +25,12 @@ std::string NginxConfig::ToString(int depth) {
   return serialized_config;
 }
 
-// gets the first server port number by looking for a "listen port#" directive (Nginx's port declaration)
+// gets the first server port number by looking for a "port #"
 int NginxConfig::GetServerPort() {
-  // look for listen directives NOT in a block
+  // look for port directives NOT in a block
   for (const auto& statement : statements_) {
     if (statement->child_block_.get() == nullptr) {
-      if (statement->tokens_[0] == "listen") {
+      if (statement->tokens_.size() == 2 && statement->tokens_[0] == "port") {
         int port = std::stoi(statement->tokens_[1]);
         if (port > 0 && port <= 65535) {
           return port;
@@ -39,11 +39,11 @@ int NginxConfig::GetServerPort() {
     }
   }
 
-  // look for listen directives in child blocks
+  // look for port directives in an immediate child block
   for (const auto& statement : statements_) {
     if (statement->child_block_.get() != nullptr) {
       for (const auto& child_statement : statement->child_block_->statements_) {
-        if (child_statement->tokens_[0] == "listen") {
+        if (child_statement->tokens_.size() == 2 && child_statement->tokens_[0] == "port") {
           int port = std::stoi(child_statement->tokens_[1]);
           if (port > 0 && port <= 65535) {
             return port;

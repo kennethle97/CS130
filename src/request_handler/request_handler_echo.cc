@@ -2,11 +2,13 @@
 #include "../../include/request_handler/request_handler_echo.h"
 #include "logger.h"
 
+Request_Handler_Echo::Request_Handler_Echo(const path_uri& prefix_) 
+    : prefix(prefix_) {}
 
 void Request_Handler_Echo::handle_request(const request& http_request, reply* http_reply)noexcept {
 
     ServerLogger* server_logger = ServerLogger::get_server_logger();
-    server_logger->log_debug("Echo Request Handler: " + http_request.uri);
+    server_logger->log_trace("Echo Request Handler: " + http_request.uri);
 
     std::string request_body_str = get_request_body(http_request);
     std::string request_body_length = std::to_string(request_body_str.length());

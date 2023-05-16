@@ -9,6 +9,10 @@
 #include "request_handler.h"
 
 typedef std::string path_uri;
+typedef std::string path_handler_name;
+
+#define ECHO_HANDLER "EchoHandler"
+#define STATIC_HANDLER "StaticHandler"
 
 class Request_Handler_Dispatcher {
 public:

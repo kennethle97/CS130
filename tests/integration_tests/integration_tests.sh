@@ -8,20 +8,24 @@ PATH_SERVER_BIN=../../build/bin/server
 PATH_RESPONSE=../tests
 
 echo "
-server {
-    listen 8080;
+port 8080;
 
+location /echo EchoHandler {
 
-    location /echo;
+}
 
-    location /static1/ {    
-        root /folder1/;
-    }
+location /static1//// StaticHandler {    
+    root ./public/folder1////;
+}
 
-    location /static2/ {
-        root /folder2/;
-    }
-}" > config_test
+location /static2/ StaticHandler {
+    root ./public/folder2;
+}
+
+location / ErrorHandler {
+
+}
+" > config_test
 
 $PATH_SERVER_BIN config_test &
 PID_SERVER=$!

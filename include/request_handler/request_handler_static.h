@@ -13,7 +13,7 @@ class Request_Handler_Static : public Request_Handler {
 public:
     explicit Request_Handler_Static(const path_uri & root, const path_uri & prefix);
     void handle_request(const request& http_request, reply* http_reply) noexcept override;
-    path_uri get_prefix()const {return prefix;}
+    path_uri get_prefix() const {return prefix;}
     path_uri get_root() const {return root;}
 
 private:

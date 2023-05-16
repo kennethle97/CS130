@@ -11,6 +11,12 @@ void Request_Handler_Static::handle_request(const request &http_request, reply *
     
     // Create the full path of the file requested by combining the prefix and the request target
     std::string uri = http_request.uri;
+
+    // remove any trailing backslashes from uri
+    while (uri.back() == '/') {
+        uri.pop_back();
+    }
+
     std::size_t prefix_pos = uri.find(prefix);
     if (prefix_pos != std::string::npos) {
         uri.replace(prefix_pos, prefix.length(), root);
@@ -19,10 +25,8 @@ void Request_Handler_Static::handle_request(const request &http_request, reply *
         server_logger->log_info("Bad request -- prefix not found");
         return;
     }
-    uri = "../.." + uri;
-    // std::cout << "Static Request Handler Serving file: " << uri << std::endl;
-
-    server_logger->log_debug("Static Request Handler Serving file: " + uri);
+    // uri = "../../public/" + uri;
+    server_logger->log_trace("Static Request Handler Serving file: " + uri);
 
     // Check if the requested file exists and is a regular file
     boost::filesystem::path path(uri);
@@ -48,6 +52,7 @@ void Request_Handler_Static::handle_request(const request &http_request, reply *
     http_reply->headers[1].name = "Content-Type";
     http_reply->headers[1].value = http::server::mime_types::extension_to_type(extension);
 }
+
 /*get_file gets the file given the path of the file taking in a boost::filesystem::path path variable*/
 std::string Request_Handler_Static::get_file(boost::filesystem::path path){
     boost::filesystem::ifstream file(path);

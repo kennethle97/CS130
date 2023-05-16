@@ -1,6 +1,6 @@
 http {
     server {
-        listen 200;
+        port 200;
         server_name foo;
         path /some/path/to/foo;
     }
