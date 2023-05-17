@@ -11,15 +11,16 @@
 
 class Request_Handler_Static : public Request_Handler {
 public:
-    explicit Request_Handler_Static(const path_uri & root, const path_uri & prefix);
+    explicit Request_Handler_Static(const path_uri & root, const path_uri & location, const path_uri& url);
     void handle_request(const request& http_request, reply* http_reply) noexcept override;
-    path_uri get_prefix() const {return prefix;}
+    path_uri get_prefix() const {return location;}
     path_uri get_root() const {return root;}
 
 private:
     std::string get_file(boost::filesystem::path path);
     path_uri root;    // Root path to serve files from
-    path_uri prefix;  // Prefix to match with root directory
+    path_uri location;  // Location to match with root directory
+    path_uri url;   // Full path from http request
 };
 
 #endif

@@ -3,26 +3,26 @@
 #include "../../include/http/mime_types.hpp"
 #include "logger.h"
 
-Request_Handler_Static::Request_Handler_Static(const path_uri& root_, const path_uri& prefix_)
-    : root(root_), prefix(prefix_) {}
+Request_Handler_Static::Request_Handler_Static(const path_uri& root_, const path_uri& location_, const path_uri& url_)
+    : root(root_), location(location_), url(url_) {}
 
 void Request_Handler_Static::handle_request(const request &http_request, reply *http_reply) noexcept {
     ServerLogger *server_logger = ServerLogger::get_server_logger();
     
-    // Create the full path of the file requested by combining the prefix and the request target
-    std::string uri = http_request.uri;
+    // Create the full path of the file requested by combining the location and the request target
+    std::string uri = this->url;
 
     // remove any trailing backslashes from uri
     while (uri.back() == '/') {
         uri.pop_back();
     }
 
-    std::size_t prefix_pos = uri.find(prefix);
-    if (prefix_pos != std::string::npos) {
-        uri.replace(prefix_pos, prefix.length(), root);
+    std::size_t location_pos = uri.find(this->location);
+    if (location_pos != std::string::npos) {
+        uri.replace(location_pos, this->location.length(), root);
     } else {
         *http_reply = reply::stock_reply(reply::not_found);
-        server_logger->log_info("Bad request -- prefix not found");
+        server_logger->log_info("Bad request -- location not found");
         return;
     }
     // uri = "../../public/" + uri;

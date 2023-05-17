@@ -1,6 +1,8 @@
 #include "request_handler_dispatcher.h"
 #include "request_handler/request_handler_echo.h"
 #include "request_handler/request_handler_static.h"
+#include "request_handler/echo_handler_factory.h"
+#include "request_handler/static_handler_factory.h"
 #include "gtest/gtest.h"
 #include "http/reply.hpp"
 #include "http/header.hpp"
@@ -43,14 +45,15 @@ TEST_F(RequestHandlerDispatcherTest, GetHandlerEcho) {
     test_request.headers[0].name="Content-Type";
     test_request.headers[0].value="text/plain";
     // Get the request handler object from the dispatcher
-    std::shared_ptr<Request_Handler> handler = dispatcher->get_request_handler(test_request);
+    std::shared_ptr<Request_Handler_Factory> handler = dispatcher->get_request_handler_factory(test_request);
+
 
     EXPECT_TRUE(handler != nullptr);
     // // Cast the base class pointer to a pointer of the derived class
-    std::shared_ptr<Request_Handler_Echo> echo_handler = std::dynamic_pointer_cast<Request_Handler_Echo>(handler);
+    std::shared_ptr<Echo_Handler_Factory> echo_handler_factory = std::dynamic_pointer_cast<Echo_Handler_Factory>(handler);
 
     // // Check that the cast was successful
-    EXPECT_TRUE(echo_handler != nullptr);
+    EXPECT_TRUE(echo_handler_factory != nullptr);
 }
 
 TEST_F(RequestHandlerDispatcherTest, GetHandlerStaticFalse) {
@@ -63,7 +66,7 @@ TEST_F(RequestHandlerDispatcherTest, GetHandlerStaticFalse) {
     test_request.headers[0].name="Content-Type";
     test_request.headers[0].value="text/plain";
 
-    EXPECT_EQ(dispatcher->get_request_handler(test_request), nullptr);
+    EXPECT_EQ(dispatcher->get_request_handler_factory(test_request), nullptr);
 }
 
 TEST_F(RequestHandlerDispatcherTest, GetHandlerStaticTrue) {
@@ -76,16 +79,17 @@ TEST_F(RequestHandlerDispatcherTest, GetHandlerStaticTrue) {
     test_request.headers[0].name="Content-Type";
     test_request.headers[0].value="text/plain";
     // Get the request handler object from the dispatcher
-    std::shared_ptr<Request_Handler> handler = dispatcher->get_request_handler(test_request);
+    std::shared_ptr<Request_Handler_Factory> handler = dispatcher->get_request_handler_factory(test_request);
 
     EXPECT_TRUE(handler != nullptr);
 
     // Cast the base class pointer to a pointer of the derived class
-    std::shared_ptr<Request_Handler_Static> static_handler = std::dynamic_pointer_cast<Request_Handler_Static>(handler);
+    std::shared_ptr<Static_Handler_Factory> static_handler_factory = std::dynamic_pointer_cast<Static_Handler_Factory>(handler);
 
     // Check that the cast was successful
-    EXPECT_TRUE(static_handler != nullptr);
+    EXPECT_TRUE(static_handler_factory != nullptr);
 
+    Request_Handler_Static* static_handler = static_handler_factory->create("/static1", "/static1/random.txt");
     // Now you can access the root and prefix members of the derived class
     EXPECT_EQ(static_handler->get_prefix(), "/static1");
     EXPECT_EQ(static_handler->get_root(), "../../public/folder1///");

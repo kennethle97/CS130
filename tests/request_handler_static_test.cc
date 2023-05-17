@@ -21,7 +21,7 @@ TEST_F(RequestHandlerStaticTest, StaticNotFoundTest) {
 
     http::server::reply test_reply;
 
-    Request_Handler_Static request_static_handler("/", "/static/");
+    Request_Handler_Static request_static_handler("/", "/", "/static/");
     request_static_handler.handle_request(test_request, &test_reply);
     EXPECT_EQ(http::server::reply::status_type::not_found, test_reply.status);
     EXPECT_EQ("<html><head><title>Not Found</title></head><body><h1>404 Not Found</h1></body></html>", test_reply.content);

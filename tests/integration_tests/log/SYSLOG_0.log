@@ -1,24 +1,26 @@
-[2023-05-16 15:57:35.791881]:[0x00007f8e41b7f740]:[0x00002c28]:[trace]: Parsing config file
-[2023-05-16 15:57:35.792390]:[0x00007f8e41b7f740]:[0x00002c28]:[trace]: Config file parsed
-[2023-05-16 15:57:35.792541]:[0x00007f8e41b7f740]:[0x00002c28]:[trace]: Parsed handler EchoHandler for path: /echo
-[2023-05-16 15:57:35.792591]:[0x00007f8e41b7f740]:[0x00002c28]:[trace]: Dispatch echo handler at path: /echo
-[2023-05-16 15:57:35.792635]:[0x00007f8e41b7f740]:[0x00002c28]:[trace]: Parsed handler StaticHandler for path: /static1
-[2023-05-16 15:57:35.792678]:[0x00007f8e41b7f740]:[0x00002c28]:[trace]: Dispatch static handler at path: /static1 with root: ./public/folder1////
-[2023-05-16 15:57:35.792725]:[0x00007f8e41b7f740]:[0x00002c28]:[trace]: Parsed handler StaticHandler for path: /static2
-[2023-05-16 15:57:35.792761]:[0x00007f8e41b7f740]:[0x00002c28]:[trace]: Dispatch static handler at path: /static2 with root: ./public/folder2
-[2023-05-16 15:57:35.792798]:[0x00007f8e41b7f740]:[0x00002c28]:[trace]: Parsed handler ErrorHandler for path: 
-[2023-05-16 15:57:35.792831]:[0x00007f8e41b7f740]:[0x00002c28]:[debug]: Error Handler init
-[2023-05-16 15:57:35.792893]:[0x00007f8e41b7f740]:[0x00002c28]:[debug]: Server started at port 8080
-[2023-05-16 15:57:36.797167]:[0x00007f8e41b7f740]:[0x00002c28]:[trace]: GET /echo HTTP/1.1 - IP Address: 127.0.0.1
-[2023-05-16 15:57:36.797258]:[0x00007f8e41b7f740]:[0x00002c28]:[trace]: Echo Request Handler: /echo
-[2023-05-16 15:57:36.797302]:[0x00007f8e41b7f740]:[0x00002c28]:[info]: Response code: 200
-[2023-05-16 15:57:36.797331]:[0x00007f8e41b7f740]:[0x00002c28]:[info]: Good request
-[2023-05-16 15:57:36.797422]:[0x00007f8e41b7f740]:[0x00002c28]:[trace]: session::handle_read: async_write
-[2023-05-16 15:57:36.801931]:[0x00007f8e41b7f740]:[0x00002c28]:[trace]: GET /this_does_not_exist HTTP/1.1 - IP Address: 127.0.0.1
-[2023-05-16 15:57:36.802007]:[0x00007f8e41b7f740]:[0x00002c28]:[info]: Bad request
-[2023-05-16 15:57:36.802103]:[0x00007f8e41b7f740]:[0x00002c28]:[trace]: session::handle_read: async_write
-[2023-05-16 15:57:36.806727]:[0x00007f8e41b7f740]:[0x00002c28]:[trace]: GET /static1/random.txt HTTP/1.1 - IP Address: 127.0.0.1
-[2023-05-16 15:57:36.806831]:[0x00007f8e41b7f740]:[0x00002c28]:[trace]: Static Request Handler Serving file: ./public/folder1/////random.txt
-[2023-05-16 15:57:36.806922]:[0x00007f8e41b7f740]:[0x00002c28]:[info]: Response code: 200
-[2023-05-16 15:57:36.806957]:[0x00007f8e41b7f740]:[0x00002c28]:[info]: Good request
-[2023-05-16 15:57:36.807016]:[0x00007f8e41b7f740]:[0x00002c28]:[trace]: session::handle_read: async_write
+[2023-05-17 00:33:19.272511]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: Parsing config file
+[2023-05-17 00:33:19.285430]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: Config file parsed
+[2023-05-17 00:33:19.286032]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: Parsed handler EchoHandler for path: /echo
+[2023-05-17 00:33:19.286590]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: Dispatch echo handler factory at path: /echo
+[2023-05-17 00:33:19.287119]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: Parsed handler StaticHandler for path: /static1
+[2023-05-17 00:33:19.287664]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: Dispatch static handler at path: /static1 with root: ./public/folder1////
+[2023-05-17 00:33:19.288219]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: Parsed handler StaticHandler for path: /static2
+[2023-05-17 00:33:19.288768]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: Dispatch static handler at path: /static2 with root: ./public/folder2
+[2023-05-17 00:33:19.289323]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: Parsed handler ErrorHandler for path: /
+[2023-05-17 00:33:19.289877]:[0x00007f7f8ad7d740]:[0x000008a9]:[debug]: Error Handler init
+[2023-05-17 00:33:19.290449]:[0x00007f7f8ad7d740]:[0x000008a9]:[debug]: Server started at port 8080
+[2023-05-17 00:33:20.230312]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: GET /echo HTTP/1.1 - IP Address: 127.0.0.1
+[2023-05-17 00:33:20.231093]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: hi
+[2023-05-17 00:33:20.237963]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: Echo Request Handler: /echo
+[2023-05-17 00:33:20.238552]:[0x00007f7f8ad7d740]:[0x000008a9]:[info]: Response code: 200
+[2023-05-17 00:33:20.239086]:[0x00007f7f8ad7d740]:[0x000008a9]:[info]: Good request
+[2023-05-17 00:33:20.239683]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: session::handle_read: async_write
+[2023-05-17 00:33:20.263697]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: GET /this_does_not_exist HTTP/1.1 - IP Address: 127.0.0.1
+[2023-05-17 00:33:20.264373]:[0x00007f7f8ad7d740]:[0x000008a9]:[info]: Bad request
+[2023-05-17 00:33:20.265084]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: session::handle_read: async_write
+[2023-05-17 00:33:20.290062]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: GET /static1/random.txt HTTP/1.1 - IP Address: 127.0.0.1
+[2023-05-17 00:33:20.290719]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: hi
+[2023-05-17 00:33:20.291282]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: Static Request Handler Serving file: ./public/folder1/////random.txt
+[2023-05-17 00:33:20.309286]:[0x00007f7f8ad7d740]:[0x000008a9]:[info]: Response code: 200
+[2023-05-17 00:33:20.309946]:[0x00007f7f8ad7d740]:[0x000008a9]:[info]: Good request
+[2023-05-17 00:33:20.310715]:[0x00007f7f8ad7d740]:[0x000008a9]:[trace]: session::handle_read: async_write

@@ -1,8 +1,8 @@
-[2023-05-16 15:57:35.781671]:[0x00007ff980847740]:[0x00002c25]:[trace]: Parsed handler EchoHandler for path: /echo
-[2023-05-16 15:57:35.781897]:[0x00007ff980847740]:[0x00002c25]:[trace]: Dispatch echo handler at path: /echo
-[2023-05-16 15:57:35.781962]:[0x00007ff980847740]:[0x00002c25]:[trace]: Parsed handler StaticHandler for path: /static1
-[2023-05-16 15:57:35.782021]:[0x00007ff980847740]:[0x00002c25]:[trace]: Dispatch static handler at path: /static1 with root: ../../public/folder1///
-[2023-05-16 15:57:35.782077]:[0x00007ff980847740]:[0x00002c25]:[trace]: Parsed handler StaticHandler for path: /static2
-[2023-05-16 15:57:35.782154]:[0x00007ff980847740]:[0x00002c25]:[trace]: Dispatch static handler at path: /static2 with root: ../../public/folder2//
-[2023-05-16 15:57:35.782218]:[0x00007ff980847740]:[0x00002c25]:[trace]: Parsed handler ErrorHandler for path: 
-[2023-05-16 15:57:35.782271]:[0x00007ff980847740]:[0x00002c25]:[debug]: Error Handler init
+[2023-05-17 00:33:19.149440]:[0x00007f16056d9740]:[0x000008a6]:[trace]: Parsed handler EchoHandler for path: /echo
+[2023-05-17 00:33:19.157567]:[0x00007f16056d9740]:[0x000008a6]:[trace]: Dispatch echo handler factory at path: /echo
+[2023-05-17 00:33:19.158203]:[0x00007f16056d9740]:[0x000008a6]:[trace]: Parsed handler StaticHandler for path: /static1
+[2023-05-17 00:33:19.158791]:[0x00007f16056d9740]:[0x000008a6]:[trace]: Dispatch static handler at path: /static1 with root: ../../public/folder1///
+[2023-05-17 00:33:19.159405]:[0x00007f16056d9740]:[0x000008a6]:[trace]: Parsed handler StaticHandler for path: /static2
+[2023-05-17 00:33:19.160045]:[0x00007f16056d9740]:[0x000008a6]:[trace]: Dispatch static handler at path: /static2 with root: ../../public/folder2//
+[2023-05-17 00:33:19.160650]:[0x00007f16056d9740]:[0x000008a6]:[trace]: Parsed handler ErrorHandler for path: /
+[2023-05-17 00:33:19.161244]:[0x00007f16056d9740]:[0x000008a6]:[debug]: Error Handler init

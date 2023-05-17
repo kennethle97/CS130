@@ -54,7 +54,9 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
         }
         /*If the request object is a valid request i.e. result == true then call the dispatcher to get the appropiate request_handler*/
         if(result == true){
-            std::shared_ptr<Request_Handler> handler = dispatcher->get_request_handler(http_request);
+            std::shared_ptr<Request_Handler_Factory> handler_factory = dispatcher->get_request_handler_factory(http_request);
+            std::string location = dispatcher->match(http_request);
+            Request_Handler* handler = handler_factory->create(location, http_request.uri);
             if (handler == nullptr) {
                 /*If handler is a nullptr then a handler is not found for the request and reply with a bad request*/
                 http_reply = reply::stock_reply(reply::bad_request);

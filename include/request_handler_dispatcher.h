@@ -7,8 +7,9 @@
 #include <map>
 #include <memory>
 #include "request_handler.h"
+#include "request_handler/request_handler_factory.h"
 
-typedef std::string path_uri;
+
 typedef std::string path_handler_name;
 
 #define ECHO_HANDLER "EchoHandler"
@@ -17,10 +18,11 @@ typedef std::string path_handler_name;
 class Request_Handler_Dispatcher {
 public:
     Request_Handler_Dispatcher(const NginxConfig& config);
-    std::shared_ptr<Request_Handler> get_request_handler(const request& http_request) const;
+    std::shared_ptr<Request_Handler_Factory> get_request_handler_factory(const request& http_request) const;
+    std::string match(const request &http_request) const;
 
 private:
-    std::map<path_uri, std::shared_ptr<Request_Handler> > map_handlers;
+    std::map<path_uri, std::shared_ptr<Request_Handler_Factory> > map_handlers;
     void parse_config_handlers(const NginxConfig& config);
 };
 

@@ -47,8 +47,12 @@ add_library(http_lib
                 src/http/request_parser.cpp)
 add_library(request_handler_lib 
                 src/request_handler_dispatcher.cc
+                src/request_handler/request_404_handler_factory.cc
+                src/request_handler/static_handler_factory.cc
+                src/request_handler/echo_handler_factory.cc
                 src/request_handler/request_handler_echo.cc
                 src/request_handler/request_handler_static.cc
+                src/request_handler/request_handler_404.cc
                 )
 
 # Update executable name, srcs, and deps
