@@ -1,8 +1,9 @@
-[2023-05-18 07:22:34.112610]:[0x00007f33523b4740]:[0x00000fb2]:[trace]: Parsed handler EchoHandler for path: /echo
-[2023-05-18 07:22:34.117655]:[0x00007f33523b4740]:[0x00000fb2]:[trace]: Dispatch echo handler factory at path: /echo
-[2023-05-18 07:22:34.118856]:[0x00007f33523b4740]:[0x00000fb2]:[trace]: Parsed handler StaticHandler for path: /static1
-[2023-05-18 07:22:34.119919]:[0x00007f33523b4740]:[0x00000fb2]:[trace]: Dispatch static handler at path: /static1 with root: ../../public/folder1///
-[2023-05-18 07:22:34.121285]:[0x00007f33523b4740]:[0x00000fb2]:[trace]: Parsed handler StaticHandler for path: /static2
-[2023-05-18 07:22:34.122667]:[0x00007f33523b4740]:[0x00000fb2]:[trace]: Dispatch static handler at path: /static2 with root: ../../public/folder2//
-[2023-05-18 07:22:34.123920]:[0x00007f33523b4740]:[0x00000fb2]:[trace]: Parsed handler ErrorHandler for path: /
-[2023-05-18 07:22:34.125219]:[0x00007f33523b4740]:[0x00000fb2]:[debug]: Error Handler init
+[2023-05-18 01:01:18.647595]:[0x00007f268142a740]:[0x00001b36]:[trace]: Parsed handler EchoHandler for path: /echo
+[2023-05-18 01:01:18.658747]:[0x00007f268142a740]:[0x00001b36]:[trace]: Dispatch echo handler factory at path: /echo
+[2023-05-18 01:01:18.659357]:[0x00007f268142a740]:[0x00001b36]:[trace]: Parsed handler StaticHandler for path: /static1
+[2023-05-18 01:01:18.660046]:[0x00007f268142a740]:[0x00001b36]:[trace]: Dispatch static handler at path: /static1 with root: ../../public/folder1///
+[2023-05-18 01:01:18.660743]:[0x00007f268142a740]:[0x00001b36]:[trace]: Parsed handler StaticHandler for path: /static2
+[2023-05-18 01:01:18.661372]:[0x00007f268142a740]:[0x00001b36]:[trace]: Dispatch static handler at path: /static2 with root: ../../public/folder2//
+[2023-05-18 01:01:18.661950]:[0x00007f268142a740]:[0x00001b36]:[trace]: Parsed handler ErrorHandler for path: /
+[2023-05-18 01:01:18.662531]:[0x00007f268142a740]:[0x00001b36]:[debug]: Error Handler init
+[2023-05-18 01:01:18.664194]:[0x00007f268142a740]:[0x00001b36]:[trace]: Echo Request Handler: /echo

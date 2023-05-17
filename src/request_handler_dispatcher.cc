@@ -15,8 +15,8 @@ Request_Handler_Dispatcher::Request_Handler_Dispatcher(const NginxConfig & confi
 /*
 The function parse_config_handlers takes in a NginxConfig type object and parses it to create the list of request handlers specificed
 in the config file by checking to see if there contains a statement with a "location" token as its first argument and sets the second
-token as the path. If the statement has its own child block then it looks for a root directive and to create a static request_handler.
-All the request_handlers are paired with their respective path variable name and are set in the member variable map_handlers()
+token as the path. If the statement has its own child block then it looks for a root directive and to create a static request_handler_factory.
+All the request_handler_factories are paired with their respective path variable name and are set in the member variable map_handlers()
 
 */
 void Request_Handler_Dispatcher::parse_config_handlers(const NginxConfig& config) {
@@ -68,11 +68,10 @@ void Request_Handler_Dispatcher::parse_config_handlers(const NginxConfig& config
                         server_logger->log_warning("EchoHandler block has statements, which will be ignored");
                     }
                     server_logger->log_trace("Dispatch echo handler factory at path: " + path);
-                    handler_factory = std::make_shared<Echo_Handler_Factory>(path);
-
+                    handler_factory = std::make_shared<Echo_Handler_Factory>(config);
                 } else {
                     server_logger->log_debug("Error Handler init");
-                    handler_factory = std::make_shared<Request_404_Handler_Factory>();
+                    handler_factory = std::make_shared<Request_404_Handler_Factory>(config);
                 }
                 map_handlers[path] = handler_factory;
             }
@@ -97,7 +96,10 @@ std::shared_ptr<Request_Handler_Factory> Request_Handler_Dispatcher::get_request
     }
 }
 
-
+/*
+Helper function for get_request_handler_factory, and was separated for reuse in session.cc to get the location url
+This function is based on longest prefix matching and returns an empty string if no match was found.
+*/
 std::string Request_Handler_Dispatcher::match(const request &http_request) const {
     // Extract URI from request
     path_uri uri = {http_request.target().begin(),http_request.target().end()};

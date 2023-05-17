@@ -7,8 +7,10 @@
 
 class Request_404_Handler_Factory : public Request_Handler_Factory {
     public:
-        Request_404_Handler_Factory() {};
+        Request_404_Handler_Factory(NginxConfig config);
         Request_Handler_404* create(const std::string& location, const std::string& url);
+    private:
+        NginxConfig config;
 };
 
 #endif
