@@ -1,8 +1,10 @@
 #include "request_handler_dispatcher.h"
 #include "request_handler/request_handler_echo.h"
 #include "request_handler/request_handler_static.h"
+#include "request_handler/request_handler_404.h"
 #include "request_handler/echo_handler_factory.h"
 #include "request_handler/static_handler_factory.h"
+#include "request_handler/request_404_handler_factory.h"
 #include "gtest/gtest.h"
 #include <boost/beast/core.hpp>
 #include <boost/beast/http.hpp>
@@ -12,7 +14,6 @@
 #include <vector>
 #include <string>
 #include <iostream>
-
 
 
 class RequestHandlerDispatcherTest : public ::testing::Test {
@@ -31,11 +32,6 @@ class RequestHandlerDispatcherTest : public ::testing::Test {
 };
 
 TEST_F(RequestHandlerDispatcherTest, GetHandlerEcho) {
-    // NginxConfigParser parser;
-    // NginxConfig config;
-
-    // bool status = parser.Parse("config_test", &config);
-    // std::cout << "status: " << status << std::endl;
     boost::beast::http::request<boost::beast::http::string_body> test_request;
     test_request.method(boost::beast::http::verb::get);
     test_request.target("/echo");
@@ -53,17 +49,24 @@ TEST_F(RequestHandlerDispatcherTest, GetHandlerEcho) {
     EXPECT_TRUE(echo_handler_factory != nullptr);
 }
 
-TEST_F(RequestHandlerDispatcherTest, GetHandlerStaticFalse) {
+TEST_F(RequestHandlerDispatcherTest, GetHandler404) {
     boost::beast::http::request<boost::beast::http::string_body> test_request;
     test_request.method(boost::beast::http::verb::get);
-    test_request.target("/static123/random_file.txt");
+    test_request.target("/non_existent_path/non_existent_file.txt");
     test_request.version(11); //beast format for 1.1
     
     test_request.set(boost::beast::http::field::content_type, "text/plain");
-    EXPECT_EQ(dispatcher->get_request_handler_factory(test_request), nullptr);
+
+    std::shared_ptr<Request_Handler_Factory> handler = dispatcher->get_request_handler_factory(test_request);
+
+    EXPECT_TRUE(handler != nullptr);
+
+    std::shared_ptr<Request_404_Handler_Factory> unknown_handler_factory = std::dynamic_pointer_cast<Request_404_Handler_Factory>(handler);
+
+    EXPECT_TRUE(unknown_handler_factory != nullptr);
 }
 
-TEST_F(RequestHandlerDispatcherTest, GetHandlerStaticTrue) {
+TEST_F(RequestHandlerDispatcherTest, GetHandlerStatic) {
     boost::beast::http::request<boost::beast::http::string_body> test_request;
     test_request.method(boost::beast::http::verb::get);
     test_request.target("/static1/random.txt");
@@ -83,5 +86,5 @@ TEST_F(RequestHandlerDispatcherTest, GetHandlerStaticTrue) {
     Request_Handler_Static* static_handler = static_handler_factory->create("/static1", "/static1/random.txt");
     // Now you can access the root and prefix members of the derived class
     EXPECT_EQ(static_handler->get_prefix(), "/static1");
-    EXPECT_EQ(static_handler->get_root(), "../../public/folder1///");
+    EXPECT_EQ(static_handler->get_root(), "../../public/folder1");
 }

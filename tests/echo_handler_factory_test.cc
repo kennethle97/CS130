@@ -39,7 +39,7 @@ TEST_F(EchoHandlerFactoryTest, EchoFactoryTest) {
 
     boost::beast::http::response<boost::beast::http::string_body> test_reply;
 
-    Request_Handler_Echo* request_echo_handler = handler_factory.create("/echo/", "/echo/");
+    Request_Handler_Echo* request_echo_handler = handler_factory.create("/echo", "/echo");
     request_echo_handler->handle_request(test_request, &test_reply);
     EXPECT_EQ(boost::beast::http::status::ok, test_reply.result());
     EXPECT_EQ("HTTP/1.1 200 OK\r\nContent-Length: 48\r\nContent-Type: text/plain\r\n\r\n", 

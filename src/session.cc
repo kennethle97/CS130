@@ -56,13 +56,28 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
 
         try {
             server_logger->log_request(http_request, socket_);
-        } catch (const std::exception& e) {
-            std::cout << "Error logging request: " << e.what() << std::endl;
-        }
+        } catch (const std::exception& e) {}
         /*If the request object is a valid request i.e. result == true then call the dispatcher to get the appropiate request_handler*/
         if(!parse_error){
 
             std::shared_ptr<Request_Handler_Factory> handler_factory = dispatcher->get_request_handler_factory(http_request);
+            if (handler_factory == nullptr) {
+                // If handler_factory is a nullptr, then a handler factory was not dispatched (most
+                // likely due to a bad config)
+                http_reply.result(boost::beast::http::status::internal_server_error);
+                const char internal_server_error[] =
+                            "<html>"
+                            "<head><title>Internal Server Error</title></head>"
+                            "<body><h1>500 Internal Server Error</h1></body>"
+                            "</html>\n";
+                http_reply.body() = internal_server_error;
+                http_reply.content_length(http_reply.body().size());
+                http_reply.set(boost::beast::http::field::content_type, "text/html");
+
+                server_logger->log_error("Internal Server Error -- a handler factory was not dispatched");
+                server_logger->log_info("Response code: " + std::to_string(http_reply.result_int()));
+            }
+            
             std::string location = dispatcher->match(http_request);
             std::string uri = {http_request.target().begin(),http_request.target().end()}; //convert beast string view to string
             Request_Handler* handler = handler_factory->create(location, uri);
@@ -74,7 +89,7 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
                             "<html>"
                             "<head><title>Bad Request</title></head>"
                             "<body><h1>400 Bad Request</h1></body>"
-                            "</html>";
+                            "</html>\n";
                 http_reply.body() = bad_request;
                 http_reply.content_length(http_reply.body().size());
                 http_reply.set(boost::beast::http::field::content_type, "text/html");
@@ -83,7 +98,8 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
                 server_logger->log_info("Response code: " + std::to_string(http_reply.result_int()));
                 return;
             }
-                     // Handle the request and generate a response
+            
+            // Handle the request and generate a response
             try {
                 handler->handle_request(http_request, &http_reply);
             } catch (const std::exception& e) {
@@ -116,7 +132,7 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
                         "<html>"
                         "<head><title>Bad Request</title></head>"
                         "<body><h1>400 Bad Request</h1></body>"
-                        "</html>";
+                        "</html>\n";
             http_reply.body() = bad_request;
             http_reply.content_length(http_reply.body().size());
             http_reply.set(boost::beast::http::field::content_type, "text/html");

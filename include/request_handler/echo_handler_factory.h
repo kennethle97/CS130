@@ -4,6 +4,7 @@
 #define ECHO_HANDLER_FACTORY_H 
 
 #include "request_handler/request_handler_echo.h"
+#include "config_parser.h"
 
 class Echo_Handler_Factory : public Request_Handler_Factory {
     public:
@@ -12,6 +13,7 @@ class Echo_Handler_Factory : public Request_Handler_Factory {
 
     private:
         NginxConfig config;
+        bool parse_config(NginxConfig config, std::string location);
 };
 
 #endif

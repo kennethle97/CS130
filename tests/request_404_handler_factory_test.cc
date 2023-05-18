@@ -37,7 +37,6 @@ TEST_F(Request404HandlerFactoryTest, Request404FactoryTest) {
     test_request.set(boost::beast::http::field::content_type, "text/plain");
 
     boost::beast::http::response<boost::beast::http::string_body> test_reply;
-
     
     Request_Handler_404* test_404_handler = handler_factory.create("/", "/");
 

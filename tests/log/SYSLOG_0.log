@@ -1,9 +1,9 @@
-[2023-05-18 01:01:18.647595]:[0x00007f268142a740]:[0x00001b36]:[trace]: Parsed handler EchoHandler for path: /echo
-[2023-05-18 01:01:18.658747]:[0x00007f268142a740]:[0x00001b36]:[trace]: Dispatch echo handler factory at path: /echo
-[2023-05-18 01:01:18.659357]:[0x00007f268142a740]:[0x00001b36]:[trace]: Parsed handler StaticHandler for path: /static1
-[2023-05-18 01:01:18.660046]:[0x00007f268142a740]:[0x00001b36]:[trace]: Dispatch static handler at path: /static1 with root: ../../public/folder1///
-[2023-05-18 01:01:18.660743]:[0x00007f268142a740]:[0x00001b36]:[trace]: Parsed handler StaticHandler for path: /static2
-[2023-05-18 01:01:18.661372]:[0x00007f268142a740]:[0x00001b36]:[trace]: Dispatch static handler at path: /static2 with root: ../../public/folder2//
-[2023-05-18 01:01:18.661950]:[0x00007f268142a740]:[0x00001b36]:[trace]: Parsed handler ErrorHandler for path: /
-[2023-05-18 01:01:18.662531]:[0x00007f268142a740]:[0x00001b36]:[debug]: Error Handler init
-[2023-05-18 01:01:18.664194]:[0x00007f268142a740]:[0x00001b36]:[trace]: Echo Request Handler: /echo
+[2023-05-18 10:20:01.681517]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Parsed handler EchoHandler for path: /echo
+[2023-05-18 10:20:01.681729]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Dispatched echo handler factory at location: /echo
+[2023-05-18 10:20:01.681784]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Parsed handler StaticHandler for path: /static1
+[2023-05-18 10:20:01.681814]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Dispatched static handler factory at location: /static1
+[2023-05-18 10:20:01.681851]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Parsed handler StaticHandler for path: /static2
+[2023-05-18 10:20:01.681884]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Dispatched static handler factory at location: /static2
+[2023-05-18 10:20:01.681920]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Parsed handler ErrorHandler for path: /
+[2023-05-18 10:20:01.681955]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Dispatched 404 handler factory at location: /
+[2023-05-18 10:20:01.682076]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Echo Request Handler: /echo

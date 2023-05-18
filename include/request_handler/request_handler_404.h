@@ -11,10 +11,11 @@
 
 class Request_Handler_404 : public Request_Handler {
 public:
-    Request_Handler_404() {};
+    Request_Handler_404(const path_uri& prefix_);
     void handle_request(const request& http_request, reply* http_reply) noexcept override;
 
 private:
+    path_uri prefix;
 };
 
 #endif

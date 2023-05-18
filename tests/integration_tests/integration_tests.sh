@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# NOTE: NAME ALL TEMPORARY TEST FILES AS "test_*" SO THAT THEY WILL BE DELETED AFTER THE INTEGRATION TEST ENDS
+
 #kills all server
 killall server 
 
@@ -14,8 +16,8 @@ location /echo EchoHandler {
 
 }
 
-location /static1//// StaticHandler {    
-    root ./public/folder1////;
+location /static1 StaticHandler {    
+    root ./public/folder1;
 }
 
 location /static2/ StaticHandler {
@@ -25,9 +27,9 @@ location /static2/ StaticHandler {
 location / ErrorHandler {
 
 }
-" > config_test
+" > test_config
 
-$PATH_SERVER_BIN config_test &
+$PATH_SERVER_BIN test_config &
 PID_SERVER=$!
 echo "Server process ID: $PID_SERVER"
 sleep 1
@@ -85,10 +87,8 @@ fi
 printf "Killing Server $PID_SERVER\n"
 kill -9 $PID_SERVER
 printf "Tests Completed!\n"
+
+# remove no longer needed test files
+rm test_*
 exit 0
-
-
-
-
-
 

@@ -10,9 +10,10 @@ class Static_Handler_Factory : public Request_Handler_Factory {
     public:
         Static_Handler_Factory(NginxConfig config);
         Request_Handler_Static* create(const path_uri& location, const path_uri& url);
+        
     private:
-        std::string parse_config_root(NginxConfig config, std::string location);
         NginxConfig config;
+        std::string parse_config(NginxConfig config, std::string location);
 };
 
 #endif

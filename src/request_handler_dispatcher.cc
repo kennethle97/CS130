@@ -9,6 +9,8 @@
 
 /*Constructor calls parse_config_handlers to initialize the map of handlers*/
 
+
+
 Request_Handler_Dispatcher::Request_Handler_Dispatcher(const NginxConfig & config) {
     parse_config_handlers(config);
 }
@@ -40,37 +42,13 @@ void Request_Handler_Dispatcher::parse_config_handlers(const NginxConfig& config
 
                 std::shared_ptr<Request_Handler_Factory> handler_factory;
                 if (handler_name == STATIC_HANDLER && statement->child_block_.get() != nullptr) {
-                    // add '/' to end of path if it doesn't have one
-                    // if (path.back() != '/') {
-                    //     path += '/';
-                    // }
-
-                    path_uri root = "#"; // set root to #, which is illegal directory character to see if it is set later
-                    for (const auto &child_statement : statement->child_block_->statements_) {
-                        if (child_statement->tokens_.size() == 2 && child_statement->tokens_[0] == "root") {
-                            root = child_statement->tokens_[1];
-                            break;
-                        }
-                    }
-
-                    if (root != "#") { // if root is not #, then it was set in the config file
-                        server_logger->log_trace("Dispatch static handler at path: " + path + " with root: " + root);
-                        // add '/' to end of root if it doesn't have one
-                        if (root.back() != '/') {
-                            root += '/';
-                        }
-                        handler_factory = std::make_shared<Static_Handler_Factory>(config);
-                    } else {
-                        server_logger->log_error("No root folder specified for static handler at path: " + path);
-                    }
+                    server_logger->log_trace("Dispatched static handler factory at location: " + path);
+                    handler_factory = std::make_shared<Static_Handler_Factory>(config);
                 } else if (handler_name == ECHO_HANDLER) {
-                    if (statement->child_block_->statements_.size() > 0) {
-                        server_logger->log_warning("EchoHandler block has statements, which will be ignored");
-                    }
-                    server_logger->log_trace("Dispatch echo handler factory at path: " + path);
+                    server_logger->log_trace("Dispatched echo handler factory at location: " + path);
                     handler_factory = std::make_shared<Echo_Handler_Factory>(config);
                 } else {
-                    server_logger->log_debug("Error Handler init");
+                    server_logger->log_trace("Dispatched 404 handler factory at location: " + path);
                     handler_factory = std::make_shared<Request_404_Handler_Factory>(config);
                 }
                 map_handlers[path] = handler_factory;
@@ -87,13 +65,11 @@ of a bad request.
 std::shared_ptr<Request_Handler_Factory> Request_Handler_Dispatcher::get_request_handler_factory(const request &http_request) const {
     std::string location = match(http_request);
 
-    // Either no matching handler was found or Invalid URI
-    if (location == "") {
+    auto it = map_handlers.find(location);
+    if (it == map_handlers.end()) {
         return nullptr;
-    } else {
-        auto it = map_handlers.find(location);
-        return it->second;
-    }
+    }    
+    return it->second;
 }
 
 /*
@@ -102,10 +78,10 @@ This function is based on longest prefix matching and returns an empty string if
 */
 std::string Request_Handler_Dispatcher::match(const request &http_request) const {
     // Extract URI from request
-    path_uri uri = {http_request.target().begin(),http_request.target().end()};
+    path_uri uri = {http_request.target().begin(), http_request.target().end()};
     if (uri.empty() || uri[0] != '/') {
         // Invalid URI, Path URI is completely empty
-        return "";
+        return "/"; // return 404 handler path
     }
     // Remove trailing slashes
     while (uri.length() > 1 && uri.back() == '/') {
@@ -113,22 +89,22 @@ std::string Request_Handler_Dispatcher::match(const request &http_request) const
     }
     auto it = map_handlers.find(uri);
 
-    char suffix_char = '\0';
+    // char suffix_char = '\0';
     //Start off with whole uri and popback characters until we find a match in map_handlers for matching path.
     if (uri.length() != 1) {
         do {
             it = map_handlers.find(uri);
-            if (it != map_handlers.end() && (suffix_char == '\0' || suffix_char == '/')) {
+            if (it != map_handlers.end()) {
                 break;
             }
-            suffix_char = uri.back();
+            // suffix_char = uri.back();
             uri.pop_back();
         } while (uri.length() > 1);
     }
     // Search for matching handler
     if (it == map_handlers.end()) {
         // No matching handler found
-        return "";
+        return "/"; // return 404 handler path
     }
     // Return matching handler
     return it->first;

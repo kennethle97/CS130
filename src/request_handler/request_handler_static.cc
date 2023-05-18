@@ -27,11 +27,11 @@ void Request_Handler_Static::handle_request(const request &http_request, reply *
                         "<html>"
                         "<head><title>Not Found</title></head>"
                         "<body><h1>404 Not Found</h1></body>"
-                        "</html>";
+                        "</html>\n";
         http_reply->body() = not_found;
         //http_reply->content_length(http_reply->body().size());
         http_reply->set(boost::beast::http::field::content_type, "text/html");
-        //*******soick reply************
+        //*******stock reply************
         server_logger->log_info("Bad request -- location not found");
         return;
     }
@@ -48,7 +48,7 @@ void Request_Handler_Static::handle_request(const request &http_request, reply *
                         "<html>"
                         "<head><title>Not Found</title></head>"
                         "<body><h1>404 Not Found</h1></body>"
-                        "</html>";
+                        "</html>\n";
         http_reply->body() = not_found;
         //http_reply->content_length(http_reply->body().size());
         http_reply->set(boost::beast::http::field::content_type, "text/html");

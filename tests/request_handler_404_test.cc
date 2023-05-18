@@ -20,7 +20,7 @@ TEST_F(RequestHandler404Test, _404Request) {
 
     boost::beast::http::response<boost::beast::http::string_body> test_reply;
 
-    Request_Handler_404 request_404_handler;
+    Request_Handler_404 request_404_handler = Request_Handler_404("/");
     request_404_handler.handle_request(test_request, &test_reply);
     EXPECT_EQ(boost::beast::http::status::not_found, test_reply.result());
     EXPECT_EQ("HTTP/1.1 404 Not Found\r\nContent-Type: text/html\r\n\r\n", 
