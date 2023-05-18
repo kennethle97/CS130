@@ -43,8 +43,7 @@ add_library(server_main_lib src/server_main.cc)
 add_library(logger_lib src/logger.cc)
 add_library(http_lib
                 src/http/mime_types.cpp
-                src/http/reply.cpp
-                src/http/request_parser.cpp)
+                )
 add_library(request_handler_lib 
                 src/request_handler_dispatcher.cc
                 src/request_handler/request_404_handler_factory.cc

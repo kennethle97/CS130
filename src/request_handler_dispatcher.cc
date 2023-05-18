@@ -100,7 +100,7 @@ std::shared_ptr<Request_Handler_Factory> Request_Handler_Dispatcher::get_request
 
 std::string Request_Handler_Dispatcher::match(const request &http_request) const {
     // Extract URI from request
-    path_uri uri = http_request.uri;
+    path_uri uri = {http_request.target().begin(),http_request.target().end()};
     if (uri.empty() || uri[0] != '/') {
         // Invalid URI, Path URI is completely empty
         return "";

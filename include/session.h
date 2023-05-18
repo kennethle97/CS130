@@ -3,14 +3,14 @@
 
 #include <boost/asio.hpp>
 #include "request_handler_dispatcher.h"
-#include "http/request.hpp"
-#include "http/reply.hpp"
-#include "http/request_parser.hpp"
+#include <boost/beast/core.hpp>
+#include <boost/beast/http.hpp>
+#include <boost/beast/version.hpp>
 
 using boost::asio::ip::tcp;
-using http::server::request;
-using http::server::reply;
-using http::server::request_parser;
+using request = boost::beast::http::request<boost::beast::http::string_body>;
+using reply = boost::beast::http::response<boost::beast::http::string_body>;
+using request_parser = boost::beast::http::request_parser<boost::beast::http::string_body>;
 
 class session :public std::enable_shared_from_this<session>
 {
@@ -25,7 +25,7 @@ public:
   request http_request;
   reply http_reply;
   request_parser http_parser;
-
+  
   friend class testsession;
 
 private:

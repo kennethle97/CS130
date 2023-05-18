@@ -4,9 +4,9 @@
 #include "request_handler/echo_handler_factory.h"
 #include "request_handler/static_handler_factory.h"
 #include "gtest/gtest.h"
-#include "http/reply.hpp"
-#include "http/header.hpp"
-#include "http/request.hpp"
+#include <boost/beast/core.hpp>
+#include <boost/beast/http.hpp>
+#include <boost/beast/version.hpp>
 #include "config_parser.h"
 #include <fstream>
 #include <vector>
@@ -36,14 +36,11 @@ TEST_F(RequestHandlerDispatcherTest, GetHandlerEcho) {
 
     // bool status = parser.Parse("config_test", &config);
     // std::cout << "status: " << status << std::endl;
-    http::server::request test_request;
-    test_request.method = "GET";
-    test_request.uri = "/echo";
-    test_request.http_version_major=1;
-    test_request.http_version_minor=1;
-    test_request.headers.resize(2);
-    test_request.headers[0].name="Content-Type";
-    test_request.headers[0].value="text/plain";
+    boost::beast::http::request<boost::beast::http::string_body> test_request;
+    test_request.method(boost::beast::http::verb::get);
+    test_request.target("/echo");
+    test_request.version(11); //beast format for 1.1
+    test_request.set(boost::beast::http::field::content_type, "text/plain");
     // Get the request handler object from the dispatcher
     std::shared_ptr<Request_Handler_Factory> handler = dispatcher->get_request_handler_factory(test_request);
 
@@ -57,27 +54,21 @@ TEST_F(RequestHandlerDispatcherTest, GetHandlerEcho) {
 }
 
 TEST_F(RequestHandlerDispatcherTest, GetHandlerStaticFalse) {
-    http::server::request test_request;
-    test_request.method = "GET";
-    test_request.uri = "/static123/random_file.txt";
-    test_request.http_version_major=1;
-    test_request.http_version_minor=1;
-    test_request.headers.resize(2);
-    test_request.headers[0].name="Content-Type";
-    test_request.headers[0].value="text/plain";
-
+    boost::beast::http::request<boost::beast::http::string_body> test_request;
+    test_request.method(boost::beast::http::verb::get);
+    test_request.target("/static123/random_file.txt");
+    test_request.version(11); //beast format for 1.1
+    
+    test_request.set(boost::beast::http::field::content_type, "text/plain");
     EXPECT_EQ(dispatcher->get_request_handler_factory(test_request), nullptr);
 }
 
 TEST_F(RequestHandlerDispatcherTest, GetHandlerStaticTrue) {
-    http::server::request test_request;
-    test_request.method = "GET";
-    test_request.uri = "/static1/random.txt";
-    test_request.http_version_major=1;
-    test_request.http_version_minor=1;
-    test_request.headers.resize(2);
-    test_request.headers[0].name="Content-Type";
-    test_request.headers[0].value="text/plain";
+    boost::beast::http::request<boost::beast::http::string_body> test_request;
+    test_request.method(boost::beast::http::verb::get);
+    test_request.target("/static1/random.txt");
+    test_request.version(11); //beast format for 1.1
+    test_request.set(boost::beast::http::field::content_type, "text/plain");
     // Get the request handler object from the dispatcher
     std::shared_ptr<Request_Handler_Factory> handler = dispatcher->get_request_handler_factory(test_request);
 

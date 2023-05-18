@@ -9,7 +9,9 @@
 #include <boost/log/utility/setup/file.hpp>
 #include <boost/log/utility/setup/common_attributes.hpp>
 #include <string>
-#include "http/request.hpp"
+#include <boost/beast/core.hpp>
+#include <boost/beast/http.hpp>
+#include <boost/beast/version.hpp>
 
 namespace logging = boost::log;
 namespace src = boost::log::sources;
@@ -17,7 +19,7 @@ namespace sinks = boost::log::sinks;
 namespace keywords = boost::log::keywords;
 using namespace boost::log::trivial;
 using boost::asio::ip::tcp;
-using http::server::request;
+using request = boost::beast::http::request<boost::beast::http::string_body>;
 
 // See logger.cc for implementation details
 class ServerLogger {

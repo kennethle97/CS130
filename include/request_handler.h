@@ -5,14 +5,14 @@
 
 #include <iostream>
 #include "./config_parser.h"
-#include "http/request.hpp"
-#include "http/reply.hpp"
-#include "http/request_parser.hpp"
+#include <boost/beast/core.hpp>
+#include <boost/beast/http.hpp>
+#include <boost/beast/version.hpp>
 
 
-using http::server::request;
-using http::server::request_parser;
-using http::server::reply;
+using request = boost::beast::http::request<boost::beast::http::string_body>;
+using reply = boost::beast::http::response<boost::beast::http::string_body>;
+using request_parser = boost::beast::http::request_parser<boost::beast::http::string_body>;
 
 class Request_Handler {
     public:

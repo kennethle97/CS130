@@ -1,8 +1,8 @@
 #include "request_handler/request_handler_static.h"
 #include "gtest/gtest.h"
-#include "http/reply.hpp"
-#include "http/header.hpp"
-#include "http/request.hpp"
+#include <boost/beast/core.hpp>
+#include <boost/beast/http.hpp>
+#include <boost/beast/version.hpp>
 
 class RequestHandlerStaticTest : public ::testing::Test {
     protected:
@@ -10,23 +10,19 @@ class RequestHandlerStaticTest : public ::testing::Test {
 };
 
 TEST_F(RequestHandlerStaticTest, StaticNotFoundTest) {
-    http::server::request test_request;
-    test_request.method = "GET";
-    test_request.uri = "/static123/random_file.txt";
-    test_request.http_version_major=1;
-    test_request.http_version_minor=1;
-    test_request.headers.resize(2);
-    test_request.headers[0].name="Content-Type";
-    test_request.headers[0].value="text/plain";
+    boost::beast::http::request<boost::beast::http::string_body> test_request;
+    test_request.method(boost::beast::http::verb::get);
+    test_request.target("/static123/random_file.txt");
+    test_request.version(11); //beast format for 1.1
+    test_request.set(boost::beast::http::field::content_type, "text/plain");
 
-    http::server::reply test_reply;
+    boost::beast::http::response<boost::beast::http::string_body> test_reply;
 
     Request_Handler_Static request_static_handler("/", "/", "/static/");
     request_static_handler.handle_request(test_request, &test_reply);
-    EXPECT_EQ(http::server::reply::status_type::not_found, test_reply.status);
-    EXPECT_EQ("<html><head><title>Not Found</title></head><body><h1>404 Not Found</h1></body></html>", test_reply.content);
-    EXPECT_EQ("Content-Length", test_reply.headers[0].name);
-    EXPECT_EQ("85", test_reply.headers[0].value);
-    EXPECT_EQ("Content-Type", test_reply.headers[1].name);
-    EXPECT_EQ("text/html", test_reply.headers[1].value);
+    EXPECT_EQ(boost::beast::http::status::not_found, test_reply.result());
+    EXPECT_EQ("<html><head><title>Not Found</title></head><body><h1>404 Not Found</h1></body></html>", 
+                                test_reply.body());
+    EXPECT_EQ(false, test_reply[boost::beast::http::field::content_type].empty());
+    EXPECT_EQ("text/html", test_reply[boost::beast::http::field::content_type]);
 }

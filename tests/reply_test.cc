@@ -1,6 +1,7 @@
-#include "http/reply.hpp"
+#include <boost/beast/core.hpp>
+#include <boost/beast/http.hpp>
+#include <boost/beast/version.hpp>
 #include "gtest/gtest.h"
-#include "http/header.hpp"
 #include <boost/asio.hpp>
 #include <vector>
 
@@ -8,14 +9,15 @@ class ReplyTest : public ::testing::Test {
     protected:
 
 };
+//dont need these tests cuz delete reply.cc
 
 // test that echo reply is made correctly and returns the correct response
+/*
 TEST_F(ReplyTest, EchoReply) {
-    http::server::reply test_reply;
-    test_reply.status=http::server::reply::status_type::ok;
-    test_reply.headers.resize(1);
-    test_reply.headers[0].name="Content-Type";
-    test_reply.headers[0].value="text/plain";
+    boost::beast::http::response<boost::beast::http::string_body> test_reply;
+    test_reply.result(boost::beast::http::status::ok);
+    http_reply.set(boost::beast::http::field::content_type, "text/plain");
+
 
     test_reply.content="GET /echo HTTP/1.1\r\n\r\n";
     
@@ -34,12 +36,12 @@ TEST_F(ReplyTest, EchoReply) {
     EXPECT_EQ(std::string(static_cast<const char*>(boost::asio::buffer("\r\n").data())), std::string(static_cast<const char*>(buffers[5].data())));
 
     EXPECT_EQ(std::string(static_cast<const char*>(boost::asio::buffer("GET /echo HTTP/1.1\r\n\r\n").data())), std::string(static_cast<const char*>(buffers[6].data())));
-}
-
+}*/
+/*
 TEST_F(ReplyTest, CheckAllStatusTypes) {
-    http::server::reply test_reply;
+    boost::beast::http::response<boost::beast::http::string_body> test_reply;
 
-    test_reply.status=http::server::reply::status_type::ok;
+    ttest_reply.result(boost::beast::http::status::ok);
     std::vector<boost::asio::const_buffer> test_header;
     test_header.push_back(boost::asio::buffer("HTTP/1.1 200 OK\r\n"));
     EXPECT_EQ(std::string(static_cast<const char*>(test_header[0].data())), std::string(static_cast<const char*>(test_reply.to_buffers()[0].data())));
@@ -120,8 +122,8 @@ TEST_F(ReplyTest, CheckAllStatusTypes) {
     EXPECT_EQ(std::string(static_cast<const char*>(test_header[0].data())), std::string(static_cast<const char*>(test_reply.to_buffers()[0].data())));
 
 
-}
-
+}*/
+/*
 TEST_F(ReplyTest, StockReplyTest) {
     http::server::reply test_reply;
     test_reply.status=http::server::reply::status_type::ok;
@@ -142,3 +144,4 @@ TEST_F(ReplyTest, StockReplyTest) {
     EXPECT_EQ(test_reply.content, stock_reply_val.content);
     
 }
+*/

@@ -16,7 +16,9 @@
 #include <iostream>
 
 #include "logger.h"
-#include "http/request.hpp"
+#include <boost/beast/core.hpp>
+#include <boost/beast/http.hpp>
+#include <boost/beast/version.hpp>
 
 namespace logging = boost::log;
 namespace src = boost::log::sources;
@@ -24,7 +26,7 @@ namespace sinks = boost::log::sinks;
 namespace keywords = boost::log::keywords;
 using namespace boost::log::trivial;
 using boost::asio::ip::tcp;
-using http::server::request;
+using request = boost::beast::http::request<boost::beast::http::string_body>;
 
 // initialize blank server_logger instance
 ServerLogger *ServerLogger::server_logger = 0;
@@ -72,9 +74,7 @@ ServerLogger::ServerLogger() {
 // received by the server
 void ServerLogger::log_request(request http_request, tcp::socket &socket) {
   std::stringstream sstream;
-  sstream << http_request.method << " " << http_request.uri;
-  sstream << " HTTP/" << http_request.http_version_major << "." << http_request.http_version_minor;
-
+  sstream <<"\r\n\r\n" <<http_request.base();
   // get ip address of the caller
   std::string remote_address = socket.remote_endpoint().address().to_string();
   sstream << " - IP Address: " << remote_address;
