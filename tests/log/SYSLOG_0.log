@@ -1,9 +1,9 @@
-[2023-05-18 10:20:01.681517]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Parsed handler EchoHandler for path: /echo
-[2023-05-18 10:20:01.681729]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Dispatched echo handler factory at location: /echo
-[2023-05-18 10:20:01.681784]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Parsed handler StaticHandler for path: /static1
-[2023-05-18 10:20:01.681814]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Dispatched static handler factory at location: /static1
-[2023-05-18 10:20:01.681851]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Parsed handler StaticHandler for path: /static2
-[2023-05-18 10:20:01.681884]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Dispatched static handler factory at location: /static2
-[2023-05-18 10:20:01.681920]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Parsed handler ErrorHandler for path: /
-[2023-05-18 10:20:01.681955]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Dispatched 404 handler factory at location: /
-[2023-05-18 10:20:01.682076]:[0x00007fc9a779e740]:[0x00002e69]:[trace]: Echo Request Handler: /echo
+[2023-05-18 10:42:00.561344]:[0x00007fa186404740]:[0x0000332a]:[trace]: Parsed handler EchoHandler for path: /echo
+[2023-05-18 10:42:00.561528]:[0x00007fa186404740]:[0x0000332a]:[trace]: Dispatched echo handler factory at location: /echo
+[2023-05-18 10:42:00.561580]:[0x00007fa186404740]:[0x0000332a]:[trace]: Parsed handler StaticHandler for path: /static1
+[2023-05-18 10:42:00.561607]:[0x00007fa186404740]:[0x0000332a]:[trace]: Dispatched static handler factory at location: /static1
+[2023-05-18 10:42:00.561625]:[0x00007fa186404740]:[0x0000332a]:[trace]: Parsed handler StaticHandler for path: /static2
+[2023-05-18 10:42:00.561643]:[0x00007fa186404740]:[0x0000332a]:[trace]: Dispatched static handler factory at location: /static2
+[2023-05-18 10:42:00.561669]:[0x00007fa186404740]:[0x0000332a]:[trace]: Parsed handler ErrorHandler for path: /
+[2023-05-18 10:42:00.561716]:[0x00007fa186404740]:[0x0000332a]:[trace]: Dispatched 404 handler factory at location: /
+[2023-05-18 10:42:00.561811]:[0x00007fa186404740]:[0x0000332a]:[trace]: Echo Request Handler: /echo
