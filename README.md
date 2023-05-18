@@ -126,20 +126,38 @@ Suppose we want to add a new request handler **FooHandler** that handles request
   ```
 
 2. **Define the request handler factory**
+Create a class for the factory that is derived from abstract class **Request_Factory_Handler**.
+Each factory must have a create function that returns a pointer to the corresponding request handler it should generate that takes in a location and url.
+Each factory also needs to take in as parameter a NginxConfig file into the constructor.
 
-_**ADD HERE**_
+  ```
+  class FooHandlerFactory : public Request_Handler_Factory {
+    public:
+      FooHandlerFactory(NginxConfig config);
+      FooHandlerRequest* create(const path_uri& location, const path_uri& url);
+    private:
+      NginxConfig config;
+  }
+  ```
 
-3. **Define the request handler**
 
-_**ADD HERE**_
+1. **Define the request handler**
+Create class for the request handler that is derived from abstract class **Request_Handler**
+The class must have a handle_request method that takes in as parameter the http request and http reply.
+  ```
+  class FooHandlerRequest : public Request_Handler {
+    public:
+      void handle_request(const request & http_request,reply * http_reply);
+  }
+  ```
 
 
-4. **Add the handler factory to the dispatcher**
+2. **Add the handler factory to the dispatcher**
+The dispatcher class located in the file "request_handler_dispatcher.cc" has a function named "parse_config_handlers" that will look for Handler names in the Nginx Config file and associate them with a specific request handler factory.
 
-_**ADD HERE**_
 
 
-5. **Add the new handler to add_library in CMakeLists.txt**
+3. **Add the new handler to add_library in CMakeLists.txt**
   ```
   add_library(request_handler_lib 
                 src/request_handler_dispatcher.cc
@@ -149,11 +167,11 @@ _**ADD HERE**_
                 src/request_handler/request_handler_echo.cc
                 src/request_handler/request_handler_static.cc
                 src/request_handler/request_handler_404.cc
-
+                src/request_handler/foo_handler_factory.cc
                 src/request_handler/foo_handler_factory.cc
                 src/request_handler/request_handler_foo.cc
                 )
   ```
-6. **Add unit tests for the new request handler in tests**
+1. **Add unit tests for the new request handler in tests**
 
-_**ADD HERE**_
+To add unit tests for the new request handler, create a boost::beast::http::request test request first as well as a boost::beast::http::reply test reply. Then, create an instance of the request handler class, call the handle_request method and pass in both the test reply and test request as parameters. After that, one can test against the expected output that the test reply should contain by calling boost::beast::http::field methods on it.
