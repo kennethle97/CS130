@@ -14,6 +14,8 @@ typedef std::string path_handler_name;
 
 #define ECHO_HANDLER "EchoHandler"
 #define STATIC_HANDLER "StaticHandler"
+#define CRUD_HANDLER "CRUDHandler"
+
 
 class Request_Handler_Dispatcher {
 public:

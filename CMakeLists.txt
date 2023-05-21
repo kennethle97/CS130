@@ -49,9 +49,11 @@ add_library(request_handler_lib
                 src/request_handler/request_404_handler_factory.cc
                 src/request_handler/static_handler_factory.cc
                 src/request_handler/echo_handler_factory.cc
+                src/request_handler/crud_handler_factory.cc
                 src/request_handler/request_handler_echo.cc
                 src/request_handler/request_handler_static.cc
                 src/request_handler/request_handler_404.cc
+                src/request_handler/request_handler_crud.cc
                 )
 
 # Update executable name, srcs, and deps

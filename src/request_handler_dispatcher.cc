@@ -4,6 +4,7 @@
 #include "../include/request_handler/request_handler_static.h"
 #include "../include/request_handler/static_handler_factory.h"
 #include "../include/request_handler/echo_handler_factory.h"
+#include "../include/request_handler/crud_handler_factory.h"
 #include "../include/request_handler/request_404_handler_factory.h"
 #include "../include/logger.h"
 
@@ -47,6 +48,9 @@ void Request_Handler_Dispatcher::parse_config_handlers(const NginxConfig& config
                 } else if (handler_name == ECHO_HANDLER) {
                     server_logger->log_trace("Dispatched echo handler factory at location: " + path);
                     handler_factory = std::make_shared<Echo_Handler_Factory>(config);
+                } else if (handler_name == CRUD_HANDLER) {
+                    server_logger->log_trace("Dispatched crud handler factory at location: " + path);
+                    handler_factory = std::make_shared<Crud_Handler_Factory>(config);
                 } else {
                     server_logger->log_trace("Dispatched 404 handler factory at location: " + path);
                     handler_factory = std::make_shared<Request_404_Handler_Factory>(config);
