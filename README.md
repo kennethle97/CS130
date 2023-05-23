@@ -84,7 +84,7 @@ cd tests/integration_tests
 To run the server binary, run the following commands from the **/build** directory:
 ```
 cd bin
-./server ../../server.conf
+./server ../../conf/server.conf
 ```
 where **server.conf** is the config file for the server defined like so:
 ```
