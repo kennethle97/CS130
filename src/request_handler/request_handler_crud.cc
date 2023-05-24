@@ -83,7 +83,7 @@ void Request_Handler_Crud::create(const request &http_request, reply *http_reply
     nlohmann::json reply_json;
     reply_json["id"] = next_id;
 
-    http_reply->result(boost::beast::http::status::created);
+    http_reply->result(boost::beast::http::status::created);    
     http_reply->set(boost::beast::http::field::content_type, "application/json");
     http_reply->body() = reply_json.dump();
     server_logger->log_info("Successfully responded to request at " + http_request.target().to_string());

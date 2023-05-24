@@ -75,8 +75,6 @@ ServerLogger::ServerLogger() {
 void ServerLogger::log_request(request http_request, tcp::socket &socket) {
   std::stringstream sstream;
   sstream << "\r\nBase:\r\n" << http_request.base();
-  sstream << "\r\nMethod String:\r\n" << http_request.method_string();
-  sstream << "\r\nBody:\r\n" << http_request.body();
   // get ip address of the caller
   std::string remote_address = socket.remote_endpoint().address().to_string();
   sstream << "- IP Address: " << remote_address;

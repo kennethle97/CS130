@@ -25,10 +25,6 @@ tcp::socket& session::socket() {
 void session::start()
 {
     auto self(shared_from_this());
-    // socket_.async_read_some(boost::asio::buffer(data_, max_length),
-    //     boost::bind(&session::handle_read, this, self,
-    //     boost::asio::placeholders::error,
-    //     boost::asio::placeholders::bytes_transferred));
     boost::asio::async_read_until( socket_, 
         boost::asio::dynamic_buffer(data_),"\r\n\r\n",
         boost::bind(&session::handle_read, this,self,
@@ -42,24 +38,7 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
     if (!error)
     {
         // Obtain a pointer to the internal character array of the std::string object of the buffer containing the request
-        server_logger->log_info("Request received: " + data_);
         const char* data_begin = data_.data();
-        // // Pass the pointer as the begin iterator and data_ + bytes_transferred as the end iterator
-        // std::string string_data_(data_);
-        // std::string base = string_data_.substr(0, string_data_.find("HTTP/1.1"));
-        // base = base + "HTTP/1.1";
-        // int content_type_index = string_data_.find("Content-Type:");
-        // std::string content_type = "";
-        // for (int i = (content_type_index+14); i < data_.size(); i++) {
-        //     if (data_[i] == '\r') {
-        //         break;
-        //     }
-        //     content_type = content_type + data_[i];
-        // }
-
-
-        // server_logger->log_info("Base is: " + base);
-        // server_logger->log_info("Content Type is: " + content_type);
 
         boost::beast::error_code parse_error;
         http_parser.put(boost::asio::buffer(data_begin, bytes_transferred), parse_error);  //parser parse buffer
