@@ -143,6 +143,28 @@ void Request_Handler_Crud::update(const request &http_request, reply *http_reply
 void Request_Handler_Crud::del(const request &http_request, reply *http_reply) {
     ServerLogger *server_logger = ServerLogger::get_server_logger();
     server_logger->log_debug("Request_Handler_Crud::del()");
+
+    std::vector<std::string> parsed_url = parse_url();
+    std::string entity_name = parsed_url[1];
+    std::string entity_id = parsed_url[2];
+
+    path_uri file_path = get_file_path(entity_name, entity_id);
+    if (!boost::filesystem::exists(file_path)) {
+        http_reply->result(boost::beast::http::status::not_found);
+        const char not_found[] =
+                        "<html>"
+                        "<head><title>Not Found</title></head>"
+                        "<body><h1>404 Not Found</h1></body>"
+                        "</html>\n";
+        http_reply->body() = not_found;
+        http_reply->set(boost::beast::http::field::content_type, "text/html");
+        //*******stock reply************
+        server_logger->log_error("File path does not exist for entity: " + entity_name + " with id: " + entity_id + " at path: " + file_path);
+        return;
+    }
+
+    boost::filesystem::remove(file_path);
+    http_reply->result(boost::beast::http::status::ok);
 }
 
 void Request_Handler_Crud::list(const request &http_request, reply *http_reply) {
@@ -162,6 +184,13 @@ void Request_Handler_Crud::list(const request &http_request, reply *http_reply) 
         }
     } else {
         http_reply->result(boost::beast::http::status::not_found);
+        const char not_found[] =
+                        "<html>"
+                        "<head><title>Not Found</title></head>"
+                        "<body><h1>404 Not Found</h1></body>"
+                        "</html>\n";
+        http_reply->body() = not_found;
+        http_reply->set(boost::beast::http::field::content_type, "text/html");
         server_logger->log_error("LIST error: Directory does not exist for entity: " + entity_name);
     }
 
