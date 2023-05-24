@@ -21,6 +21,8 @@ class Request_Handler_Crud: public Request_Handler {
         void update(const request &http_request, reply *http_reply);
         void del(const request &http_request, reply *http_reply);
         void list(const request &http_request, reply *http_reply);
+        
+        int check_mime_type(const request &http_request);
 
         int find_next_id(std::string entity);
         path_uri get_file_path(std::string entity, std::string id);

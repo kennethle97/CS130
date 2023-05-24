@@ -40,16 +40,16 @@ void Request_Handler_Crud::create(const request &http_request, reply *http_reply
     ServerLogger *server_logger = ServerLogger::get_server_logger();
     server_logger->log_debug("Request_Handler_Crud::create()");
 
-    // Step 1: Grab correct MIME type
-    const boost::beast::string_view mime_type = http_request[boost::beast::http::field::content_type];
-    // if (mime_type != "application/json") {
-    //     http_reply->result(boost::beast::http::status::bad_request);
-    //     server_logger->log_error("Invalid MIME type. Expected application/json.");
-    //     return;
-    // }
+    // Step 1: Check that MIME type is application/json
+    int mime_check = check_mime_type(http_request);
+    if (mime_check == 0) {
+        http_reply->result(boost::beast::http::status::bad_request);
+        server_logger->log_error("Invalid MIME type. Expected application/json.");
+        return;
+    }
 
-    // Step 3: Get next available id
-    server_logger->log_info("URL for CRUD create request: " + url_);
+    // Step 2: Get next available id
+    server_logger->log_info("URL for CRUD CREATE request: " + url_);
 
     std::vector<std::string> parsed_url = parse_url();
     std::string crud_api = parsed_url[0];
@@ -62,7 +62,6 @@ void Request_Handler_Crud::create(const request &http_request, reply *http_reply
 
     // Step 3: Write request body's JSON data to created file
     std::string file_path = get_file_path(entity_name, std::to_string(next_id));
-
     // Create folder for entity if it doesn't exist
     boost::filesystem::path dir(data_path_ + "/" + entity_name);
     if (boost::filesystem::create_directory(dir)) {
@@ -138,6 +137,59 @@ void Request_Handler_Crud::read(const request &http_request, reply *http_reply) 
 void Request_Handler_Crud::update(const request &http_request, reply *http_reply) {
     ServerLogger *server_logger = ServerLogger::get_server_logger();
     server_logger->log_debug("Request_Handler_Crud::update()");
+
+    // Step 1: Check that MIME type is application/json
+    int mime_check = check_mime_type(http_request);
+    if (mime_check == 0) {
+        http_reply->result(boost::beast::http::status::bad_request);
+        server_logger->log_error("Invalid MIME type. Expected application/json.");
+        return;
+    }
+
+    // Step 2: Check if id is valid
+    server_logger->log_info("URL for CRUD PUT request: " + url_);
+
+    std::vector<std::string> parsed_url = parse_url();
+    std::string crud_api = parsed_url[0];
+    std::string entity_name = parsed_url[1];
+    std::string entity_id = parsed_url[2];
+    if (entity_id == "") {
+        server_logger->log_warning("Forgot to specify entity id");
+    }
+    int entity_id_int = std::stoi(entity_id);
+
+    server_logger->log_info("Entity name: " + entity_name);
+    server_logger->log_info("CRUD API: " + crud_api);
+    int next_id = find_next_id(entity_name);  // id specified must be less than next_id
+    if (entity_id_int >= next_id) {
+        http_reply->result(boost::beast::http::status::bad_request);
+        server_logger->log_error("Invalid Entity Id, highest entity id is: " + std::to_string(next_id - 1) + " but id entered was: " + entity_id);
+        return;
+    }
+    server_logger->log_info("Entity id: " + entity_id);
+
+    // Step 3: Update request body's JSON data to file
+    std::string file_path = get_file_path(entity_name, entity_id);
+    std::ofstream file(file_path);
+    if (!file) {
+        http_reply->result(boost::beast::http::status::internal_server_error);
+        server_logger->log_error("Failed to open file for entity: " + entity_name + " with id: " + std::to_string(next_id) + " at path: " + file_path);
+        return;
+    }
+
+    file << http_request.body();
+    file.close();
+    server_logger->log_info("Successfully wrote JSON data for request at " + http_request.target().to_string() + " to file: " + file_path);
+
+    // Step 4: Return response of newly created entity (ex. {"id": 1}"})
+    nlohmann::json reply_json;
+    reply_json["id"] = entity_id;
+
+    http_reply->result(boost::beast::http::status::ok);
+    http_reply->set(boost::beast::http::field::content_type, "application/json");
+    http_reply->body() = reply_json.dump();
+    server_logger->log_info("Successfully updated request at " + http_request.target().to_string());
+    return;
 }
 
 void Request_Handler_Crud::del(const request &http_request, reply *http_reply) {
@@ -249,4 +301,14 @@ std::vector<std::string> Request_Handler_Crud::parse_url() {
     result.push_back(entity_id);
 
     return result;
+}
+
+int Request_Handler_Crud::check_mime_type(const request &http_request) {
+    ServerLogger *server_logger = ServerLogger::get_server_logger();
+    const boost::beast::string_view mime_type = http_request[boost::beast::http::field::content_type];
+    server_logger->log_info("Mime type is: " + std::string(mime_type));
+    if (std::string(mime_type).compare("applications/json") == 0) {
+        return 1;
+    }
+    return 0; 
 }
