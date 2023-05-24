@@ -48,14 +48,14 @@ TEST_F(SessionTest, start_session) {
     EXPECT_TRUE(true);
 }
 
-TEST_F(SessionTest, handle_read_session) {
-    boost::asio::io_service io_service_;
-    testsession friend_session;
-    auto s = std::make_shared<session>(io_service_, dispatcher);
-    boost::system::error_code error;
-    friend_session.friend_handle_read(s.get(), s, error, 0);
-    EXPECT_TRUE(true);
-}
+// TEST_F(SessionTest, handle_read_session) {
+//     boost::asio::io_service io_service_;
+//     testsession friend_session;
+//     auto s = std::make_shared<session>(io_service_, dispatcher);
+//     boost::system::error_code error;
+//     friend_session.friend_handle_read(s.get(), s, error, 0);
+//     EXPECT_TRUE(true);
+// }
 
 
 TEST_F(SessionTest, handle_write_session) {

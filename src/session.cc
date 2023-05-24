@@ -38,16 +38,22 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
     if (!error)
     {
         // Obtain a pointer to the internal character array of the std::string object of the buffer containing the request
-        const char* data_begin = data_.data();
+        //const char* data_begin = data_.data();
 
         boost::beast::error_code parse_error;
-        http_parser.put(boost::asio::buffer(data_begin, bytes_transferred), parse_error);  //parser parse buffer
+        std::string_view emulated_stream = data_;
+        while(!(http_parser.is_done() or emulated_stream.empty() or parse_error)){
 
-        if(http_parser.is_done())
-        {   
-            http_request = http_parser.get();
+            auto consumed=http_parser.put(boost::asio::buffer(emulated_stream.data(), bytes_transferred), parse_error);  //parser parse buffer
+            if (parse_error == boost::beast::http::error::need_more)
+                parse_error.clear();
+            emulated_stream.remove_prefix(consumed);
         }
-        
+        //std::cout<<"donedonedone"<<std::endl;
+        http_request = http_parser.release();
+        std::cout<<"bodybodybody"<<std::endl;
+        std::cout<<http_request.body()<<std::endl;
+
         /*result returns a tribool where we ignore the right side of the tuple and only care about the 
         result boolean value returning true if its a valid http request and false if it is a bad request*/
 
