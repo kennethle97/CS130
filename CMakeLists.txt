@@ -91,6 +91,9 @@ target_link_libraries(request_handler_static_test gtest_main request_handler_lib
 add_executable(request_handler_dispatcher_test tests/request_handler_dispatcher_test.cc)
 target_link_libraries(request_handler_dispatcher_test gtest_main request_handler_lib http_lib config_parser_lib logger_lib Boost::filesystem Boost::log Boost::log_setup )
 
+add_executable(request_handler_crud_test tests/request_handler_crud_test.cc)
+target_link_libraries(request_handler_crud_test gtest_main request_handler_lib http_lib config_parser_lib logger_lib Boost::filesystem Boost::log Boost::log_setup )
+
 add_executable(reply_lib_test tests/reply_test.cc)
 target_link_libraries(reply_lib_test http_lib gtest_main)
 
@@ -122,13 +125,15 @@ gtest_discover_tests(request_handler_404_test WORKING_DIRECTORY ${CMAKE_CURRENT_
 gtest_discover_tests(request_404_handler_factory_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(static_handler_factory_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(echo_handler_factory_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+gtest_discover_tests(request_handler_crud_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+
 
 # Update with target/test targets
 # include(cmake/CodeCoverageReportConfig.cmake)
 # generate_coverage_report(TARGETS example_server example_lib TESTS example_lib_test)
 include(cmake/CodeCoverageReportConfig.cmake)
 generate_coverage_report(TARGETS server server_lib session_lib config_parser_lib logger_lib
-                         TESTS server_lib_test session_lib_test config_parser_lib_test logger_test reply_lib_test request_handler_echo_test request_handler_static_test request_handler_dispatcher_test request_handler_404_test request_404_handler_factory_test static_handler_factory_test echo_handler_factory_test)
+                         TESTS server_lib_test session_lib_test config_parser_lib_test logger_test reply_lib_test request_handler_echo_test request_handler_static_test request_handler_dispatcher_test request_handler_404_test request_404_handler_factory_test static_handler_factory_test echo_handler_factory_test request_handler_crud_test)
 
 
 # paste local path

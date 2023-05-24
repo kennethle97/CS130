@@ -55,6 +55,12 @@ void Request_Handler_Crud::create(const request &http_request, reply *http_reply
     std::string crud_api = parsed_url[0];
     std::string entity_name = parsed_url[1];
 
+    if (entity_name == ""){
+        server_logger->log_info("No entity name specified");
+        http_reply->result(boost::beast::http::status::bad_request);  
+        return;  
+    }
+
     server_logger->log_info("Entity name: " + entity_name);
     server_logger->log_info("CRUD API: " + crud_api);
     int next_id = find_next_id(entity_name);
@@ -142,7 +148,7 @@ void Request_Handler_Crud::update(const request &http_request, reply *http_reply
     int mime_check = check_mime_type(http_request);
     if (mime_check == 0) {
         http_reply->result(boost::beast::http::status::bad_request);
-        server_logger->log_error("Invalid MIME type. Expected application/json.");
+        server_logger->log_error("Invalid MIME type for update. Expected application/json");
         return;
     }
 
@@ -307,7 +313,7 @@ int Request_Handler_Crud::check_mime_type(const request &http_request) {
     ServerLogger *server_logger = ServerLogger::get_server_logger();
     const boost::beast::string_view mime_type = http_request[boost::beast::http::field::content_type];
     server_logger->log_info("Mime type is: " + std::string(mime_type));
-    if (std::string(mime_type).compare("applications/json") == 0) {
+    if (std::string(mime_type).compare("application/json") == 0) {
         return 1;
     }
     return 0; 

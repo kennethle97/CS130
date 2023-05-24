@@ -1,9 +1,4 @@
-[2023-05-24 05:51:26.835281]:[0x00007f47e42c9740]:[0x0000111e]:[trace]: Parsed handler EchoHandler for path: /echo
-[2023-05-24 05:51:26.835441]:[0x00007f47e42c9740]:[0x0000111e]:[trace]: Dispatched echo handler factory at location: /echo
-[2023-05-24 05:51:26.835497]:[0x00007f47e42c9740]:[0x0000111e]:[trace]: Parsed handler StaticHandler for path: /static1
-[2023-05-24 05:51:26.835530]:[0x00007f47e42c9740]:[0x0000111e]:[trace]: Dispatched static handler factory at location: /static1
-[2023-05-24 05:51:26.835559]:[0x00007f47e42c9740]:[0x0000111e]:[trace]: Parsed handler StaticHandler for path: /static2
-[2023-05-24 05:51:26.835587]:[0x00007f47e42c9740]:[0x0000111e]:[trace]: Dispatched static handler factory at location: /static2
-[2023-05-24 05:51:26.835613]:[0x00007f47e42c9740]:[0x0000111e]:[trace]: Parsed handler ErrorHandler for path: /
-[2023-05-24 05:51:26.835638]:[0x00007f47e42c9740]:[0x0000111e]:[trace]: Dispatched 404 handler factory at location: /
-[2023-05-24 05:51:26.835791]:[0x00007f47e42c9740]:[0x0000111e]:[trace]: Echo Request Handler: /echo
+[2023-05-24 07:56:05.584895]:[0x00007fe04df6d740]:[0x00003c6a]:[debug]: Request_Handler_Crud::create()
+[2023-05-24 07:56:05.587735]:[0x00007fe04df6d740]:[0x00003c6a]:[info]: Mime type is: application/json
+[2023-05-24 07:56:05.588320]:[0x00007fe04df6d740]:[0x00003c6a]:[info]: URL for CRUD CREATE request: /api
+[2023-05-24 07:56:05.588975]:[0x00007fe04df6d740]:[0x00003c6a]:[info]: No entity name specified
