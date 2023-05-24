@@ -4,7 +4,7 @@
 #define REQUEST_HANDLER_CRUD_H
 #include <iostream>
 #include <boost/filesystem.hpp>
-#include <boost/filesystem/fstream.hpp>
+#include <boost/range/iterator_range.hpp>
 #include "../request_handler.h"
 #include "../request_handler_dispatcher.h"
 #include "../nlohmann/json.hpp"
@@ -20,6 +20,7 @@ class Request_Handler_Crud: public Request_Handler {
         void read(const request &http_request, reply *http_reply);
         void update(const request &http_request, reply *http_reply);
         void del(const request &http_request, reply *http_reply);
+        void list(const request &http_request, reply *http_reply);
 
         int find_next_id(std::string entity);
         path_uri get_file_path(std::string entity, std::string id);

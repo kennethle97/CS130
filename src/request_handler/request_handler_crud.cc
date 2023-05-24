@@ -15,7 +15,15 @@ void Request_Handler_Crud::handle_request(const request &http_request, reply *ht
     if (method == "POST") {
         create(http_request, http_reply);
     } else if (method == "GET") {
-        read(http_request, http_reply);
+        // TODO: direct requests to LIST as well
+        std::vector<std::string> parsed_url = parse_url();
+
+        // If entity ID was parsed... GET specific entity
+        if (parsed_url[2] != "") {
+            read(http_request, http_reply);
+        } else {    // Otherwise, GET all entities
+            list(http_request, http_reply);
+        }
     } else if (method == "PUT") {
         update(http_request, http_reply);
     } else if (method == "DELETE") {
@@ -103,9 +111,28 @@ void Request_Handler_Crud::read(const request &http_request, reply *http_reply) 
         //http_reply->content_length(http_reply->body().size());
         http_reply->set(boost::beast::http::field::content_type, "text/html");
         //*******stock reply************
-        // server_logger->log_error("File path does not exist for entity: " + entity_name + " with id: " + std::to_string(next_id));
+        server_logger->log_error("File path does not exist for entity: " + entity_name + " with id: " + entity_id + " at path: " + file_path);
         return;
     }
+
+    // Return response of requested created entity (ex. {"id": 1}"})
+    std::ifstream file(file_path);
+    if (!file) {
+        http_reply->result(boost::beast::http::status::internal_server_error);
+        server_logger->log_error("Failed to open file for entity: " + entity_name + " with id: " + entity_id + " at path: " + file_path);
+        return;
+    }
+
+    std::string fileContents((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+    nlohmann::json reply_json = nlohmann::json::parse(fileContents);
+    file.close();
+    server_logger->log_info("Successfully read JSON data for request at " + http_request.target().to_string() + " for file: " + file_path);
+
+    http_reply->result(boost::beast::http::status::ok);
+    http_reply->set(boost::beast::http::field::content_type, "application/json");
+    http_reply->body() = reply_json.dump();
+    server_logger->log_info("Successfully responded to request at " + http_request.target().to_string());
+    return;
 }
 
 void Request_Handler_Crud::update(const request &http_request, reply *http_reply) {
@@ -116,6 +143,34 @@ void Request_Handler_Crud::update(const request &http_request, reply *http_reply
 void Request_Handler_Crud::del(const request &http_request, reply *http_reply) {
     ServerLogger *server_logger = ServerLogger::get_server_logger();
     server_logger->log_debug("Request_Handler_Crud::del()");
+}
+
+void Request_Handler_Crud::list(const request &http_request, reply *http_reply) {
+    ServerLogger *server_logger = ServerLogger::get_server_logger();
+    server_logger->log_debug("Request_Handler_Crud::list()");
+
+    std::vector<std::string> parsed_url = parse_url();
+    std::string entity_name = parsed_url[1];
+    
+    std::vector<std::string> list_files;
+    std::string dir_path = data_path_ + "/" + entity_name;
+    server_logger->log_info("Listing entity: " + entity_name + " at Directory path: " + dir_path);
+
+    if (boost::filesystem::is_directory(dir_path)) {
+        for (auto& entry : boost::make_iterator_range(boost::filesystem::directory_iterator(dir_path), {})) {
+            list_files.push_back(entry.path().filename().string());
+        }
+    } else {
+        http_reply->result(boost::beast::http::status::not_found);
+        server_logger->log_error("LIST error: Directory does not exist for entity: " + entity_name);
+    }
+
+    nlohmann::json list_files_json(list_files);
+
+    http_reply->result(boost::beast::http::status::ok);
+    http_reply->set(boost::beast::http::field::content_type, "application/json");
+    http_reply->body() = list_files_json.dump();
+    return;
 }
 
 // Helper function for POST to find next open id for a given entity
@@ -163,5 +218,6 @@ std::vector<std::string> Request_Handler_Crud::parse_url() {
     result.push_back(crud_api);
     result.push_back(entity_name);
     result.push_back(entity_id);
+
     return result;
 }
