@@ -36,7 +36,7 @@ private:
 
   tcp::socket socket_;
   enum { max_length = 1024 };
-  std::string data_;
+  boost::asio::streambuf data_;
   const std::shared_ptr<const Request_Handler_Dispatcher> dispatcher;
 };
 
