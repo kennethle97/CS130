@@ -7,11 +7,11 @@ Crud_Handler_Factory::Crud_Handler_Factory(NginxConfig config) {
 }
 
 Request_Handler_Crud* Crud_Handler_Factory::create(const std::string& location_, const std::string& url_) {
-    std::string root_ = parse_config(this->config, location_);
-    if (root_ == "#") {
+    std::string data_path = parse_config(this->config, location_);
+    if (data_path == "#") {
         return nullptr;
     }
-    return new Request_Handler_Crud(root_, location_, url_);
+    return new Request_Handler_Crud(data_path, location_, url_);
 }
 
 
@@ -28,15 +28,15 @@ std::string Crud_Handler_Factory::parse_config(NginxConfig config, std::string l
 
                 if (handler_name == CRUD_HANDLER && statement->child_block_.get() != nullptr && location == path) {
                     ServerLogger *server_logger = ServerLogger::get_server_logger();
-                    path_uri root = "\0"; 
+                    path_uri data_path = "\0"; 
                     for (const auto &child_statement : statement->child_block_->statements_) {
-                        if (child_statement->tokens_.size() == 2 && child_statement->tokens_[0] == "root") {
-                            root = child_statement->tokens_[1];
-                            while (root.length() > 1 && root.back() == '/') {
-                                root.pop_back();
+                        if (child_statement->tokens_.size() == 2 && child_statement->tokens_[0] == "data_path") {
+                            data_path = child_statement->tokens_[1];
+                            while (data_path.length() > 1 && data_path.back() == '/') {
+                                data_path.pop_back();
                             }
-                            server_logger->log_trace("Parsed CrudHandler root " + root + " for location " + location);
-                            return root;
+                            server_logger->log_trace("Parsed CrudHandler data_path " + data_path + " for location " + location);
+                            return data_path;
                         }
                     }
 
@@ -45,5 +45,5 @@ std::string Crud_Handler_Factory::parse_config(NginxConfig config, std::string l
             }
         }
     }
-    return "#"; // set root to #, which is illegal directory character, if root doesn't exist
+    return "#"; // set data_path to #, which is illegal directory character, if data_path doesn't exist
 }
