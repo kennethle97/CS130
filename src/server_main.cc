@@ -12,10 +12,11 @@
 #include <iostream>
 #include <boost/asio.hpp>
 #include <signal.h>
-
+#include <boost/thread.hpp>
 #include "server.h"
 #include "config_parser.h"
 #include "logger.h"
+#include <vector>
 using boost::asio::ip::tcp;
 
 // Signal handler to be able to log server termination
@@ -62,9 +63,22 @@ int main(int argc, char* argv[]) {
     server_logger->log_trace("Config file parsed");
 
     server s(io_service, port, config);
-    server_logger->log_debug("Server started at port " + std::to_string(port));
 
-    io_service.run();
+    server_logger->log_debug("Server started at port " + std::to_string(port));
+    const size_t THREAD_POOL_SIZE = 5;
+    // Creating a pool of threads to run io_service
+    std::vector<boost::shared_ptr<boost::thread> > threads;
+    for (std::size_t i = 0; i < THREAD_POOL_SIZE; ++i) {
+      boost::shared_ptr<boost::thread> thread(new boost::thread(
+        boost::bind(&boost::asio::io_service::run, &io_service)
+      ));
+      threads.push_back(thread);
+    }
+    
+    // waiting for all threads in the pool to exit
+    for (std::size_t i = 0; i < threads.size(); i++) {
+      threads[i]->join();
+    }
 
   }
   catch (std::exception& e) {

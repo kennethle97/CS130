@@ -16,7 +16,7 @@ typedef std::string path_handler_name;
 #define STATIC_HANDLER "StaticHandler"
 #define CRUD_HANDLER "CRUDHandler"
 #define HEALTH_HANDLER "HealthHandler"
-
+#define SLEEP_HANDLER "SleepHandler"
 
 class Request_Handler_Dispatcher {
 public:

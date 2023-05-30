@@ -3,10 +3,12 @@
 #include "request_handler/request_handler_static.h"
 #include "request_handler/request_handler_health.h"
 #include "request_handler/request_handler_404.h"
+#include "../include/request_handler/request_handler_sleep.h"
 #include "request_handler/echo_handler_factory.h"
 #include "request_handler/static_handler_factory.h"
 #include "request_handler/health_handler_factory.h"
 #include "request_handler/request_404_handler_factory.h"
+#include "../include/request_handler/sleep_handler_factory.h"
 
 #include "gtest/gtest.h"
 #include <boost/beast/core.hpp>

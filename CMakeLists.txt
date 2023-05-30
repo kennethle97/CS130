@@ -49,6 +49,7 @@ add_library(request_handler_lib
                 src/request_handler/request_404_handler_factory.cc
                 src/request_handler/static_handler_factory.cc
                 src/request_handler/echo_handler_factory.cc
+                src/request_handler/sleep_handler_factory.cc
                 src/request_handler/crud_handler_factory.cc
                 src/request_handler/health_handler_factory.cc
                 src/request_handler/request_handler_echo.cc
@@ -56,6 +57,7 @@ add_library(request_handler_lib
                 src/request_handler/request_handler_404.cc
                 src/request_handler/request_handler_crud.cc
                 src/request_handler/request_handler_health.cc
+                src/request_handler/request_handler_sleep.cc
                 )
 
 # Update executable name, srcs, and deps
@@ -65,7 +67,7 @@ add_executable(server src/server_main.cc)
 
 target_link_libraries(server server_main_lib server_lib session_lib 
                       config_parser_lib logger_lib request_handler_lib http_lib Boost::system pthread
-                      Boost::regex Boost::log_setup Boost::log)
+                      Boost::regex Boost::log_setup Boost::log Boost::thread)
 
 
 # Update test executable name, srcs, and deps

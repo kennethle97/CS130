@@ -19,3 +19,7 @@ location /static2 StaticHandler {
 location / ErrorHandler {
 
 }
+
+location /sleep SleepHandler {
+
+}
