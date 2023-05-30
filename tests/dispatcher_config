@@ -4,6 +4,10 @@ location /echo/// EchoHandler { # echo folder defined with trailing backslashes 
 
 }
 
+location /health/// HealthHandler { # echo folder defined with trailing backslashes that should be ignored
+
+}
+
 location /static1 StaticHandler {    
     root ../../public/folder1///; # absolute folder path with trailing backslashes
 }

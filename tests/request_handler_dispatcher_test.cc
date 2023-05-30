@@ -1,10 +1,13 @@
 #include "request_handler_dispatcher.h"
 #include "request_handler/request_handler_echo.h"
 #include "request_handler/request_handler_static.h"
+#include "request_handler/request_handler_health.h"
 #include "request_handler/request_handler_404.h"
 #include "request_handler/echo_handler_factory.h"
 #include "request_handler/static_handler_factory.h"
+#include "request_handler/health_handler_factory.h"
 #include "request_handler/request_404_handler_factory.h"
+
 #include "gtest/gtest.h"
 #include <boost/beast/core.hpp>
 #include <boost/beast/http.hpp>
@@ -64,6 +67,23 @@ TEST_F(RequestHandlerDispatcherTest, GetHandler404) {
     std::shared_ptr<Request_404_Handler_Factory> unknown_handler_factory = std::dynamic_pointer_cast<Request_404_Handler_Factory>(handler);
 
     EXPECT_TRUE(unknown_handler_factory != nullptr);
+}
+TEST_F(RequestHandlerDispatcherTest, GetHandlerHealth) {
+    boost::beast::http::request<boost::beast::http::string_body> test_request;
+    test_request.method(boost::beast::http::verb::get);
+    test_request.target("/health");
+    test_request.version(11); //beast format for 1.1
+    test_request.set(boost::beast::http::field::content_type, "text/plain");
+    // Get the request handler object from the dispatcher
+    std::shared_ptr<Request_Handler_Factory> handler = dispatcher->get_request_handler_factory(test_request);
+
+
+    EXPECT_TRUE(handler != nullptr);
+    // // Cast the base class pointer to a pointer of the derived class
+    std::shared_ptr<Health_Handler_Factory> health_handler_factory = std::dynamic_pointer_cast<Health_Handler_Factory>(handler);
+
+    // // Check that the cast was successful
+    EXPECT_TRUE(health_handler_factory != nullptr);
 }
 
 TEST_F(RequestHandlerDispatcherTest, GetHandlerStatic) {

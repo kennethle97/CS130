@@ -50,10 +50,12 @@ add_library(request_handler_lib
                 src/request_handler/static_handler_factory.cc
                 src/request_handler/echo_handler_factory.cc
                 src/request_handler/crud_handler_factory.cc
+                src/request_handler/health_handler_factory.cc
                 src/request_handler/request_handler_echo.cc
                 src/request_handler/request_handler_static.cc
                 src/request_handler/request_handler_404.cc
                 src/request_handler/request_handler_crud.cc
+                src/request_handler/request_handler_health.cc
                 )
 
 # Update executable name, srcs, and deps
@@ -69,6 +71,9 @@ target_link_libraries(server server_main_lib server_lib session_lib
 # Update test executable name, srcs, and deps
 # add_executable(example_lib_test tests/example_lib_test.cc)
 # target_link_libraries(example_lib_test example_lib gtest_main)
+
+add_executable(health_handler_factory_test tests/health_handler_factory_test.cc)
+target_link_libraries(health_handler_factory_test request_handler_lib http_lib config_parser_lib logger_lib gtest_main Boost::log Boost::log_setup)
 
 add_executable(request_404_handler_factory_test tests/request_404_handler_factory_test.cc)
 target_link_libraries(request_404_handler_factory_test request_handler_lib http_lib config_parser_lib logger_lib gtest_main Boost::log Boost::log_setup)
@@ -93,6 +98,9 @@ target_link_libraries(request_handler_dispatcher_test gtest_main request_handler
 
 add_executable(request_handler_crud_test tests/request_handler_crud_test.cc)
 target_link_libraries(request_handler_crud_test gtest_main request_handler_lib http_lib config_parser_lib logger_lib Boost::filesystem Boost::log Boost::log_setup )
+
+add_executable(request_handler_health_test tests/request_handler_health_test.cc)
+target_link_libraries(request_handler_health_test gtest_main request_handler_lib http_lib config_parser_lib logger_lib Boost::filesystem Boost::log Boost::log_setup )
 
 add_executable(reply_lib_test tests/reply_test.cc)
 target_link_libraries(reply_lib_test http_lib gtest_main)
@@ -122,10 +130,13 @@ gtest_discover_tests(request_handler_echo_test WORKING_DIRECTORY ${CMAKE_CURRENT
 gtest_discover_tests(request_handler_static_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(request_handler_dispatcher_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(request_handler_404_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+gtest_discover_tests(request_handler_health_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(request_404_handler_factory_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(static_handler_factory_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(echo_handler_factory_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+gtest_discover_tests(health_handler_factory_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(request_handler_crud_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+
 
 
 # Update with target/test targets
@@ -133,7 +144,21 @@ gtest_discover_tests(request_handler_crud_test WORKING_DIRECTORY ${CMAKE_CURRENT
 # generate_coverage_report(TARGETS example_server example_lib TESTS example_lib_test)
 include(cmake/CodeCoverageReportConfig.cmake)
 generate_coverage_report(TARGETS server server_lib session_lib config_parser_lib logger_lib
-                         TESTS server_lib_test session_lib_test config_parser_lib_test logger_test reply_lib_test request_handler_echo_test request_handler_static_test request_handler_dispatcher_test request_handler_404_test request_404_handler_factory_test static_handler_factory_test echo_handler_factory_test request_handler_crud_test)
+                         TESTS server_lib_test 
+                         session_lib_test
+                         config_parser_lib_test 
+                         logger_test 
+                         reply_lib_test 
+                         request_handler_echo_test 
+                         request_handler_static_test 
+                         request_handler_dispatcher_test 
+                         request_handler_404_test
+                         request_handler_health_test 
+                         request_health_handler_factory_test
+                         request_404_handler_factory_test 
+                         static_handler_factory_test 
+                         echo_handler_factory_test 
+                         request_handler_crud_test)
 
 
 # paste local path
