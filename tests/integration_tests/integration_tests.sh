@@ -32,6 +32,10 @@ location / ErrorHandler {
 
 }
 
+location /health HealthHandler {
+
+}
+
 location /sleep SleepHandler {
 
 }
@@ -171,6 +175,25 @@ else
     exit 1
 fi
 
+
+
+# Test 6 should pass as we are sending the correct health request
+printf "Test 6: should return response containing contents 'OK'"
+
+printf "GET /health HTTP/1.1\r\n\r\n" | nc 127.0.0.1 8080 > test_response8
+
+diff -q expected_response8 test_response8
+
+DIFF_EXIT_CODE=$?
+#expected and test response should be both blank
+if [ $DIFF_EXIT_CODE -eq 0 ]; then
+    printf "Health handler succeed! Expected Response = Test Response\n"
+else
+    printf "Health handler failed. Expected Reponse != Test Response\n"
+    kill -9 $PID_SERVER
+    exit 1
+fi
+
 printf "Killing Server $PID_SERVER\n"
 kill -9 $PID_SERVER
 printf "Tests Completed!\n"
@@ -178,4 +201,3 @@ printf "Tests Completed!\n"
 # remove no longer needed test files
 rm test_*
 exit 0
-

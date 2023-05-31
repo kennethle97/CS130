@@ -1,4 +1,1 @@
-[2023-05-31 03:45:02.527307]:[0x00007f772ff06740]:[0x00002e6b]:[debug]: Request_Handler_Crud::create()
-[2023-05-31 03:45:02.530855]:[0x00007f772ff06740]:[0x00002e6b]:[info]: Mime type is: application/json
-[2023-05-31 03:45:02.531959]:[0x00007f772ff06740]:[0x00002e6b]:[info]: URL for CRUD CREATE request: /api
-[2023-05-31 03:45:02.532887]:[0x00007f772ff06740]:[0x00002e6b]:[info]: No entity name specified
+[2023-05-31 06:17:32.580850]:[0x00007f222f242740]:[0x000042b2]:[trace]: Sleep Request Handler: /sleep
