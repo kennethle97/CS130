@@ -68,15 +68,18 @@ std::string Request_Handler_Crud::use_configured_root(reply *http_reply){
                         "<body><h1>404 Not Found</h1></body>"
                         "</html>\n";
         http_reply->body() = not_found;
-        //http_reply->content_length(http_reply->body().size());
+        http_reply->content_length(http_reply->body().size());
         http_reply->set(boost::beast::http::field::content_type, "text/html");
         //*******stock reply************
-        server_logger->log_info("Bad request -- location not found");
+        server_logger->log_trace("-- crud file location not found");
+        server_logger->log_info("[HandlerMetrics] Crud_handler");
+        server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply->result_int()));
         return NULL;
         }
     return uri;
     }
 bool Request_Handler_Crud::check_if_exists(std::string sub_directory, int file_id,reply *http_reply) {
+    ServerLogger *server_logger = ServerLogger::get_server_logger();
     //If the sub-directory already exists
     if(boost::filesystem::exists(sub_directory)){
 
@@ -86,12 +89,14 @@ bool Request_Handler_Crud::check_if_exists(std::string sub_directory, int file_i
 
             if(it == entity_map.end()){
             // Case where the file does not exist at the url path.
+                server_logger->log_trace("-- crud file not found");
                 write_not_found_json_response(http_reply);
                 return false;
             }
         }
         else if(file_id == -1){
             // Case where no id was found: error
+            server_logger->log_trace("-- crud file id not found");
             write_not_found_json_response(http_reply);
             return false;
         }
@@ -99,6 +104,7 @@ bool Request_Handler_Crud::check_if_exists(std::string sub_directory, int file_i
     // subdirectory doesn't exist, this means that existing file can't be found via the subdirectory provided
     else if(!boost::filesystem::exists(sub_directory)){
         // Case where no id was found: error 
+        server_logger->log_trace("-- crud file id not found");
         write_not_found_json_response(http_reply);
         return false;
     }
@@ -190,21 +196,28 @@ void Request_Handler_Crud::write_base_http(reply *http_reply){
 
 }
 void Request_Handler_Crud::write_response(std::string content_body,reply *http_reply) {
+    ServerLogger *server_logger = ServerLogger::get_server_logger();
 	http_reply->set(boost::beast::http::field::content_type, "text/plain");
 	http_reply->set(boost::beast::http::field::content_disposition, "inline");
 	http_reply->body() = content_body + "\n";
-    http_reply->content_length(http_reply->body().size());    
+    http_reply->content_length(http_reply->body().size());
+    server_logger->log_info("[HandlerMetrics] Crud_handler");
+    server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply->result_int()));    
 }
 
 void Request_Handler_Crud::write_not_found_json_response(reply *http_reply) {
+    ServerLogger *server_logger = ServerLogger::get_server_logger();
     http_reply->result(boost::beast::http::status::not_found);
     http_reply->set(boost::beast::http::field::content_type, "text/plain");
     http_reply->set(boost::beast::http::field::content_disposition, "inline");
     http_reply->body() = "Could not resolve ID -- ID not found.\n";
     http_reply->content_length(http_reply->body().size());
+    server_logger->log_info("[HandlerMetrics] Crud_handler");
+    server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply->result_int()));
 }
 
 void Request_Handler_Crud::write_invalid_json_response(reply *http_reply){
+    ServerLogger *server_logger = ServerLogger::get_server_logger();
     http_reply->result(boost::beast::http::status::unsupported_media_type);                   
     http_reply->set(boost::beast::http::field::content_type, "text/plain");
     http_reply->set(boost::beast::http::field::content_disposition, "inline");
@@ -213,16 +226,19 @@ void Request_Handler_Crud::write_invalid_json_response(reply *http_reply){
 }
 
 void Request_Handler_Crud::write_file_exists_response(int file_id,reply *http_reply){
+    ServerLogger *server_logger = ServerLogger::get_server_logger();
     http_reply->result(boost::beast::http::status::conflict);                   
     http_reply->set(boost::beast::http::field::content_type, "text/plain");
     http_reply->set(boost::beast::http::field::content_disposition, "inline");
     http_reply->body() = std::string("File already exists at path with ID: {id:")+ std::to_string(file_id) +std::string("}. To update, make a PUT request.\n");
     http_reply->content_length(http_reply->body().size());
+    server_logger->log_info("[HandlerMetrics] Crud_handler");
+    server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply->result_int()));
 
 }
 
 void Request_Handler_Crud::handle_post(std::string request_filename,std::string json_data,reply *http_reply){
-
+    ServerLogger *server_logger = ServerLogger::get_server_logger();
     write_base_http(http_reply);
 
     Json::Value json_file;
@@ -254,6 +270,9 @@ void Request_Handler_Crud::handle_post(std::string request_filename,std::string 
                 http_reply->set(boost::beast::http::field::content_disposition, "inline");
                 http_reply->body() = "Invalid ID. Must be integer greater than 0.\n";
                 http_reply->content_length(http_reply->body().size());
+                server_logger->log_trace("-- crud create ivalid id request");
+                server_logger->log_info("[HandlerMetrics] Crud_handler");
+                server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply->result_int()));
                 return;
                 
             } 
@@ -301,10 +320,14 @@ void Request_Handler_Crud::handle_post(std::string request_filename,std::string 
 	http_reply->set(boost::beast::http::field::content_type, "text/plain");
 	http_reply->set(boost::beast::http::field::content_disposition, "inline");
 	http_reply->body() = std::string("{id: ") + std::to_string(file_id) + "}\n";
-    http_reply->content_length(http_reply->body().size());     
+    http_reply->content_length(http_reply->body().size());  
+    server_logger->log_trace("-- crud create valid ");
+    server_logger->log_info("[HandlerMetrics] Crud_handler");
+    server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply->result_int()));   
 }
 
 void Request_Handler_Crud::handle_put(std::string request_filename, std::string json_data,reply *http_reply){
+    ServerLogger *server_logger = ServerLogger::get_server_logger();
     write_base_http(http_reply);
 
     Json::Value json_file;
@@ -316,6 +339,7 @@ void Request_Handler_Crud::handle_put(std::string request_filename, std::string 
 
     if(!is_json){
         //LOG invalid file type. Not a json file type.
+        server_logger->log_trace("-- crud update ivalid file json type");
         write_invalid_json_response(http_reply);
         return;
     }
@@ -332,6 +356,7 @@ void Request_Handler_Crud::handle_put(std::string request_filename, std::string 
         }
     else{
         // Case where no id was found: error for UPDATE request
+        server_logger->log_trace("-- crud update file id not found");
         write_not_found_json_response(http_reply);
         return;
     }
@@ -349,10 +374,12 @@ void Request_Handler_Crud::handle_put(std::string request_filename, std::string 
     file_path = sub_directory + file_name;
     create_entity(file_path,json_data);
     std::string content_body = "Update successful to file with ID: " + std::to_string(file_id);
+    server_logger->log_trace("-- crud update valid");
     write_response(content_body,http_reply);
 }
 
 void Request_Handler_Crud::handle_get(std::string request_filename,reply *http_reply) {
+    ServerLogger *server_logger = ServerLogger::get_server_logger();
     write_base_http(http_reply);
     std::string sub_directory = "";
     int file_id = -1;
@@ -396,16 +423,19 @@ void Request_Handler_Crud::handle_get(std::string request_filename,reply *http_r
             } else {
                 res << "[]";
             }
+            server_logger->log_trace("-- crud list valid");
             write_response(res.str(),http_reply);
             return;
         } else {
             // not a directory in api folder, so return not found
+            server_logger->log_trace("-- crud list file not found");
             write_not_found_json_response(http_reply);
             return;
         }
     }
     else{
         // Case where no id was found: error for GET request
+        server_logger->log_trace("-- crud file id not found");
         write_not_found_json_response(http_reply);
         return;
     }
@@ -422,11 +452,13 @@ void Request_Handler_Crud::handle_get(std::string request_filename,reply *http_r
     file_name = entity_id + ".json";
     file_path = sub_directory + file_name;
     std::string content = get_entity(file_path); // call get_entity function to retrieve contents of file
+    server_logger->log_trace("-- crud retrieve valid");
     write_response(content,http_reply);
 }
 
 // DELETE methods are handled here
 void Request_Handler_Crud::handle_delete(std::string request_filename,reply *http_reply) {
+    ServerLogger *server_logger = ServerLogger::get_server_logger();
     write_base_http(http_reply);
     std::string sub_directory = "";
     int file_id = -1;
@@ -452,16 +484,19 @@ void Request_Handler_Crud::handle_delete(std::string request_filename,reply *htt
             }
 
             delete_entity_folder(request_filename);
+            server_logger->log_trace("-- crud delete folder valid");
             write_response("Delete successful for folder: " + path_extension,http_reply);
             return;
         } else {
             // not a directory in api folder, so return not found
+            server_logger->log_trace("-- crud delete file not found");
             write_not_found_json_response(http_reply);
             return;
         }
     }
     else{
         // Case where no id was found: error for DELETE request
+        server_logger->log_trace("-- crud delete file id not found");
         write_not_found_json_response(http_reply);
         return;
     }
@@ -482,6 +517,7 @@ void Request_Handler_Crud::handle_delete(std::string request_filename,reply *htt
     std::cout << file_path << std::endl;
     delete_entity(file_path, sub_directory, file_id); 
     std::string content_body = "Delete successful to file with ID: " + std::to_string(file_id);
+    server_logger->log_trace("-- crud delete id valid");
     write_response(content_body,http_reply);
 }
 
@@ -515,12 +551,22 @@ void Request_Handler_Crud::handle_request(const request &http_request, reply *ht
     {
         // Handle DELETE request
         handle_delete(filename,http_reply);
+        
     }
     else{
-        http_reply->result(boost::beast::http::status::method_not_allowed);
+        http_reply->result(boost::beast::http::status::bad_request);
         http_reply->set(boost::beast::http::field::content_type, "text/plain");
         http_reply->set(boost::beast::http::field::content_disposition, "inline");
-        http_reply->body() = "Invalid HTTP method used.\n";
+        const char bad_request[] =
+                            "<html>"
+                            "<head><title>Bad Request</title></head>"
+                            "<body><h1>400 Bad Request</h1></body>"
+                            "</html>\n";
+        http_reply->body() = bad_request;
         http_reply->content_length(http_reply->body().size());
+        server_logger->log_trace("-- crud ivalid api request");
+        server_logger->log_info("[HandlerMetrics] Crud_handler");
+        server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply->result_int()));
     }
+        
 }

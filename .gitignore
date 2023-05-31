@@ -5,6 +5,7 @@ build_*
 mirror
 logs
 log
+log/
 # random scripts
 gs
 mcv

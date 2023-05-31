@@ -42,7 +42,7 @@ TEST_F(Request404HandlerFactoryTest, Request404FactoryTest) {
 
     test_404_handler->handle_request(test_request, &test_reply);
     EXPECT_EQ(boost::beast::http::status::not_found, test_reply.result());
-    EXPECT_EQ("HTTP/1.1 404 Not Found\r\nContent-Type: text/html\r\n\r\n", 
+    EXPECT_EQ("HTTP/1.1 404 Not Found\r\nContent-Length: 86\r\nContent-Type: text/html\r\n\r\n", 
                  boost::lexical_cast<std::string>(test_reply.base()));
     EXPECT_EQ(false, test_reply[boost::beast::http::field::content_type].empty());
     EXPECT_EQ("text/html", test_reply[boost::beast::http::field::content_type]);

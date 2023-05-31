@@ -22,17 +22,17 @@ void Request_Handler_Static::handle_request(const request &http_request, reply *
         uri.replace(location_pos, this->location.length(), root);
     } else {
         //*******stock reply************
-        http_reply->result(boost::beast::http::status::bad_request);
-        const char bad_request[] =
+        http_reply->result(boost::beast::http::status::not_found);
+            const char not_found[] =
                         "<html>"
-                        "<head><title>Bad Request</title></head>"
-                        "<body><h1>400 Bad Request</h1></body>"
+                        "<head><title>Not Found</title></head>"
+                        "<body><h1>404 Not Found</h1></body>"
                         "</html>\n";
-        http_reply->body() = bad_request;
+        http_reply->body() = not_found;
         http_reply->content_length(http_reply->body().size());
         http_reply->set(boost::beast::http::field::content_type, "text/html");
         //*******stock reply************
-        server_logger->log_trace("Bad request -- static file location not found");
+        server_logger->log_trace("-- static file location not found");
         server_logger->log_info("[HandlerMetrics] Static_handler");
         server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply->result_int()));
         return;
@@ -45,17 +45,17 @@ void Request_Handler_Static::handle_request(const request &http_request, reply *
     
     if (!boost::filesystem::exists(path)||!boost::filesystem::is_regular_file(uri)) {
         //*******stock reply************
-        http_reply->result(boost::beast::http::status::bad_request);
-        const char bad_request[] =
+        http_reply->result(boost::beast::http::status::not_found);
+            const char not_found[] =
                         "<html>"
-                        "<head><title>Bad Request</title></head>"
-                        "<body><h1>400 Bad Request</h1></body>"
+                        "<head><title>Not Found</title></head>"
+                        "<body><h1>404 Not Found</h1></body>"
                         "</html>\n";
-        http_reply->body() = bad_request;
+        http_reply->body() = not_found;
         http_reply->content_length(http_reply->body().size());
         http_reply->set(boost::beast::http::field::content_type, "text/html");
         //*******stock reply************
-        server_logger->log_trace("Bad request -- static file not found");
+        server_logger->log_trace("-- static file not found");
         server_logger->log_info("[HandlerMetrics] Static_handler");
         server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply->result_int()));
         return;
@@ -71,7 +71,7 @@ void Request_Handler_Static::handle_request(const request &http_request, reply *
     http_reply->body()=file_contents;
     http_reply->set(boost::beast::http::field::content_length, file_size);
     http_reply->set(boost::beast::http::field::content_type, http::server::mime_types::extension_to_type(extension));
-    server_logger->log_trace("static file found");
+    server_logger->log_trace("-- static file found");
     server_logger->log_info("[HandlerMetrics] Static_handler");
     server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply->result_int()));
 
