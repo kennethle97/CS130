@@ -8,7 +8,7 @@ Request_Handler_Sleep::Request_Handler_Sleep(const path_uri& prefix_)
     : prefix(prefix_) {}
 
 void Request_Handler_Sleep::handle_request(const request& http_request, reply* http_reply)noexcept {
-    sleep(10); // sleeping for 10 seconds
+    sleep(7); // sleeping for 4 seconds
     ServerLogger* server_logger = ServerLogger::get_server_logger();
 
     std::string uri = {http_request.target().begin(),http_request.target().end()};

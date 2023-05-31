@@ -1,0 +1,5 @@
+HTTP/1.1 200 OK
+Content-Length: 106
+Content-Type: text/plain
+
+<html><head><title>Sleeping</title></head><body><h1>I had a good sleep for 10 seconds!</h1></body></html>

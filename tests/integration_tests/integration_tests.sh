@@ -31,6 +31,10 @@ location /api CRUDHandler {
 location / ErrorHandler {
 
 }
+
+location /sleep SleepHandler {
+
+}
 " > test_config
 
 $PATH_SERVER_BIN test_config &
@@ -89,21 +93,65 @@ else
     exit 1
 fi
 
-printf "Killing Server $PID_SERVER\n"
-kill -9 $PID_SERVER
-printf "Tests Completed!\n"
+# # Test 4 should pass as we are creating an entity, retrieving/verifying it, and deleting/verifying deletion.
+# printf "Test 3: should return 2 responses. First should be a correct retrieved entity. Second should be a 404 error"
 
-# remove no longer needed test files
+# printf "POST /api/Shoes HTTP/1.1\r\nContent-Type: application/json\r\nContent-Length: 17\r\n\r\n{"brand": "Nike"}" | nc 127.0.0.1 8080
+# printf "GET /api/Shoes/1 HTTP/1.1\r\n\r\n" | nc 127.0.0.1 8080 > test_response4
+# diff -q expected_response4 test_response4
+
+# DIFF_EXIT_CODE=$?
+# if [ $DIFF_EXIT_CODE -eq 0 ]; then
+#     printf "Success! Expected Response = Test Response\n"
+# else
+#     printf "Failure. Expected Reponse != Test Response\n"
+#     kill -9 $PID_SERVER
+#     exit 1
+# fi
+
+# printf "DELETE /api/Shoes/1 HTTP/1.1\r\n\r\n" | nc 127.0.0.1 8080
+# printf "GET /api/Shoes/1 HTTP/1.1\r\n\r\n" | nc 127.0.0.1 8080 > test_response5
+# diff -q expected_response5 test_response5
+
+# DIFF_EXIT_CODE=$?
+# if [ $DIFF_EXIT_CODE -eq 0 ]; then
+#     printf "Success! Expected Response = Test Response\n"
+# else
+#     printf "Failure. Expected Reponse != Test Response\n"
+#     kill -9 $PID_SERVER
+#     exit 1
+# fi
+
 rm test_*
-exit 0
 
-# Test 4 should pass as we are creating an entity, retrieving/verifying it, and deleting/verifying deletion.
-printf "Test 3: should return 2 responses. First should be a correct retrieved entity. Second should be a 404 error"
+# Test 5 is testing whether our server is multithreaded by handling multiple requests at the same time
+printf "GET /sleep HTTP/1.0\r\n\r\n" | nc 127.0.0.1 8080 > test_response6 &
+sleep 1    # sleeping for 1 second to make sure that /sleep got called before /echo did
+printf "GET /echo HTTP/1.0\r\n\r\n" | nc 127.0.0.1 8080 > test_response7 
 
-printf "POST /api/Shoes HTTP/1.1\r\nContent-Type: application/json\r\nContent-Length: 17\r\n\r\n{"brand": "Nike"}" | nc 127.0.0.1 8080
-printf "GET /api/Shoes/1 HTTP/1.1\r\n\r\n" | nc 127.0.0.1 8080 > test_response4
-diff -q expected_response4 test_response4
 
+test -e test_response7
+EXIST_EXIT_CODE=$?
+if [ $EXIST_EXIT_CODE -eq 0 ]; then
+    printf "Success! echo did run!\n"
+else 
+    printf "Failure. The file containing echo's output does not exist.\n"
+fi
+
+test -e test_response6
+EXIST_EXIT_CODE=$?
+
+
+
+if [ -s test_response6 ]; then
+    printf "It seems that /sleep finished before echo did!\n"
+else
+    printf "Success! sleep did not finish running before echo did, but echo still finished!\n"
+fi
+
+sleep 8
+
+diff -q --strip-trailing-cr expected_response6 test_response6
 DIFF_EXIT_CODE=$?
 if [ $DIFF_EXIT_CODE -eq 0 ]; then
     printf "Success! Expected Response = Test Response\n"
@@ -113,10 +161,7 @@ else
     exit 1
 fi
 
-printf "DELETE /api/Shoes/1 HTTP/1.1\r\n\r\n" | nc 127.0.0.1 8080
-printf "GET /api/Shoes/1 HTTP/1.1\r\n\r\n" | nc 127.0.0.1 8080 > test_response5
-diff -q expected_response5 test_response5
-
+diff -q expected_response7 test_response7
 DIFF_EXIT_CODE=$?
 if [ $DIFF_EXIT_CODE -eq 0 ]; then
     printf "Success! Expected Response = Test Response\n"
@@ -125,7 +170,6 @@ else
     kill -9 $PID_SERVER
     exit 1
 fi
-
 
 printf "Killing Server $PID_SERVER\n"
 kill -9 $PID_SERVER

@@ -74,6 +74,9 @@ target_link_libraries(server server_main_lib server_lib session_lib
 # add_executable(example_lib_test tests/example_lib_test.cc)
 # target_link_libraries(example_lib_test example_lib gtest_main)
 
+add_executable(sleep_handler_factory_test tests/sleep_handler_factory_test.cc)
+target_link_libraries(sleep_handler_factory_test request_handler_lib http_lib config_parser_lib logger_lib gtest_main Boost::log Boost::log_setup)
+
 add_executable(health_handler_factory_test tests/health_handler_factory_test.cc)
 target_link_libraries(health_handler_factory_test request_handler_lib http_lib config_parser_lib logger_lib gtest_main Boost::log Boost::log_setup)
 
@@ -85,6 +88,9 @@ target_link_libraries(echo_handler_factory_test request_handler_lib http_lib con
 
 add_executable(static_handler_factory_test tests/static_handler_factory_test.cc)
 target_link_libraries(static_handler_factory_test request_handler_lib http_lib config_parser_lib logger_lib gtest_main Boost::log Boost::log_setup)
+
+add_executable(request_handler_sleep_test tests/request_handler_sleep_test.cc)
+target_link_libraries(request_handler_sleep_test request_handler_lib http_lib logger_lib gtest_main Boost::log Boost::log_setup)
 
 add_executable(request_handler_404_test tests/request_handler_404_test.cc)
 target_link_libraries(request_handler_404_test request_handler_lib http_lib logger_lib gtest_main Boost::log Boost::log_setup)
@@ -134,12 +140,12 @@ gtest_discover_tests(request_handler_dispatcher_test WORKING_DIRECTORY ${CMAKE_C
 gtest_discover_tests(request_handler_404_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(request_handler_health_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(request_404_handler_factory_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+gtest_discover_tests(sleep_handler_factory_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(static_handler_factory_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(echo_handler_factory_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(health_handler_factory_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(request_handler_crud_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
-
-
+gtest_discover_tests(request_handler_sleep_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 
 # Update with target/test targets
 # include(cmake/CodeCoverageReportConfig.cmake)
@@ -160,7 +166,9 @@ generate_coverage_report(TARGETS server server_lib session_lib config_parser_lib
                          request_404_handler_factory_test 
                          static_handler_factory_test 
                          echo_handler_factory_test 
-                         request_handler_crud_test)
+                         request_handler_crud_test
+                         request_handler_sleep_test 
+                         sleep_handler_factory_test)
 
 
 # paste local path
