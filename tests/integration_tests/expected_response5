@@ -1,4 +1,8 @@
 HTTP/1.1 404 Not Found
-Content-Type: text/html
+Connection: close
+Server: Beast
+Content-Type: text/plain
+Content-Disposition: inline
+Content-Length: 38
 
-<html><head><title>Not Found</title></head><body><h1>404 Not Found</h1></body></html>
+Could not resolve ID -- ID not found.

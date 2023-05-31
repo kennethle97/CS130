@@ -4,6 +4,7 @@
 
 Crud_Handler_Factory::Crud_Handler_Factory(NginxConfig config) {
     this->config = config;
+    this->sub_directory_map = std::make_shared<std::map<std::string, std::map<int, std::string>>>();
 }
 
 Request_Handler_Crud* Crud_Handler_Factory::create(const std::string& location_, const std::string& url_) {
@@ -11,7 +12,7 @@ Request_Handler_Crud* Crud_Handler_Factory::create(const std::string& location_,
     if (data_path == "#") {
         return nullptr;
     }
-    return new Request_Handler_Crud(data_path, location_, url_);
+    return new Request_Handler_Crud(data_path, location_, url_,sub_directory_map);
 }
 
 

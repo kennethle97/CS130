@@ -97,42 +97,20 @@ else
     exit 1
 fi
 
-# # Test 4 should pass as we are creating an entity, retrieving/verifying it, and deleting/verifying deletion.
-# printf "Test 3: should return 2 responses. First should be a correct retrieved entity. Second should be a 404 error"
 
-# printf "POST /api/Shoes HTTP/1.1\r\nContent-Type: application/json\r\nContent-Length: 17\r\n\r\n{"brand": "Nike"}" | nc 127.0.0.1 8080
-# printf "GET /api/Shoes/1 HTTP/1.1\r\n\r\n" | nc 127.0.0.1 8080 > test_response4
-# diff -q expected_response4 test_response4
+# Test 4 should pass as we are creating an entity, retrieving/verifying it, and deleting/verifying deletion.
+printf "Test 4: should return 2 responses. First should be a correct retrieved entity. Second should be a 404 error"
 
-# DIFF_EXIT_CODE=$?
-# if [ $DIFF_EXIT_CODE -eq 0 ]; then
-#     printf "Success! Expected Response = Test Response\n"
-# else
-#     printf "Failure. Expected Reponse != Test Response\n"
-#     kill -9 $PID_SERVER
-#     exit 1
-# fi
-
-# printf "DELETE /api/Shoes/1 HTTP/1.1\r\n\r\n" | nc 127.0.0.1 8080
-# printf "GET /api/Shoes/1 HTTP/1.1\r\n\r\n" | nc 127.0.0.1 8080 > test_response5
-# diff -q expected_response5 test_response5
-
-# DIFF_EXIT_CODE=$?
-# if [ $DIFF_EXIT_CODE -eq 0 ]; then
-#     printf "Success! Expected Response = Test Response\n"
-# else
-#     printf "Failure. Expected Reponse != Test Response\n"
-#     kill -9 $PID_SERVER
-#     exit 1
-# fi
-
-rm test_*
+payload='{"brand": "Nike"}'
+content_length=$(echo -n "$payload" | wc -c)
+printf "POST /api/Shoes HTTP/1.1\r\nContent-Type: application/json\r\nContent-Length: $content_length\r\n\r\n$payload\r\n" | nc 127.0.0.1 8080
+printf "GET /api/Shoes/1 HTTP/1.1\r\n\r\n" | nc 127.0.0.1 8080 > test_response4
+diff -q expected_response4 test_response4
 
 # Test 5 is testing whether our server is multithreaded by handling multiple requests at the same time
 printf "GET /sleep HTTP/1.0\r\n\r\n" | nc 127.0.0.1 8080 > test_response6 &
 sleep 1    # sleeping for 1 second to make sure that /sleep got called before /echo did
 printf "GET /echo HTTP/1.0\r\n\r\n" | nc 127.0.0.1 8080 > test_response7 
-
 
 test -e test_response7
 EXIST_EXIT_CODE=$?
@@ -200,4 +178,5 @@ printf "Tests Completed!\n"
 
 # remove no longer needed test files
 rm test_*
+rm -r ./public/crud/Shoes
 exit 0

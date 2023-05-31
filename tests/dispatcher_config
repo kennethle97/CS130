@@ -9,11 +9,11 @@ location /health/// HealthHandler { # echo folder defined with trailing backslas
 }
 
 location /static1 StaticHandler {    
-    root ../../public/folder1///; # absolute folder path with trailing backslashes
+    root ../public/folder1///; # absolute folder path with trailing backslashes
 }
 
 location /static2 StaticHandler {
-    root ../../public/folder2//; # absolute folder path
+    root ../public/folder2//; # absolute folder path
 }
 
 location / ErrorHandler {
@@ -23,3 +23,11 @@ location / ErrorHandler {
 location /sleep SleepHandler {
 
 }
+location /api CRUDHandler{
+    data_path ../public/crud///; # absolute folder path
+}
+
+location /sleep SleepHandler {
+
+}
+

@@ -8,6 +8,7 @@ class Crud_Handler_Factory : public Request_Handler_Factory {
     public:
         Crud_Handler_Factory(NginxConfig config);
         Request_Handler_Crud* create(const path_uri& location, const path_uri& url);
+        std::shared_ptr<std::map<std::string, std::map<int, std::string>>> sub_directory_map;
         
     private:
         NginxConfig config;

@@ -32,7 +32,11 @@ set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost 1.50 REQUIRED COMPONENTS system regex log_setup log)
 message(STATUS "Boost version: ${Boost_VERSION}")
 
+
 include_directories(include)
+
+find_package(jsoncpp REQUIRED)
+message(STATUS "jsoncpp version: ${jsoncpp_VERSION}")
 
 # Update name and srcs
 # add_library(example_lib src/example_lib.cc)
@@ -44,29 +48,49 @@ add_library(logger_lib src/logger.cc)
 add_library(http_lib
                 src/http/mime_types.cpp
                 )
-add_library(request_handler_lib 
-                src/request_handler_dispatcher.cc
-                src/request_handler/request_404_handler_factory.cc
-                src/request_handler/static_handler_factory.cc
-                src/request_handler/echo_handler_factory.cc
-                src/request_handler/sleep_handler_factory.cc
-                src/request_handler/crud_handler_factory.cc
-                src/request_handler/health_handler_factory.cc
-                src/request_handler/request_handler_echo.cc
-                src/request_handler/request_handler_static.cc
-                src/request_handler/request_handler_404.cc
-                src/request_handler/request_handler_crud.cc
-                src/request_handler/request_handler_health.cc
-                src/request_handler/request_handler_sleep.cc
-                )
+
+add_library(request_handler_dispatcher_obj OBJECT src/request_handler_dispatcher.cc)
+add_library(request_404_handler_factory_obj OBJECT src/request_handler/request_404_handler_factory.cc)
+add_library(static_handler_factory_obj OBJECT src/request_handler/static_handler_factory.cc)
+add_library(echo_handler_factory_obj OBJECT src/request_handler/echo_handler_factory.cc)
+add_library(crud_handler_factory_obj OBJECT src/request_handler/crud_handler_factory.cc)
+add_library(sleep_handler_factory_obj OBJECT src/request_handler/sleep_handler_factory.cc)
+add_library(health_handler_factory_obj OBJECT src/request_handler/health_handler_factory.cc)
+add_library(request_handler_echo_obj OBJECT src/request_handler/request_handler_echo.cc)
+add_library(request_handler_static_obj OBJECT src/request_handler/request_handler_static.cc)
+add_library(request_handler_404_obj OBJECT src/request_handler/request_handler_404.cc)
+add_library(request_handler_crud_obj OBJECT src/request_handler/request_handler_crud.cc)
+add_library(request_handler_health_obj OBJECT src/request_handler/request_handler_health.cc)
+add_library(request_handler_sleep_obj OBJECT src/request_handler/request_handler_sleep.cc)
+
+# Create request_handler_lib using object files
+add_library(request_handler_lib STATIC
+    $<TARGET_OBJECTS:request_handler_dispatcher_obj>
+    $<TARGET_OBJECTS:request_404_handler_factory_obj>
+    $<TARGET_OBJECTS:static_handler_factory_obj>
+    $<TARGET_OBJECTS:echo_handler_factory_obj>
+    $<TARGET_OBJECTS:crud_handler_factory_obj>
+    $<TARGET_OBJECTS:sleep_handler_factory_obj>
+    $<TARGET_OBJECTS:health_handler_factory_obj>
+    $<TARGET_OBJECTS:sleep_handler_factory_obj>
+    $<TARGET_OBJECTS:request_handler_echo_obj>
+    $<TARGET_OBJECTS:request_handler_static_obj>
+    $<TARGET_OBJECTS:request_handler_404_obj>
+    $<TARGET_OBJECTS:request_handler_crud_obj>
+    $<TARGET_OBJECTS:request_handler_health_obj>
+    $<TARGET_OBJECTS:request_handler_sleep_obj>
+)
+
 
 # Update executable name, srcs, and deps
 # add_executable(example_server src/example_server_main.cc)
 # target_link_libraries(example_server example_lib Boost::system)
 add_executable(server src/server_main.cc)
 
+target_link_libraries(request_handler_lib jsoncpp)
+
 target_link_libraries(server server_main_lib server_lib session_lib 
-                      config_parser_lib logger_lib request_handler_lib http_lib Boost::system pthread
+                      config_parser_lib logger_lib request_handler_lib http_lib jsoncpp Boost::system pthread
                       Boost::regex Boost::log_setup Boost::log Boost::thread)
 
 
@@ -107,6 +131,9 @@ target_link_libraries(request_handler_dispatcher_test gtest_main request_handler
 add_executable(request_handler_crud_test tests/request_handler_crud_test.cc)
 target_link_libraries(request_handler_crud_test gtest_main request_handler_lib http_lib config_parser_lib logger_lib Boost::filesystem Boost::log Boost::log_setup )
 
+add_executable(crud_handler_factory_test tests/crud_handler_factory_test.cc)
+target_link_libraries(crud_handler_factory_test gtest_main request_handler_lib http_lib config_parser_lib logger_lib Boost::filesystem Boost::log Boost::log_setup )
+
 add_executable(request_handler_health_test tests/request_handler_health_test.cc)
 target_link_libraries(request_handler_health_test gtest_main request_handler_lib http_lib config_parser_lib logger_lib Boost::filesystem Boost::log Boost::log_setup )
 
@@ -146,6 +173,10 @@ gtest_discover_tests(echo_handler_factory_test WORKING_DIRECTORY ${CMAKE_CURRENT
 gtest_discover_tests(health_handler_factory_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(request_handler_crud_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(request_handler_sleep_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+gtest_discover_tests(crud_handler_factory_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+gtest_discover_tests(request_handler_sleep_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+
+
 
 # Update with target/test targets
 # include(cmake/CodeCoverageReportConfig.cmake)
@@ -168,7 +199,9 @@ generate_coverage_report(TARGETS server server_lib session_lib config_parser_lib
                          echo_handler_factory_test 
                          request_handler_crud_test
                          request_handler_sleep_test 
-                         sleep_handler_factory_test)
+                         sleep_handler_factory_test
+                         crud_handler_factory_test
+                         )
 
 
 # paste local path
