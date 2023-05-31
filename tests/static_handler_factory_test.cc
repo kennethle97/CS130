@@ -39,8 +39,8 @@ TEST_F(StaticHandlerFactoryTest, IncorrectURLStaticFactoryTest) {
 
     Request_Handler_Static* request_static_handler = handler_factory.create("/static1", "/static1/random.txt");
     request_static_handler->handle_request(test_request, &test_reply);
-    EXPECT_EQ(boost::beast::http::status::not_found, test_reply.result());
-    EXPECT_EQ("<html><head><title>Not Found</title></head><body><h1>404 Not Found</h1></body></html>\n", 
+    EXPECT_EQ(boost::beast::http::status::bad_request, test_reply.result());
+    EXPECT_EQ("<html><head><title>Bad Request</title></head><body><h1>400 Bad Request</h1></body></html>\n", 
                                 test_reply.body());
     EXPECT_EQ(false, test_reply[boost::beast::http::field::content_type].empty());
     EXPECT_EQ("text/html", test_reply[boost::beast::http::field::content_type]);

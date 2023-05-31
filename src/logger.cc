@@ -74,12 +74,14 @@ ServerLogger::ServerLogger() {
 // received by the server
 void ServerLogger::log_request(request http_request, tcp::socket &socket) {
   std::stringstream sstream;
-  sstream << "\r\nBase:\r\n" << http_request.base();
+  sstream << "-Base:\r\n" << http_request.base();
   // get ip address of the caller
   std::string remote_address = socket.remote_endpoint().address().to_string();
   sstream << "- IP Address: " << remote_address;
-
   BOOST_LOG_SEV(sev_logger, trace) << sstream.str();
+  BOOST_LOG_SEV(sev_logger, info) << "[IPMetrics] "+remote_address;
+  BOOST_LOG_SEV(sev_logger, info) << "[RequestPathMetrics] "+ http_request.target().to_string();
+  
 }
 
 // Called when logging any info about the server

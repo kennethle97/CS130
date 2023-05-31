@@ -17,9 +17,10 @@ void Request_Handler_Echo::handle_request(const request& http_request, reply* ht
     /*Set http_reply member values with the body of the request and set the reply to ok*/
     http_reply->result(boost::beast::http::status::ok);
     http_reply->body()=boost::lexical_cast<std::string>(http_request.base());
-    http_reply->set(boost::beast::http::field::content_length, std::to_string(http_reply->body().size()));
+    http_reply->content_length(http_reply->body().size());
     http_reply->set(boost::beast::http::field::content_type, "text/plain");
-
+    server_logger->log_info("[HandlerMetrics] Echo_handler");
+    server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply->result_int()));
     
 
 }

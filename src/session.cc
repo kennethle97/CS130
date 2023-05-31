@@ -58,7 +58,7 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
                 http_reply.set(boost::beast::http::field::content_type, "text/html");
 
                 server_logger->log_error("Internal Server Error -- a handler factory was not dispatched");
-                server_logger->log_info("Response code: " + std::to_string(http_reply.result_int()));
+                server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply.result_int()));
             }
             
             std::string location = dispatcher->match(http_request);
@@ -76,9 +76,9 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
                 http_reply.body() = bad_request;
                 http_reply.content_length(http_reply.body().size());
                 http_reply.set(boost::beast::http::field::content_type, "text/html");
-                //*******soick reply************
+                //*******stock reply************
                 server_logger->log_warning("Bad Request -- Request handler not found");
-                server_logger->log_info("Response code: " + std::to_string(http_reply.result_int()));
+                server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply.result_int()));
                 return;
             }
             
@@ -93,9 +93,8 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
             
             
             // Log http response code
-            server_logger->log_info("Response code: " + std::to_string(http_reply.result_int()));
             if (http_reply.result() == boost::beast::http::status::ok) {
-                server_logger->log_info("Good request");
+                server_logger->log_trace("Valid request");
             }
             //Bind the reply to the buffer associated with handle_write//
             boost::beast::http::async_write(
@@ -106,19 +105,23 @@ void session::handle_read(std::shared_ptr<session> self,const boost::system::err
         //If the request is not a valid request i.e. result == false. Then we set the reply object to a default bad_request and write to buffer.
     else {
         //If the there is an error reading from the socket then we log the information and delete the session object.
-        server_logger->log_error("Error reading from socket: " + std::string(error.message()));
-         http_reply.result(boost::beast::http::status::bad_request);
+        http_reply.result(boost::beast::http::status::bad_request);
             const char bad_request[] =
                         "<html>"
                         "<head><title>Bad Request</title></head>"
                         "<body><h1>400 Bad Request</h1></body>"
                         "</html>\n";
-            http_reply.body() = bad_request;
-            http_reply.content_length(http_reply.body().size());
-            http_reply.set(boost::beast::http::field::content_type, "text/html");
-            boost::beast::http::async_write(
+        http_reply.body() = bad_request;
+        http_reply.content_length(http_reply.body().size());
+        http_reply.set(boost::beast::http::field::content_type, "text/html");
+
+        server_logger->log_error("Error reading from socket: " + std::string(error.message()));
+        server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply.result_int()));
+
+        boost::beast::http::async_write(
                 socket_,http_reply,
                 boost::bind(&session::handle_write, shared_from_this(),boost::asio::placeholders::error));
+        
     }
 }
 void session::handle_write(const boost::system::error_code& error)

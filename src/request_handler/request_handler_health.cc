@@ -20,6 +20,9 @@ void Request_Handler_Health::handle_request(const request& http_request, reply* 
     http_reply->content_length(http_reply->body().size());
     http_reply->set(boost::beast::http::field::content_type, "text/plain");
     //*******stock reply************
+    server_logger->log_info("static file found");
+    server_logger->log_info("[HandlerMetrics] Health_handler");
+    server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply->result_int()));
     return;
 }
 

@@ -24,6 +24,8 @@ void Request_Handler_404::handle_request(const request& http_request, reply* htt
     //http_reply->content_length(http_reply->body().size());
     http_reply->set(boost::beast::http::field::content_type, "text/html");
     //*******stock reply************
+    server_logger->log_info("[HandlerMetrics] 404_handler");
+    server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply->result_int()));
     return;
 }
 
