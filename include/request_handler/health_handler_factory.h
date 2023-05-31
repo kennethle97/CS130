@@ -1,6 +1,6 @@
 
-#ifndef REQUEST_HEALTH_HANDLER_FACTORY_H
-#define REQUEST_HEALTH_HANDLER_FACTORY_H 
+#ifndef HEALTH_HANDLER_FACTORY_H
+#define HEALTH_HANDLER_FACTORY_H 
 
 #include "request_handler/request_handler_health.h"
 #include "config_parser.h"

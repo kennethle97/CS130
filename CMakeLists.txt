@@ -154,7 +154,7 @@ generate_coverage_report(TARGETS server server_lib session_lib config_parser_lib
                          request_handler_dispatcher_test 
                          request_handler_404_test
                          request_handler_health_test 
-                         request_health_handler_factory_test
+                         health_handler_factory_test
                          request_404_handler_factory_test 
                          static_handler_factory_test 
                          echo_handler_factory_test 
