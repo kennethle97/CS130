@@ -35,9 +35,6 @@ message(STATUS "Boost version: ${Boost_VERSION}")
 
 include_directories(include)
 
-find_package(jsoncpp REQUIRED)
-message(STATUS "jsoncpp version: ${jsoncpp_VERSION}")
-
 # Update name and srcs
 # add_library(example_lib src/example_lib.cc)
 add_library(server_lib src/server.cc)
@@ -87,10 +84,8 @@ add_library(request_handler_lib STATIC
 # target_link_libraries(example_server example_lib Boost::system)
 add_executable(server src/server_main.cc)
 
-target_link_libraries(request_handler_lib jsoncpp)
-
 target_link_libraries(server server_main_lib server_lib session_lib 
-                      config_parser_lib logger_lib request_handler_lib http_lib jsoncpp Boost::system pthread
+                      config_parser_lib logger_lib request_handler_lib http_lib Boost::system pthread
                       Boost::regex Boost::log_setup Boost::log Boost::thread)
 
 

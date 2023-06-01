@@ -15,7 +15,6 @@ RUN apt-get update && apt-get install -y \
     libboost-system-dev \
     libgmock-dev \
     libgtest-dev \
-    libjsoncpp-dev \
     netcat \
     gcovr \
     libboost-thread-dev

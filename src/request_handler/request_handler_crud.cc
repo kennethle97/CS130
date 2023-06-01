@@ -127,6 +127,20 @@ bool Request_Handler_Crud::is_ID(std::string path_extension){
     }
     return true;
 }
+bool Request_Handler_Crud::isRequestValidJson(std::string json_data)
+{
+    try
+    {
+        // Parse the body as JSON
+        nlohmann::json bodyJson = nlohmann::json::parse(json_data);
+        // Check if parsing was successful
+        return true;
+    }
+    catch (const nlohmann::json::parse_error& e)
+    {
+        return false;
+    }
+}
 
 int Request_Handler_Crud::get_next_id(std::string path){
     auto entity_map = (*sub_directory_map)[path];
@@ -241,12 +255,8 @@ void Request_Handler_Crud::handle_post(std::string request_filename,std::string 
     ServerLogger *server_logger = ServerLogger::get_server_logger();
     write_base_http(http_reply);
 
-    Json::Value json_file;
-    Json::CharReaderBuilder readerBuilder;
-    std::istringstream iss(json_data);
-    std::string parseError;
 
-    bool is_json = Json::parseFromStream(readerBuilder, iss, &json_file, &parseError);
+    bool is_json = isRequestValidJson(json_data);
 
     if(!is_json){
         //LOG invalid file type. Not a json file type.
@@ -330,12 +340,7 @@ void Request_Handler_Crud::handle_put(std::string request_filename, std::string 
     ServerLogger *server_logger = ServerLogger::get_server_logger();
     write_base_http(http_reply);
 
-    Json::Value json_file;
-    Json::CharReaderBuilder readerBuilder;
-    std::istringstream iss(json_data);
-    std::string parseError;
-
-    bool is_json = Json::parseFromStream(readerBuilder, iss, &json_file, &parseError);
+    bool is_json = isRequestValidJson(json_data);
 
     if(!is_json){
         //LOG invalid file type. Not a json file type.

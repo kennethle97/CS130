@@ -4,10 +4,10 @@
 #define REQUEST_HANDLER_CRUD_H
 #include <iostream>
 #include <boost/filesystem.hpp>
-#include <jsoncpp/json/json.h>
 #include <boost/range/iterator_range.hpp>
 #include "../request_handler.h"
 #include "../request_handler_dispatcher.h"
+#include "../nlohmann/json.hpp"
 
 class Request_Handler_Crud: public Request_Handler {
     public:
@@ -26,6 +26,7 @@ class Request_Handler_Crud: public Request_Handler {
         void write_not_found_json_response(reply *http_reply);
         void write_invalid_json_response(reply *http_reply);
         void write_file_exists_response(int file_id,reply *http_reply);
+        bool isRequestValidJson(std::string json_data);
         
         std::string use_configured_root(reply *http_reply);
         void init_entity_map();
