@@ -53,12 +53,15 @@ add_library(echo_handler_factory_obj OBJECT src/request_handler/echo_handler_fac
 add_library(crud_handler_factory_obj OBJECT src/request_handler/crud_handler_factory.cc)
 add_library(sleep_handler_factory_obj OBJECT src/request_handler/sleep_handler_factory.cc)
 add_library(health_handler_factory_obj OBJECT src/request_handler/health_handler_factory.cc)
+add_library(meme_create_handler_factory_obj OBJECT src/request_handler/meme_create_handler_factory.cc)
+
 add_library(request_handler_echo_obj OBJECT src/request_handler/request_handler_echo.cc)
 add_library(request_handler_static_obj OBJECT src/request_handler/request_handler_static.cc)
 add_library(request_handler_404_obj OBJECT src/request_handler/request_handler_404.cc)
 add_library(request_handler_crud_obj OBJECT src/request_handler/request_handler_crud.cc)
 add_library(request_handler_health_obj OBJECT src/request_handler/request_handler_health.cc)
 add_library(request_handler_sleep_obj OBJECT src/request_handler/request_handler_sleep.cc)
+add_library(request_handler_meme_create_obj OBJECT src/request_handler/request_handler_meme_create.cc)
 
 # Create request_handler_lib using object files
 add_library(request_handler_lib STATIC
@@ -70,12 +73,15 @@ add_library(request_handler_lib STATIC
     $<TARGET_OBJECTS:sleep_handler_factory_obj>
     $<TARGET_OBJECTS:health_handler_factory_obj>
     $<TARGET_OBJECTS:sleep_handler_factory_obj>
+    $<TARGET_OBJECTS:meme_create_handler_factory_obj>
+
     $<TARGET_OBJECTS:request_handler_echo_obj>
     $<TARGET_OBJECTS:request_handler_static_obj>
     $<TARGET_OBJECTS:request_handler_404_obj>
     $<TARGET_OBJECTS:request_handler_crud_obj>
     $<TARGET_OBJECTS:request_handler_health_obj>
     $<TARGET_OBJECTS:request_handler_sleep_obj>
+    $<TARGET_OBJECTS:request_handler_meme_create_obj>
 )
 
 
@@ -86,12 +92,14 @@ add_executable(server src/server_main.cc)
 
 target_link_libraries(server server_main_lib server_lib session_lib 
                       config_parser_lib logger_lib request_handler_lib http_lib Boost::system pthread
-                      Boost::regex Boost::log_setup Boost::log Boost::thread)
+                      Boost::regex Boost::log_setup Boost::log Boost::thread )
 
 
 # Update test executable name, srcs, and deps
 # add_executable(example_lib_test tests/example_lib_test.cc)
 # target_link_libraries(example_lib_test example_lib gtest_main)
+
+
 
 add_executable(sleep_handler_factory_test tests/sleep_handler_factory_test.cc)
 target_link_libraries(sleep_handler_factory_test request_handler_lib http_lib config_parser_lib logger_lib gtest_main Boost::log Boost::log_setup)

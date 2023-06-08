@@ -6,6 +6,8 @@ mirror
 logs
 log
 log/
+*.log
+crud/
 # random scripts
 gs
 mcv
