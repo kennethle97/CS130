@@ -54,6 +54,7 @@ add_library(crud_handler_factory_obj OBJECT src/request_handler/crud_handler_fac
 add_library(sleep_handler_factory_obj OBJECT src/request_handler/sleep_handler_factory.cc)
 add_library(health_handler_factory_obj OBJECT src/request_handler/health_handler_factory.cc)
 add_library(meme_create_handler_factory_obj OBJECT src/request_handler/meme_create_handler_factory.cc)
+add_library(meme_list_handler_factory_obj OBJECT src/request_handler/meme_list_handler_factory.cc)
 
 add_library(request_handler_echo_obj OBJECT src/request_handler/request_handler_echo.cc)
 add_library(request_handler_static_obj OBJECT src/request_handler/request_handler_static.cc)
@@ -62,6 +63,7 @@ add_library(request_handler_crud_obj OBJECT src/request_handler/request_handler_
 add_library(request_handler_health_obj OBJECT src/request_handler/request_handler_health.cc)
 add_library(request_handler_sleep_obj OBJECT src/request_handler/request_handler_sleep.cc)
 add_library(request_handler_meme_create_obj OBJECT src/request_handler/request_handler_meme_create.cc)
+add_library(request_handler_meme_list_obj OBJECT src/request_handler/request_handler_meme_list.cc)
 
 # Create request_handler_lib using object files
 add_library(request_handler_lib STATIC
@@ -74,6 +76,7 @@ add_library(request_handler_lib STATIC
     $<TARGET_OBJECTS:health_handler_factory_obj>
     $<TARGET_OBJECTS:sleep_handler_factory_obj>
     $<TARGET_OBJECTS:meme_create_handler_factory_obj>
+    $<TARGET_OBJECTS:meme_list_handler_factory_obj>
 
     $<TARGET_OBJECTS:request_handler_echo_obj>
     $<TARGET_OBJECTS:request_handler_static_obj>
@@ -82,6 +85,7 @@ add_library(request_handler_lib STATIC
     $<TARGET_OBJECTS:request_handler_health_obj>
     $<TARGET_OBJECTS:request_handler_sleep_obj>
     $<TARGET_OBJECTS:request_handler_meme_create_obj>
+    $<TARGET_OBJECTS:request_handler_meme_list_obj>
 )
 
 

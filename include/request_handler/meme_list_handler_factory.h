@@ -1,7 +1,7 @@
 #ifndef MEME_LIST_HANDLER_FACTORY_H
 #define MEME_LIST_HANDLER_FACTORY_H 
 
-#include "request_handler/request_handler_meme_list.h"
+#include "request_handler_meme_list.h"
 #include "config_parser.h"
 
 class Meme_List_Handler_Factory : public Request_Handler_Factory {

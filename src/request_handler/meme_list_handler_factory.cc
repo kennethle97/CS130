@@ -1,5 +1,5 @@
-#include "request_handler/meme_list_request_handler.h"
-#include "request_handler/meme_list_handler_factory.h"
+#include "../../include/request_handler/request_handler_meme_list.h"
+#include "../../include/request_handler/meme_list_handler_factory.h"
 #include "logger.h"
 
 Meme_List_Handler_Factory::Meme_List_Handler_Factory(NginxConfig config) {
@@ -26,7 +26,7 @@ std::string Meme_List_Handler_Factory::parse_config(NginxConfig config, std::str
                     path.pop_back();
                 }
 
-                if (handler_name == MEME_HANDLER_LIST && statement->child_block_.get() != nullptr && location == path) {
+                if (handler_name == MEME_LIST_HANDLER && statement->child_block_.get() != nullptr && location == path) {
                     ServerLogger *server_logger = ServerLogger::get_server_logger();
                     path_uri data_path = "\0"; 
                     for (const auto &child_statement : statement->child_block_->statements_) {

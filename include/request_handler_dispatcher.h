@@ -18,6 +18,7 @@ typedef std::string path_handler_name;
 #define HEALTH_HANDLER "HealthHandler"
 #define SLEEP_HANDLER "SleepHandler"
 #define MEME_CREATE_HANDLER "MemeCreateHandler"
+#define MEME_LIST_HANDLER "MemeListHandler"
 
 class Request_Handler_Dispatcher {
 public:

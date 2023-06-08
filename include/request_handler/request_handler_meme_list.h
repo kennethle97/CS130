@@ -8,6 +8,7 @@
 #include "../nlohmann/json.hpp"
 #include <string>
 #include <tuple>
+#include <vector>
 
 
 
@@ -27,7 +28,7 @@ class Request_Handler_Meme_List: public Request_Handler {
 
         struct meme_data;
         void write_base_http(reply *http_reply);
-        void write_response(std::string content_body, reply *http_reply);
+        void write_response(nlohmann::json json_body, reply *http_reply);
         void write_not_found_meme_response(reply *http_reply);
         
         std::string use_configured_root(reply *http_reply);
@@ -38,7 +39,10 @@ class Request_Handler_Meme_List: public Request_Handler {
 
         bool check_if_exists(std::string meme_name,reply *http_reply);
         
+        meme_data get_meme_data(std::string meme_name);
+
         std::string get_entity(std::string path);
+        std::string convert_name_from_url(std::string meme_name);
         
         void handle_get(std::string filename,reply *http_reply);
 
