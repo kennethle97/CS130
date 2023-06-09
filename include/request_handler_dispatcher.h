@@ -6,6 +6,7 @@
 #include <iostream>
 #include <map>
 #include <memory>
+#include <unordered_map>
 #include "request_handler.h"
 #include "request_handler/request_handler_factory.h"
 

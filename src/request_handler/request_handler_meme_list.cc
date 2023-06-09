@@ -3,19 +3,15 @@
 
 using json = nlohmann::json;
 
-struct Request_Handler_Meme_List::meme_data {
-    int id;
-    int num_likes;
-    std::string file_path;
-};
 
 Request_Handler_Meme_List::Request_Handler_Meme_List(const path_uri& data_path_, const path_uri& location_, const path_uri& url_) {
     this->data_path_ = data_path_;
     this->location_ = location_;
     this->url_ = url_;
-    this->meme_map = std::map<std::string, meme_data>();
+    this->meme_map = std::unordered_map<std::string, meme_data>();
     this->ordered_likes = std::vector<std::pair<int,std::string>>();
     this->ordered_time = std::vector<std::pair<int,std::string>>();
+
     init_meme_map();
     num_memes = meme_map.size();
 
@@ -61,6 +57,8 @@ void Request_Handler_Meme_List::init_meme_map(){
             meme_info.file_path = file_path;
 
             meme_map[meme_name] = meme_info;
+            
+            // file_locks[meme_name] = std::mutex();
         }
     }
 }
@@ -133,6 +131,13 @@ std::string Request_Handler_Meme_List::get_entity(std::string path) {
     return content.str();
 }
 
+void Request_Handler_Meme_List::update_entity(const std::string& path,const json& json_contents){
+    boost::filesystem::path file_path(path);
+
+    std::ofstream out_file(file_path);
+    out_file << json_contents.dump();
+    
+}
 bool Request_Handler_Meme_List::check_if_exists(std::string meme_name,reply *http_reply){
     auto it = meme_map.find(meme_name);
     if(it == meme_map.end()){
@@ -177,6 +182,28 @@ std::string Request_Handler_Meme_List::convert_name_from_url(std::string meme_na
     return std::string(meme_name_decoded);
 
 }
+bool Request_Handler_Meme_List::is_valid_json(std::string json_data){
+    
+        try
+        {
+            // Parse the body as JSON
+            nlohmann::json bodyJson = nlohmann::json::parse(json_data);
+            // Check if parsing was successful
+            return true;
+        }
+        catch (const nlohmann::json::parse_error& e)
+        {
+            return false;
+        }
+    }
+    
+bool Request_Handler_Meme_List::is_valid_ip_address(const std::string ip_address) {
+    std::regex ip_address_regex(
+        R"(^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$)"
+    );
+
+    return std::regex_match(ip_address, ip_address_regex);
+}
 
 void Request_Handler_Meme_List::write_base_http(reply *http_reply){
     http_reply->body().clear();
@@ -205,6 +232,23 @@ void Request_Handler_Meme_List::write_not_found_meme_response(reply *http_reply)
     server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply->result_int()));
 }
 
+void Request_Handler_Meme_List::write_bad_request(reply *http_reply){
+        ServerLogger *server_logger = ServerLogger::get_server_logger();
+        http_reply->result(boost::beast::http::status::bad_request);
+        http_reply->set(boost::beast::http::field::content_type, "text/plain");
+        http_reply->set(boost::beast::http::field::content_disposition, "inline");
+        const char bad_request[] =
+                            "<html>"
+                            "<head><title>Bad Request</title></head>"
+                            "<body><h1>400 Bad Request</h1></body>"
+                            "</html>\n";
+        http_reply->body() = bad_request;
+        http_reply->content_length(http_reply->body().size());
+        server_logger->log_trace("-- Meme List invalid api request");
+        server_logger->log_info("[HandlerMetrics] Meme_List_handler");
+        server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply->result_int()));
+    
+}
 void Request_Handler_Meme_List::handle_get(std::string meme_path, reply *http_reply){
 
     write_base_http(http_reply);
@@ -289,6 +333,59 @@ void Request_Handler_Meme_List::handle_get(std::string meme_path, reply *http_re
      write_response(response_data,http_reply);
 }
 
+
+
+void Request_Handler_Meme_List::handle_post(std::string meme_path, std::string ip_address,reply* http_reply){
+
+    write_base_http(http_reply);
+
+    std::string uri = meme_path;
+    json json_contents;
+    meme_data data;
+    
+    size_t last_slash_pos = uri.find_last_of('/');
+
+    // Find the position of the second-to-last occurrence of '/'
+    size_t second_last_slash_pos = uri.find_last_of('/', last_slash_pos - 1);
+
+    // Extract the substring between the second-to-last and last slashes which should be the meme name meme/list/name_of_meme/like
+    std::string meme_name = uri.substr(second_last_slash_pos + 1, last_slash_pos - second_last_slash_pos - 1);
+
+    //We have to decode the second to last segment if it includes spaces (%20) within the url
+    
+    meme_name = convert_name_from_url(meme_name);
+
+    std::string like_extension = meme_path.substr(meme_path.find_last_of('/' + 1));
+
+    if(like_extension == "like"){
+
+        if(check_if_exists(meme_name,http_reply)){
+            auto it = meme_map.find(meme_name);
+            data = it->second;
+            json_contents = get_entity(data.file_path);
+            json& likes = json_contents["likes"];
+            
+            bool ip_exists = false;
+            for (const auto& value: likes){
+                if(value == ip_address){
+                    ip_exists == true;
+                    break;                    
+                }
+            }
+            if(!ip_exists){
+                likes.push_back(ip_address);
+                update_entity(data.file_path,json_contents);            
+                //Right now just sending the whole.json object back to the client so it would prob refresh the page? 
+                //Could change to just update the number of likes but will need to figure out front end api.
+                json_contents["likes"] = json_contents["likes"].size();
+                write_response(json_contents,http_reply);
+            } 
+        }
+    }
+    else{
+       write_bad_request(http_reply);
+    }
+}
 void Request_Handler_Meme_List::handle_request(const request &http_request, reply *http_reply) noexcept {
     ServerLogger *server_logger = ServerLogger::get_server_logger();
     // Configure the filename path with the configured root path
@@ -297,27 +394,28 @@ void Request_Handler_Meme_List::handle_request(const request &http_request, repl
     std::cout<<"Filename path" <<filename <<std::endl;
     // Get method of request to call appropiate function
     std::string method = http_request.method_string().to_string();
+    std::string json_contents = http_request.body();
 
     if (method == "GET")
     {
-        // Handle GET request
+        // Handle GET request for either list of memes sorted by either time 
+        //or popularity or the individual meme itself.
         handle_get(filename,http_reply);
     }
    
-    else{
-        http_reply->result(boost::beast::http::status::bad_request);
-        http_reply->set(boost::beast::http::field::content_type, "text/plain");
-        http_reply->set(boost::beast::http::field::content_disposition, "inline");
-        const char bad_request[] =
-                            "<html>"
-                            "<head><title>Bad Request</title></head>"
-                            "<body><h1>400 Bad Request</h1></body>"
-                            "</html>\n";
-        http_reply->body() = bad_request;
-        http_reply->content_length(http_reply->body().size());
-        server_logger->log_trace("-- crud ivalid api request");
-        server_logger->log_info("[HandlerMetrics] Crud_handler");
-        server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply->result_int()));
+    else if(method == "POST"){
+        //Handle POST request i.e. whenever an invidividual viewing a meme through
+        // meme/list/popularity or meme/list/time or meme/list/name_of_meme they we
+        // add their ip to list of ips to update server side number of likes
+        std::string json_contents = http_request.body();
+
+        //We don't want people to do a POST command with just junk instead of an actual ip address
+        //to update the number of likes.
+        if(is_valid_ip_address(json_contents)){
+            handle_post(filename,json_contents,http_reply);
+        }
     }
-        
+    else{
+       write_bad_request(http_reply);
+    }
 }
