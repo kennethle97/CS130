@@ -1,126 +1,126 @@
-[2023-06-09 11:20:29.023883]:[0x00007f458c908740]:[0x00001316]:[trace]: Parsing config file
-[2023-06-09 11:20:29.024335]:[0x00007f458c908740]:[0x00001316]:[trace]: Config file parsed
-[2023-06-09 11:20:29.024463]:[0x00007f458c908740]:[0x00001316]:[trace]: Parsed handler EchoHandler for path: /echo
-[2023-06-09 11:20:29.024510]:[0x00007f458c908740]:[0x00001316]:[trace]: Dispatched echo handler factory at location: /echo
-[2023-06-09 11:20:29.024557]:[0x00007f458c908740]:[0x00001316]:[trace]: Parsed handler StaticHandler for path: /static1
-[2023-06-09 11:20:29.024591]:[0x00007f458c908740]:[0x00001316]:[trace]: Dispatched static handler factory at location: /static1
-[2023-06-09 11:20:29.024630]:[0x00007f458c908740]:[0x00001316]:[trace]: Parsed handler StaticHandler for path: /static2
-[2023-06-09 11:20:29.024664]:[0x00007f458c908740]:[0x00001316]:[trace]: Dispatched static handler factory at location: /static2
-[2023-06-09 11:20:29.024706]:[0x00007f458c908740]:[0x00001316]:[trace]: Parsed handler CRUDHandler for path: /api
-[2023-06-09 11:20:29.024740]:[0x00007f458c908740]:[0x00001316]:[trace]: Dispatched crud handler factory at location: /api
-[2023-06-09 11:20:29.024779]:[0x00007f458c908740]:[0x00001316]:[trace]: Parsed handler ErrorHandler for path: /
-[2023-06-09 11:20:29.024814]:[0x00007f458c908740]:[0x00001316]:[trace]: Dispatched 404 handler factory at location: /
-[2023-06-09 11:20:29.024851]:[0x00007f458c908740]:[0x00001316]:[trace]: Parsed handler HealthHandler for path: /health
-[2023-06-09 11:20:29.024892]:[0x00007f458c908740]:[0x00001316]:[trace]: Dispatched health handler factory at location: /health
-[2023-06-09 11:20:29.024936]:[0x00007f458c908740]:[0x00001316]:[trace]: Parsed handler SleepHandler for path: /sleep
-[2023-06-09 11:20:29.024972]:[0x00007f458c908740]:[0x00001316]:[trace]: Dispatched sleep handler factory at location: /sleep
-[2023-06-09 11:20:29.025046]:[0x00007f458c908740]:[0x00001316]:[debug]: Server started at port 8080
-[2023-06-09 11:20:30.031006]:[0x00007f458b104640]:[0x00001316]:[trace]: -Base:
+[2023-06-09 21:49:32.393155]:[0x00007fd6489b4740]:[0x000024c9]:[trace]: Parsing config file
+[2023-06-09 21:49:32.393541]:[0x00007fd6489b4740]:[0x000024c9]:[trace]: Config file parsed
+[2023-06-09 21:49:32.393663]:[0x00007fd6489b4740]:[0x000024c9]:[trace]: Parsed handler EchoHandler for path: /echo
+[2023-06-09 21:49:32.393708]:[0x00007fd6489b4740]:[0x000024c9]:[trace]: Dispatched echo handler factory at location: /echo
+[2023-06-09 21:49:32.393757]:[0x00007fd6489b4740]:[0x000024c9]:[trace]: Parsed handler StaticHandler for path: /static1
+[2023-06-09 21:49:32.393828]:[0x00007fd6489b4740]:[0x000024c9]:[trace]: Dispatched static handler factory at location: /static1
+[2023-06-09 21:49:32.393880]:[0x00007fd6489b4740]:[0x000024c9]:[trace]: Parsed handler StaticHandler for path: /static2
+[2023-06-09 21:49:32.393915]:[0x00007fd6489b4740]:[0x000024c9]:[trace]: Dispatched static handler factory at location: /static2
+[2023-06-09 21:49:32.393961]:[0x00007fd6489b4740]:[0x000024c9]:[trace]: Parsed handler CRUDHandler for path: /api
+[2023-06-09 21:49:32.393996]:[0x00007fd6489b4740]:[0x000024c9]:[trace]: Dispatched crud handler factory at location: /api
+[2023-06-09 21:49:32.394038]:[0x00007fd6489b4740]:[0x000024c9]:[trace]: Parsed handler ErrorHandler for path: /
+[2023-06-09 21:49:32.394072]:[0x00007fd6489b4740]:[0x000024c9]:[trace]: Dispatched 404 handler factory at location: /
+[2023-06-09 21:49:32.394113]:[0x00007fd6489b4740]:[0x000024c9]:[trace]: Parsed handler HealthHandler for path: /health
+[2023-06-09 21:49:32.394149]:[0x00007fd6489b4740]:[0x000024c9]:[trace]: Dispatched health handler factory at location: /health
+[2023-06-09 21:49:32.394193]:[0x00007fd6489b4740]:[0x000024c9]:[trace]: Parsed handler SleepHandler for path: /sleep
+[2023-06-09 21:49:32.394228]:[0x00007fd6489b4740]:[0x000024c9]:[trace]: Dispatched sleep handler factory at location: /sleep
+[2023-06-09 21:49:32.394309]:[0x00007fd6489b4740]:[0x000024c9]:[debug]: Server started at port 8080
+[2023-06-09 21:49:33.395285]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: -Base:
 GET /echo HTTP/1.1
 Host: www.integration_test.com
 Accept: */*
 
 - IP Address: 127.0.0.1
-[2023-06-09 11:20:30.031115]:[0x00007f458b104640]:[0x00001316]:[info]: [IPMetrics] 127.0.0.1
-[2023-06-09 11:20:30.031157]:[0x00007f458b104640]:[0x00001316]:[info]: [RequestPathMetrics] /echo
-[2023-06-09 11:20:30.031209]:[0x00007f458b104640]:[0x00001316]:[trace]: Echo Request Handler: /echo
-[2023-06-09 11:20:30.031289]:[0x00007f458b104640]:[0x00001316]:[info]: [HandlerMetrics] Echo_handler
-[2023-06-09 11:20:30.031341]:[0x00007f458b104640]:[0x00001316]:[info]: [ResponseMetrics] 200
-[2023-06-09 11:20:30.031381]:[0x00007f458b104640]:[0x00001316]:[trace]: Valid request
-[2023-06-09 11:20:30.031527]:[0x00007f458b104640]:[0x00001316]:[trace]: session::handle_read: async_write
-[2023-06-09 11:20:30.084608]:[0x00007f458c106640]:[0x00001316]:[error]: Error reading from socket: bad version
-[2023-06-09 11:20:30.084696]:[0x00007f458c106640]:[0x00001316]:[info]: [ResponseMetrics] 400
-[2023-06-09 11:20:30.116094]:[0x00007f458c106640]:[0x00001316]:[trace]: -Base:
+[2023-06-09 21:49:33.395390]:[0x00007fd6479b1640]:[0x000024c9]:[info]: [IPMetrics] 127.0.0.1
+[2023-06-09 21:49:33.395422]:[0x00007fd6479b1640]:[0x000024c9]:[info]: [RequestPathMetrics] /echo
+[2023-06-09 21:49:33.395482]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: Echo Request Handler: /echo
+[2023-06-09 21:49:33.395540]:[0x00007fd6479b1640]:[0x000024c9]:[info]: [HandlerMetrics] Echo_handler
+[2023-06-09 21:49:33.395568]:[0x00007fd6479b1640]:[0x000024c9]:[info]: [ResponseMetrics] 200
+[2023-06-09 21:49:33.395605]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: Valid request
+[2023-06-09 21:49:33.395767]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: session::handle_read: async_write
+[2023-06-09 21:49:33.400736]:[0x00007fd6479b1640]:[0x000024c9]:[error]: Error reading from socket: bad version
+[2023-06-09 21:49:33.400848]:[0x00007fd6479b1640]:[0x000024c9]:[info]: [ResponseMetrics] 400
+[2023-06-09 21:49:33.405409]:[0x00007fd6489b3640]:[0x000024c9]:[trace]: -Base:
 GET /static1/random.txt HTTP/1.1
 
 - IP Address: 127.0.0.1
-[2023-06-09 11:20:30.116184]:[0x00007f458c106640]:[0x00001316]:[info]: [IPMetrics] 127.0.0.1
-[2023-06-09 11:20:30.116218]:[0x00007f458c106640]:[0x00001316]:[info]: [RequestPathMetrics] /static1/random.txt
-[2023-06-09 11:20:30.116312]:[0x00007f458c106640]:[0x00001316]:[trace]: Parsed StaticHandler root ./public/folder1 for location /static1
-[2023-06-09 11:20:30.116346]:[0x00007f458c106640]:[0x00001316]:[trace]: Static Request Handler Serving file: ./public/folder1/random.txt
-[2023-06-09 11:20:30.117399]:[0x00007f458c106640]:[0x00001316]:[trace]: -- static file found
-[2023-06-09 11:20:30.117485]:[0x00007f458c106640]:[0x00001316]:[info]: [HandlerMetrics] Static_handler
-[2023-06-09 11:20:30.117502]:[0x00007f458c106640]:[0x00001316]:[info]: [ResponseMetrics] 200
-[2023-06-09 11:20:30.117520]:[0x00007f458c106640]:[0x00001316]:[trace]: Valid request
-[2023-06-09 11:20:30.117635]:[0x00007f458c106640]:[0x00001316]:[trace]: session::handle_read: async_write
-[2023-06-09 11:20:30.127473]:[0x00007f458c907640]:[0x00001316]:[trace]: -Base:
+[2023-06-09 21:49:33.405505]:[0x00007fd6489b3640]:[0x000024c9]:[info]: [IPMetrics] 127.0.0.1
+[2023-06-09 21:49:33.405537]:[0x00007fd6489b3640]:[0x000024c9]:[info]: [RequestPathMetrics] /static1/random.txt
+[2023-06-09 21:49:33.405604]:[0x00007fd6489b3640]:[0x000024c9]:[trace]: Parsed StaticHandler root ./public/folder1 for location /static1
+[2023-06-09 21:49:33.405664]:[0x00007fd6489b3640]:[0x000024c9]:[trace]: Static Request Handler Serving file: ./public/folder1/random.txt
+[2023-06-09 21:49:33.405802]:[0x00007fd6489b3640]:[0x000024c9]:[trace]: -- static file found
+[2023-06-09 21:49:33.405854]:[0x00007fd6489b3640]:[0x000024c9]:[info]: [HandlerMetrics] Static_handler
+[2023-06-09 21:49:33.405885]:[0x00007fd6489b3640]:[0x000024c9]:[info]: [ResponseMetrics] 200
+[2023-06-09 21:49:33.405916]:[0x00007fd6489b3640]:[0x000024c9]:[trace]: Valid request
+[2023-06-09 21:49:33.406044]:[0x00007fd6489b3640]:[0x000024c9]:[trace]: session::handle_read: async_write
+[2023-06-09 21:49:33.412565]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: -Base:
 POST /api/Shoes HTTP/1.1
 Content-Type: application/json
 Content-Length: 17
 
 - IP Address: 127.0.0.1
-[2023-06-09 11:20:30.127556]:[0x00007f458c907640]:[0x00001316]:[info]: [IPMetrics] 127.0.0.1
-[2023-06-09 11:20:30.127574]:[0x00007f458c907640]:[0x00001316]:[info]: [RequestPathMetrics] /api/Shoes
-[2023-06-09 11:20:30.127611]:[0x00007f458c907640]:[0x00001316]:[trace]: Parsed CrudHandler data_path ./public/crud for location /api
-[2023-06-09 11:20:30.127878]:[0x00007f458c907640]:[0x00001316]:[trace]: -- crud create valid 
-[2023-06-09 11:20:30.127903]:[0x00007f458c907640]:[0x00001316]:[info]: [HandlerMetrics] Crud_handler
-[2023-06-09 11:20:30.127917]:[0x00007f458c907640]:[0x00001316]:[info]: [ResponseMetrics] 200
-[2023-06-09 11:20:30.127932]:[0x00007f458c907640]:[0x00001316]:[trace]: Valid request
-[2023-06-09 11:20:30.128033]:[0x00007f458c907640]:[0x00001316]:[trace]: session::handle_read: async_write
-[2023-06-09 11:20:30.130905]:[0x00007f458b905640]:[0x00001316]:[trace]: -Base:
+[2023-06-09 21:49:33.412712]:[0x00007fd6479b1640]:[0x000024c9]:[info]: [IPMetrics] 127.0.0.1
+[2023-06-09 21:49:33.412745]:[0x00007fd6479b1640]:[0x000024c9]:[info]: [RequestPathMetrics] /api/Shoes
+[2023-06-09 21:49:33.412808]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: Parsed CrudHandler data_path ./public/crud for location /api
+[2023-06-09 21:49:33.413147]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: -- crud create valid 
+[2023-06-09 21:49:33.413204]:[0x00007fd6479b1640]:[0x000024c9]:[info]: [HandlerMetrics] Crud_handler
+[2023-06-09 21:49:33.413274]:[0x00007fd6479b1640]:[0x000024c9]:[info]: [ResponseMetrics] 200
+[2023-06-09 21:49:33.413306]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: Valid request
+[2023-06-09 21:49:33.413415]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: session::handle_read: async_write
+[2023-06-09 21:49:33.416531]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: -Base:
 GET /api/Shoes/1 HTTP/1.1
 
 - IP Address: 127.0.0.1
-[2023-06-09 11:20:30.130977]:[0x00007f458b905640]:[0x00001316]:[info]: [IPMetrics] 127.0.0.1
-[2023-06-09 11:20:30.130995]:[0x00007f458b905640]:[0x00001316]:[info]: [RequestPathMetrics] /api/Shoes/1
-[2023-06-09 11:20:30.131027]:[0x00007f458b905640]:[0x00001316]:[trace]: Parsed CrudHandler data_path ./public/crud for location /api
-[2023-06-09 11:20:30.131098]:[0x00007f458b905640]:[0x00001316]:[trace]: -- crud retrieve valid
-[2023-06-09 11:20:30.131123]:[0x00007f458b905640]:[0x00001316]:[info]: [HandlerMetrics] Crud_handler
-[2023-06-09 11:20:30.131138]:[0x00007f458b905640]:[0x00001316]:[info]: [ResponseMetrics] 200
-[2023-06-09 11:20:30.131152]:[0x00007f458b905640]:[0x00001316]:[trace]: Valid request
-[2023-06-09 11:20:30.131245]:[0x00007f458b905640]:[0x00001316]:[trace]: session::handle_read: async_write
-[2023-06-09 11:20:30.151508]:[0x00007f458b905640]:[0x00001316]:[trace]: -Base:
+[2023-06-09 21:49:33.416617]:[0x00007fd6479b1640]:[0x000024c9]:[info]: [IPMetrics] 127.0.0.1
+[2023-06-09 21:49:33.416646]:[0x00007fd6479b1640]:[0x000024c9]:[info]: [RequestPathMetrics] /api/Shoes/1
+[2023-06-09 21:49:33.416691]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: Parsed CrudHandler data_path ./public/crud for location /api
+[2023-06-09 21:49:33.416910]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: -- crud retrieve valid
+[2023-06-09 21:49:33.417000]:[0x00007fd6479b1640]:[0x000024c9]:[info]: [HandlerMetrics] Crud_handler
+[2023-06-09 21:49:33.417023]:[0x00007fd6479b1640]:[0x000024c9]:[info]: [ResponseMetrics] 200
+[2023-06-09 21:49:33.417042]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: Valid request
+[2023-06-09 21:49:33.417165]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: session::handle_read: async_write
+[2023-06-09 21:49:33.421442]:[0x00007fd6481b2640]:[0x000024c9]:[trace]: -Base:
 DELETE /api/Shoes/1 HTTP/1.1
 
 - IP Address: 127.0.0.1
-[2023-06-09 11:20:30.151596]:[0x00007f458b905640]:[0x00001316]:[info]: [IPMetrics] 127.0.0.1
-[2023-06-09 11:20:30.151622]:[0x00007f458b905640]:[0x00001316]:[info]: [RequestPathMetrics] /api/Shoes/1
-[2023-06-09 11:20:30.151690]:[0x00007f458b905640]:[0x00001316]:[trace]: Parsed CrudHandler data_path ./public/crud for location /api
-[2023-06-09 11:20:30.151828]:[0x00007f458b905640]:[0x00001316]:[trace]: -- crud delete id valid
-[2023-06-09 11:20:30.151887]:[0x00007f458b905640]:[0x00001316]:[info]: [HandlerMetrics] Crud_handler
-[2023-06-09 11:20:30.151938]:[0x00007f458b905640]:[0x00001316]:[info]: [ResponseMetrics] 200
-[2023-06-09 11:20:30.151975]:[0x00007f458b905640]:[0x00001316]:[trace]: Valid request
-[2023-06-09 11:20:30.152106]:[0x00007f458b905640]:[0x00001316]:[trace]: session::handle_read: async_write
-[2023-06-09 11:20:30.154885]:[0x00007f458b104640]:[0x00001316]:[trace]: -Base:
+[2023-06-09 21:49:33.421564]:[0x00007fd6481b2640]:[0x000024c9]:[info]: [IPMetrics] 127.0.0.1
+[2023-06-09 21:49:33.421593]:[0x00007fd6481b2640]:[0x000024c9]:[info]: [RequestPathMetrics] /api/Shoes/1
+[2023-06-09 21:49:33.421646]:[0x00007fd6481b2640]:[0x000024c9]:[trace]: Parsed CrudHandler data_path ./public/crud for location /api
+[2023-06-09 21:49:33.421761]:[0x00007fd6481b2640]:[0x000024c9]:[trace]: -- crud delete id valid
+[2023-06-09 21:49:33.421839]:[0x00007fd6481b2640]:[0x000024c9]:[info]: [HandlerMetrics] Crud_handler
+[2023-06-09 21:49:33.421914]:[0x00007fd6481b2640]:[0x000024c9]:[info]: [ResponseMetrics] 200
+[2023-06-09 21:49:33.421951]:[0x00007fd6481b2640]:[0x000024c9]:[trace]: Valid request
+[2023-06-09 21:49:33.422102]:[0x00007fd6481b2640]:[0x000024c9]:[trace]: session::handle_read: async_write
+[2023-06-09 21:49:33.425378]:[0x00007fd6471b0640]:[0x000024c9]:[trace]: -Base:
 GET /api/Shoes/1 HTTP/1.1
 
 - IP Address: 127.0.0.1
-[2023-06-09 11:20:30.154952]:[0x00007f458b104640]:[0x00001316]:[info]: [IPMetrics] 127.0.0.1
-[2023-06-09 11:20:30.154970]:[0x00007f458b104640]:[0x00001316]:[info]: [RequestPathMetrics] /api/Shoes/1
-[2023-06-09 11:20:30.155004]:[0x00007f458b104640]:[0x00001316]:[trace]: Parsed CrudHandler data_path ./public/crud for location /api
-[2023-06-09 11:20:30.155051]:[0x00007f458b104640]:[0x00001316]:[trace]: -- crud file not found
-[2023-06-09 11:20:30.155088]:[0x00007f458b104640]:[0x00001316]:[info]: [HandlerMetrics] Crud_handler
-[2023-06-09 11:20:30.155113]:[0x00007f458b104640]:[0x00001316]:[info]: [ResponseMetrics] 404
-[2023-06-09 11:20:30.155210]:[0x00007f458b104640]:[0x00001316]:[trace]: session::handle_read: async_write
-[2023-06-09 11:20:30.160876]:[0x00007f458c106640]:[0x00001316]:[trace]: -Base:
+[2023-06-09 21:49:33.425492]:[0x00007fd6471b0640]:[0x000024c9]:[info]: [IPMetrics] 127.0.0.1
+[2023-06-09 21:49:33.425529]:[0x00007fd6471b0640]:[0x000024c9]:[info]: [RequestPathMetrics] /api/Shoes/1
+[2023-06-09 21:49:33.425700]:[0x00007fd6471b0640]:[0x000024c9]:[trace]: Parsed CrudHandler data_path ./public/crud for location /api
+[2023-06-09 21:49:33.425825]:[0x00007fd6471b0640]:[0x000024c9]:[trace]: -- crud file not found
+[2023-06-09 21:49:33.425873]:[0x00007fd6471b0640]:[0x000024c9]:[info]: [HandlerMetrics] Crud_handler
+[2023-06-09 21:49:33.425905]:[0x00007fd6471b0640]:[0x000024c9]:[info]: [ResponseMetrics] 404
+[2023-06-09 21:49:33.426060]:[0x00007fd6471b0640]:[0x000024c9]:[trace]: session::handle_read: async_write
+[2023-06-09 21:49:33.431723]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: -Base:
 GET /sleep HTTP/1.0
 
 - IP Address: 127.0.0.1
-[2023-06-09 11:20:30.161003]:[0x00007f458c106640]:[0x00001316]:[info]: [IPMetrics] 127.0.0.1
-[2023-06-09 11:20:30.161067]:[0x00007f458c106640]:[0x00001316]:[info]: [RequestPathMetrics] /sleep
-[2023-06-09 11:20:31.163081]:[0x00007f458a903640]:[0x00001316]:[trace]: -Base:
+[2023-06-09 21:49:33.431850]:[0x00007fd6479b1640]:[0x000024c9]:[info]: [IPMetrics] 127.0.0.1
+[2023-06-09 21:49:33.431889]:[0x00007fd6479b1640]:[0x000024c9]:[info]: [RequestPathMetrics] /sleep
+[2023-06-09 21:49:34.434884]:[0x00007fd6489b3640]:[0x000024c9]:[trace]: -Base:
 GET /echo HTTP/1.0
 
 - IP Address: 127.0.0.1
-[2023-06-09 11:20:31.163195]:[0x00007f458a903640]:[0x00001316]:[info]: [IPMetrics] 127.0.0.1
-[2023-06-09 11:20:31.163307]:[0x00007f458a903640]:[0x00001316]:[info]: [RequestPathMetrics] /echo
-[2023-06-09 11:20:31.163399]:[0x00007f458a903640]:[0x00001316]:[trace]: Echo Request Handler: /echo
-[2023-06-09 11:20:31.163476]:[0x00007f458a903640]:[0x00001316]:[info]: [HandlerMetrics] Echo_handler
-[2023-06-09 11:20:31.163522]:[0x00007f458a903640]:[0x00001316]:[info]: [ResponseMetrics] 200
-[2023-06-09 11:20:31.163563]:[0x00007f458a903640]:[0x00001316]:[trace]: Valid request
-[2023-06-09 11:20:31.163686]:[0x00007f458a903640]:[0x00001316]:[trace]: session::handle_read: async_write
-[2023-06-09 11:20:37.161313]:[0x00007f458c106640]:[0x00001316]:[trace]: Sleep Request Handler: /sleep
-[2023-06-09 11:20:37.161452]:[0x00007f458c106640]:[0x00001316]:[trace]: Valid request
-[2023-06-09 11:20:37.161612]:[0x00007f458c106640]:[0x00001316]:[trace]: session::handle_read: async_write
-[2023-06-09 11:20:39.199794]:[0x00007f458c907640]:[0x00001316]:[trace]: -Base:
+[2023-06-09 21:49:34.435001]:[0x00007fd6489b3640]:[0x000024c9]:[info]: [IPMetrics] 127.0.0.1
+[2023-06-09 21:49:34.435036]:[0x00007fd6489b3640]:[0x000024c9]:[info]: [RequestPathMetrics] /echo
+[2023-06-09 21:49:34.435090]:[0x00007fd6489b3640]:[0x000024c9]:[trace]: Echo Request Handler: /echo
+[2023-06-09 21:49:34.435151]:[0x00007fd6489b3640]:[0x000024c9]:[info]: [HandlerMetrics] Echo_handler
+[2023-06-09 21:49:34.435200]:[0x00007fd6489b3640]:[0x000024c9]:[info]: [ResponseMetrics] 200
+[2023-06-09 21:49:34.435215]:[0x00007fd6489b3640]:[0x000024c9]:[trace]: Valid request
+[2023-06-09 21:49:34.435325]:[0x00007fd6489b3640]:[0x000024c9]:[trace]: session::handle_read: async_write
+[2023-06-09 21:49:40.432100]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: Sleep Request Handler: /sleep
+[2023-06-09 21:49:40.432317]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: Valid request
+[2023-06-09 21:49:40.432645]:[0x00007fd6479b1640]:[0x000024c9]:[trace]: session::handle_read: async_write
+[2023-06-09 21:49:42.444103]:[0x00007fd6471b0640]:[0x000024c9]:[trace]: -Base:
 GET /health HTTP/1.1
 
 - IP Address: 127.0.0.1
-[2023-06-09 11:20:39.199884]:[0x00007f458c907640]:[0x00001316]:[info]: [IPMetrics] 127.0.0.1
-[2023-06-09 11:20:39.199914]:[0x00007f458c907640]:[0x00001316]:[info]: [RequestPathMetrics] /health
-[2023-06-09 11:20:39.199967]:[0x00007f458c907640]:[0x00001316]:[debug]: Health Request Handler: /health
-[2023-06-09 11:20:39.200012]:[0x00007f458c907640]:[0x00001316]:[info]: static file found
-[2023-06-09 11:20:39.200049]:[0x00007f458c907640]:[0x00001316]:[info]: [HandlerMetrics] Health_handler
-[2023-06-09 11:20:39.200082]:[0x00007f458c907640]:[0x00001316]:[info]: [ResponseMetrics] 200
-[2023-06-09 11:20:39.200117]:[0x00007f458c907640]:[0x00001316]:[trace]: Valid request
-[2023-06-09 11:20:39.200286]:[0x00007f458c907640]:[0x00001316]:[trace]: session::handle_read: async_write
+[2023-06-09 21:49:42.444192]:[0x00007fd6471b0640]:[0x000024c9]:[info]: [IPMetrics] 127.0.0.1
+[2023-06-09 21:49:42.444223]:[0x00007fd6471b0640]:[0x000024c9]:[info]: [RequestPathMetrics] /health
+[2023-06-09 21:49:42.444268]:[0x00007fd6471b0640]:[0x000024c9]:[debug]: Health Request Handler: /health
+[2023-06-09 21:49:42.444321]:[0x00007fd6471b0640]:[0x000024c9]:[info]: static file found
+[2023-06-09 21:49:42.444380]:[0x00007fd6471b0640]:[0x000024c9]:[info]: [HandlerMetrics] Health_handler
+[2023-06-09 21:49:42.444417]:[0x00007fd6471b0640]:[0x000024c9]:[info]: [ResponseMetrics] 200
+[2023-06-09 21:49:42.444458]:[0x00007fd6471b0640]:[0x000024c9]:[trace]: Valid request
+[2023-06-09 21:49:42.444575]:[0x00007fd6471b0640]:[0x000024c9]:[trace]: session::handle_read: async_write

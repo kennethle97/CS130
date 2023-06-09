@@ -43,7 +43,7 @@ void Request_Handler_Meme::init_meme_map(){
                 //Get the file_path and file id to parse the json and get the id for the file.
                 auto file_path = path.string();
                 auto file_name = path.filename().string();
-                std::cout<<"file_name: " << file_name << std::endl;
+
                 if(file_name != "meme_id_tracker.txt"){
                         std::cout<<"failed  conditional"<<std::endl;
                         std::string id = file_name.substr(0,file_name.find_last_of("."));
@@ -90,11 +90,6 @@ std::string Request_Handler_Meme::use_configured_root(reply *http_reply){
     }
     
     std::size_t location_pos = uri.find(this->location_);
-    std::cout <<"url: " << uri <<std::endl;
-    std::cout<<"location_pos: "<<location_pos<<std::endl;
-    std::cout<<"location: "<<location_ <<std::endl;
-    std::cout<<"data_path :"<<data_path_<<std::endl;
-    std::cout<<"location length: "<<this->location_.length()<<std::endl;
     if (location_pos != std::string::npos) {
         uri.replace(location_pos, this->location_.length(), data_path_);
     } else {
@@ -114,14 +109,11 @@ std::string Request_Handler_Meme::use_configured_root(reply *http_reply){
         server_logger->log_info("[ResponseMetrics] " + std::to_string(http_reply->result_int()));
         return NULL;
         }
-    std::cout<<"checkpoint 1"<<std::endl;
-    std::cout<<"uri : "<<uri<<std::endl;
+
     std::string filename = uri.substr(uri.find_last_of('/') + 1);
     filename = convert_name_from_url(filename);
-    std::cout<<"new file_name: "<<filename<<std::endl;
     //Replace the ending in case the filename has spaces in it in the form of %20.
-    uri = uri.substr(0,uri.find_last_of('/')+1)+filename;
-    std::cout<<"final uri: "<<uri<<std::endl;    
+    uri = uri.substr(0,uri.find_last_of('/')+1)+filename;    
     return uri;
     }
 
@@ -353,6 +345,7 @@ void Request_Handler_Meme::create_meme(std::string json_data,reply*http_reply){
         new_data.file_path = path;
         new_data.num_likes = 0;
         (*meme_map)[meme_name] = new_data;
+        (*meme_locks)[meme_name] = std::unique_lock<std::mutex>{};
 
         json_contents["likes"] = json::array();
 
@@ -481,7 +474,6 @@ void Request_Handler_Meme::handle_post(std::string meme_path, std::string ip_add
     //We have to decode the second to last segment if it includes spaces (%20) within the url
     
     meme_name = convert_name_from_url(meme_name);
-    std::cout << "meme_name post: " <<meme_name;
 
     std::string like_extension = meme_path.substr(meme_path.find_last_of('/') + 1);
 
@@ -556,10 +548,6 @@ void Request_Handler_Meme::handle_request(const request &http_request, reply *ht
         std::cout <<meme_create<<std::endl;
         std::cout<<meme_like<<std::endl;
         std::string json_contents = http_request.body();
-
-        std::cout << "filename_length: "<<filename.length()<<std::endl;
-        std::cout << "meme/create length: "<<meme_create.length()<<std::endl;
-        std::cout <<"filename_substr: "<<filename.substr(filename.length()-meme_create.length())<<std::endl;
        
 
         if(filename.find(meme_like) != std::string::npos){
@@ -583,7 +571,6 @@ void Request_Handler_Meme::handle_request(const request &http_request, reply *ht
         //Makes sure that meme/create substring is at the end of the url only so you can't make a post command with meme/create/some_random_thing
        
         else if ((filename.length() >= meme_create.length()) && (filename.substr(filename.length() - meme_create.length()) == meme_create)){
-                std::cout<<"Checkpoint 2"<<std::endl;
 
                 bool is_json = is_valid_json(json_contents);
 

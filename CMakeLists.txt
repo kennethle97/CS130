@@ -116,6 +116,9 @@ target_link_libraries(echo_handler_factory_test request_handler_lib http_lib con
 add_executable(static_handler_factory_test tests/static_handler_factory_test.cc)
 target_link_libraries(static_handler_factory_test request_handler_lib http_lib config_parser_lib logger_lib gtest_main Boost::log Boost::log_setup)
 
+add_executable(meme_handler_factory_test tests/meme_handler_factory_test.cc)
+target_link_libraries(meme_handler_factory_test request_handler_lib http_lib config_parser_lib logger_lib gtest_main Boost::log Boost::log_setup)
+
 add_executable(request_handler_sleep_test tests/request_handler_sleep_test.cc)
 target_link_libraries(request_handler_sleep_test request_handler_lib http_lib logger_lib gtest_main Boost::log Boost::log_setup)
 
@@ -139,6 +142,10 @@ target_link_libraries(crud_handler_factory_test gtest_main request_handler_lib h
 
 add_executable(request_handler_health_test tests/request_handler_health_test.cc)
 target_link_libraries(request_handler_health_test gtest_main request_handler_lib http_lib config_parser_lib logger_lib Boost::filesystem Boost::log Boost::log_setup )
+
+#add_executable(request_handler_meme_test tests/request_handler_meme_test.cc)
+#target_link_libraries(request_handler_meme_test gtest_main request_handler_lib http_lib config_parser_lib logger_lib Boost::filesystem Boost::log Boost::log_setup )
+
 
 add_executable(reply_lib_test tests/reply_test.cc)
 target_link_libraries(reply_lib_test http_lib gtest_main)
@@ -178,7 +185,7 @@ gtest_discover_tests(request_handler_crud_test WORKING_DIRECTORY ${CMAKE_CURRENT
 gtest_discover_tests(request_handler_sleep_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(crud_handler_factory_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 gtest_discover_tests(request_handler_sleep_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
-
+gtest_discover_tests(meme_handler_factory_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 
 
 # Update with target/test targets
@@ -204,6 +211,7 @@ generate_coverage_report(TARGETS server server_lib session_lib config_parser_lib
                          request_handler_sleep_test 
                          sleep_handler_factory_test
                          crud_handler_factory_test
+                         meme_handler_factory_test
                          )
 
 

@@ -27,6 +27,10 @@ location /api CRUDHandler{
     data_path ../public/crud///; # absolute folder path
 }
 
+location /meme MemeHandler{
+    data_path ../public/meme
+
+}
 location /sleep SleepHandler {
 
 }

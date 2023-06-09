@@ -1,1 +1,20 @@
-[2023-06-09 11:20:29.013451]:[0x00007f4305541740]:[0x00001313]:[trace]: Sleep Request Handler: /sleep
+[2023-06-09 21:49:32.364956]:[0x00007fde5e548740]:[0x000024c6]:[trace]: Parsed handler EchoHandler for path: /echo
+[2023-06-09 21:49:32.381718]:[0x00007fde5e548740]:[0x000024c6]:[trace]: Dispatched echo handler factory at location: /echo
+[2023-06-09 21:49:32.381843]:[0x00007fde5e548740]:[0x000024c6]:[trace]: Parsed handler HealthHandler for path: /health
+[2023-06-09 21:49:32.381869]:[0x00007fde5e548740]:[0x000024c6]:[trace]: Dispatched health handler factory at location: /health
+[2023-06-09 21:49:32.381896]:[0x00007fde5e548740]:[0x000024c6]:[trace]: Parsed handler StaticHandler for path: /static1
+[2023-06-09 21:49:32.381925]:[0x00007fde5e548740]:[0x000024c6]:[trace]: Dispatched static handler factory at location: /static1
+[2023-06-09 21:49:32.381954]:[0x00007fde5e548740]:[0x000024c6]:[trace]: Parsed handler StaticHandler for path: /static2
+[2023-06-09 21:49:32.381979]:[0x00007fde5e548740]:[0x000024c6]:[trace]: Dispatched static handler factory at location: /static2
+[2023-06-09 21:49:32.382007]:[0x00007fde5e548740]:[0x000024c6]:[trace]: Parsed handler ErrorHandler for path: /
+[2023-06-09 21:49:32.382032]:[0x00007fde5e548740]:[0x000024c6]:[trace]: Dispatched 404 handler factory at location: /
+[2023-06-09 21:49:32.382062]:[0x00007fde5e548740]:[0x000024c6]:[trace]: Parsed handler SleepHandler for path: /sleep
+[2023-06-09 21:49:32.382085]:[0x00007fde5e548740]:[0x000024c6]:[trace]: Dispatched sleep handler factory at location: /sleep
+[2023-06-09 21:49:32.382116]:[0x00007fde5e548740]:[0x000024c6]:[trace]: Parsed handler CRUDHandler for path: /api
+[2023-06-09 21:49:32.382139]:[0x00007fde5e548740]:[0x000024c6]:[trace]: Dispatched crud handler factory at location: /api
+[2023-06-09 21:49:32.382177]:[0x00007fde5e548740]:[0x000024c6]:[trace]: Parsed handler MemeHandler for path: /meme
+[2023-06-09 21:49:32.382208]:[0x00007fde5e548740]:[0x000024c6]:[trace]: Dispatched meme handler factory at location: /meme
+[2023-06-09 21:49:32.382353]:[0x00007fde5e548740]:[0x000024c6]:[trace]: Parsed Meme Handler data_path ../public/meme for location /meme
+[2023-06-09 21:49:32.383097]:[0x00007fde5e548740]:[0x000024c6]:[trace]: --  meme create valid 
+[2023-06-09 21:49:32.383142]:[0x00007fde5e548740]:[0x000024c6]:[info]: [HandlerMetrics] Meme_create_handler
+[2023-06-09 21:49:32.383175]:[0x00007fde5e548740]:[0x000024c6]:[info]: [ResponseMetrics] 200

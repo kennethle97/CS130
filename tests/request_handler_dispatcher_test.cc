@@ -11,6 +11,8 @@
 #include "request_handler/sleep_handler_factory.h"
 #include "request_handler/crud_handler_factory.h"
 #include "request_handler/sleep_handler_factory.h"
+#include "request_handler/meme_handler_factory.h"
+
 
 #include "gtest/gtest.h"
 #include <boost/beast/core.hpp>
@@ -128,3 +130,22 @@ TEST_F(RequestHandlerDispatcherTest, GetHandlerStatic) {
     EXPECT_EQ(static_handler->get_prefix(), "/static1");
     EXPECT_EQ(static_handler->get_root(), "../public/folder1");
 }
+
+
+TEST_F(RequestHandlerDispatcherTest, GetHandlerMeme) {
+    boost::beast::http::request<boost::beast::http::string_body> test_request;
+    test_request.method(boost::beast::http::verb::post);
+    test_request.target("/meme");
+    test_request.version(11); //beast format for 1.1
+    
+    test_request.set(boost::beast::http::field::content_type, "text/plain");
+
+    std::shared_ptr<Request_Handler_Factory> handler = dispatcher->get_request_handler_factory(test_request);
+
+    EXPECT_TRUE(handler != nullptr);
+
+    std::shared_ptr<Meme_Handler_Factory> unknown_handler_factory = std::dynamic_pointer_cast<Meme_Handler_Factory>(handler);
+
+    EXPECT_TRUE(unknown_handler_factory != nullptr);
+}
+
