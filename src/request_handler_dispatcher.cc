@@ -9,8 +9,7 @@
 #include "../include/request_handler/request_404_handler_factory.h"
 #include "../include/request_handler/health_handler_factory.h"
 #include "../include/request_handler/sleep_handler_factory.h"
-#include "../include/request_handler/meme_create_handler_factory.h"
-#include "../include/request_handler/meme_list_handler_factory.h"
+#include "../include/request_handler/meme_handler_factory.h"
 
 
 
@@ -65,14 +64,10 @@ void Request_Handler_Dispatcher::parse_config_handlers(const NginxConfig& config
                 } else if (handler_name == SLEEP_HANDLER) {
                     server_logger->log_trace("Dispatched sleep handler factory at location: " + path);
                     handler_factory = std::make_shared<Sleep_Handler_Factory>(config);
-                } else if (handler_name == MEME_CREATE_HANDLER) {
-                    server_logger->log_trace("Dispatched meme create handler factory at location: " + path);
-                    handler_factory = std::make_shared<Meme_Create_Handler_Factory>(config);
-                } 
-                else if (handler_name == MEME_LIST_HANDLER) {
-                    server_logger->log_trace("Dispatched meme create handler factory at location: " + path);
-                    handler_factory = std::make_shared<Meme_List_Handler_Factory>(config);
-                }else {
+                }  else if (handler_name == MEME_HANDLER) {
+                    server_logger->log_trace("Dispatched meme handler factory at location: " + path);
+                    handler_factory = std::make_shared<Meme_Handler_Factory>(config);
+                } else {
                     server_logger->log_trace("Dispatched 404 handler factory at location: " + path);
                     handler_factory = std::make_shared<Request_404_Handler_Factory>(config);
                 }

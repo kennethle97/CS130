@@ -1,22 +1,25 @@
-#include "../../include/request_handler/request_handler_meme_list.h"
-#include "../../include/request_handler/meme_list_handler_factory.h"
+
+#include "../../include/request_handler/request_handler_meme.h"
+#include "../../include/request_handler/meme_handler_factory.h"
 #include "logger.h"
 
-Meme_List_Handler_Factory::Meme_List_Handler_Factory(NginxConfig config) {
+Meme_Handler_Factory::Meme_Handler_Factory(NginxConfig config) {
     this->config = config;
-}
+    meme_locks = std::make_shared<std::unordered_map<std::string,std::unique_lock<std::mutex>>> ();
+    meme_map = std::make_shared<std::unordered_map<std::string,Request_Handler_Meme::meme_data>> ();
+    meme_map_lock = std::make_shared<std::shared_mutex>();
 
-Request_Handler_Meme_List* Meme_List_Handler_Factory::create(const std::string& location_, const std::string& url_) {
+}   
+
+Request_Handler_Meme* Meme_Handler_Factory::create(const path_uri& location_, const path_uri& url_) {
     std::string data_path = parse_config(this->config, location_);
     if (data_path == "#") {
         return nullptr;
     }
-    return new Request_Handler_Meme_List(data_path, location_, url_);
+    return new Request_Handler_Meme(data_path, location_, url_,meme_locks,meme_map,meme_map_lock);
 }
 
-
-
-std::string Meme_List_Handler_Factory::parse_config(NginxConfig config, std::string location) {
+std::string Meme_Handler_Factory::parse_config(NginxConfig config, std::string location) {
     for (const auto &statement : config.statements_) {
         if (statement->child_block_.get() != nullptr) {
             if (statement->tokens_.size() == 3 && statement->tokens_[0] == "location") {
@@ -26,7 +29,7 @@ std::string Meme_List_Handler_Factory::parse_config(NginxConfig config, std::str
                     path.pop_back();
                 }
 
-                if (handler_name == MEME_LIST_HANDLER && statement->child_block_.get() != nullptr && location == path) {
+                if (handler_name == MEME_HANDLER && statement->child_block_.get() != nullptr && location == path) {
                     ServerLogger *server_logger = ServerLogger::get_server_logger();
                     path_uri data_path = "\0"; 
                     for (const auto &child_statement : statement->child_block_->statements_) {
@@ -35,7 +38,7 @@ std::string Meme_List_Handler_Factory::parse_config(NginxConfig config, std::str
                             while (data_path.length() > 1 && data_path.back() == '/') {
                                 data_path.pop_back();
                             }
-                            server_logger->log_trace("Parsed Meme List Handler data_path " + data_path + " for location " + location);
+                            server_logger->log_trace("Parsed Meme Handler data_path " + data_path + " for location " + location);
                             return data_path;
                         }
                     }
