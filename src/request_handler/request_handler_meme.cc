@@ -402,7 +402,7 @@ void Request_Handler_Meme::handle_get(std::string meme_path, reply *http_reply){
             data = it->second;            
             json_contents = get_entity(data.file_path);
             current_meme_json = json::parse(json_contents);
-            current_meme_json["likes"] = std::to_string(data.num_likes);
+            // current_meme_json["likes"] = std::to_string(data.num_likes);
             response_data.push_back(current_meme_json);                                                     
         }
          write_response(response_data,http_reply);        
@@ -419,7 +419,7 @@ void Request_Handler_Meme::handle_get(std::string meme_path, reply *http_reply){
             data = it->second;
             json_contents = get_entity(data.file_path);
             current_meme_json = json::parse(json_contents);
-            current_meme_json["likes"] = std::to_string(data.num_likes);
+            // current_meme_json["likes"] = std::to_string(data.num_likes);
             response_data.push_back(current_meme_json);                                            
         }
          write_response(response_data,http_reply);
@@ -437,7 +437,7 @@ void Request_Handler_Meme::handle_get(std::string meme_path, reply *http_reply){
             data = it->second;
             json_contents = get_entity(data.file_path);
             current_meme_json = json::parse(json_contents);
-            current_meme_json["likes"] = std::to_string(data.num_likes);
+            // current_meme_json["likes"] = std::to_string(data.num_likes);
             response_data.push_back(current_meme_json);                                                     
         }
          write_response(response_data,http_reply);        
@@ -448,7 +448,7 @@ void Request_Handler_Meme::handle_get(std::string meme_path, reply *http_reply){
             data = get_meme_data(meme_name);
             json_contents = get_entity(data.file_path);
             response_data = json::parse(json_contents);
-            response_data["likes"] = std::to_string(data.num_likes);
+            // response_data["likes"] = std::to_string(data.num_likes);
             write_response(response_data,http_reply);
         } 
     }
@@ -504,7 +504,7 @@ void Request_Handler_Meme::handle_post(std::string meme_path, std::string ip_add
                 data.num_likes += 1;           
                 //Right now just sending the whole.json object back to the client so it would prob refresh the page? 
                 //Could change to just update the number of likes but will need to figure out front end api.
-                json_contents["likes"] = std::to_string(data.num_likes);
+                // json_contents["likes"] = std::to_string(data.num_likes);
                 write_response(json_contents,http_reply);
             } 
         }
