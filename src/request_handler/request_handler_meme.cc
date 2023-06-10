@@ -373,7 +373,7 @@ void Request_Handler_Meme::handle_get(std::string meme_path, reply *http_reply){
     write_base_http(http_reply);
 
     meme_data data;
-    auto response_data = json::object();
+    json response_data;
     std::string json_contents;    
     
     std::string uri = meme_path;
@@ -461,7 +461,7 @@ void Request_Handler_Meme::handle_post(std::string meme_path, std::string ip_add
     write_base_http(http_reply);
 
     std::string uri = meme_path;
-    auto json_contents = json::object();
+    json json_contents;
     
     size_t last_slash_pos = uri.find_last_of('/');
 
