@@ -115,6 +115,11 @@
         margin-top: 8px;
       }
 
+      .tools-area p {
+        font-size: 16px;
+        margin-right: 4px;
+      }
+
       .add-text-btn {
         display: flex;
         align-items: center;
@@ -131,7 +136,7 @@
         align-items: center;
         justify-content: space-between;
         margin-top: 8px;
-        width: 380px;
+        width: 400px;
       }
 
       .name-input {
@@ -164,6 +169,43 @@
         margin: 0 0 8px 0;
         font-size: 22px;
       }
+
+      .color-pick {
+        width: 24px;
+        height: 24px;
+        border-radius: 25%;
+        border: 2px solid black;
+        margin-left: 4px;
+        margin-right: 4px;
+      }
+
+      .color-pick:hover {
+        cursor: pointer;
+      }
+
+      #black {
+        background: black;
+      }
+
+      #white {
+        background: white;
+      }
+
+      #red {
+        background: red;
+      }
+
+      #blue {
+        background: blue;
+      }
+
+      #green {
+        background: green;
+      }
+
+      #yellow {
+        background: yellow;
+      }
     </style>
   </head>
   <body>
@@ -171,7 +213,6 @@
       <div class="navbar">
         <a href="browse.html">Browse Memes</a>
         <a href="create.html">Create Meme</a>
-        <a href="ai.html">Randomizer</a>
       </div>
       <h1 class="header">Meme Generator</h1>
 
@@ -193,11 +234,7 @@
           ondrop="drop(event)"
           ondragover="allowDrop(event)"
         >
-          <!-- <img src="meme.png" alt="" class="meme-img" /> -->
-          <img
-            alt=""
-            class="meme-img"
-          />
+          <img alt="" class="meme-img" />
         </div>
       </div>
 
@@ -213,6 +250,16 @@
       </div>
 
       <div class="tools-area">
+        <p>Text Color:</p> 
+        <div onclick="changeColor(event, this)" class="color-pick" id="black"></div>
+        <div onclick="changeColor(event, this)" class="color-pick" id="white"></div>
+        <div onclick="changeColor(event, this)" class="color-pick" id="red"></div>
+        <div onclick="changeColor(event, this)" class="color-pick" id="blue"></div>
+        <div onclick="changeColor(event, this)" class="color-pick" id="green"></div>
+        <div onclick="changeColor(event, this)" class="color-pick" id="yellow"></div>
+      </div>
+
+      <div class="tools-area">
         <button class="add-text-btn" onclick="addTextBox(event)">
           Add TextBox
         </button>
@@ -222,7 +269,6 @@
         <button class="add-text-btn" onclick="captureCanvas(event)">
           Save Meme
         </button>
-        <!-- <button class="add-text-btn" onclick="clickMe(event)">test</button> -->
       </div>
     </div>
   </body>
@@ -244,6 +290,16 @@
       event.preventDefault();
       dragElement.style.left = event.clientX - offsetX + "px";
       dragElement.style.top = event.clientY - offsetY + "px";
+    }
+
+    function changeColor(event) {
+      event.preventDefault();
+      var meme = document.getElementsByClassName("meme-text");
+      
+      // change the last meme-text's color
+      if (meme.length > 0) {
+        meme[meme.length - 1].style.color = event.target.id;
+      }
     }
 
     function addTextBox(event) {
@@ -276,7 +332,7 @@
 
     function uploadImage(event) {
       event.preventDefault();
-      
+
       var file = document.getElementById("fileToUpload").files[0];
       var reader = new FileReader();
       reader.onloadend = function () {
@@ -306,13 +362,13 @@
 
       html2canvas(document.querySelector("#capture")).then((canvas) => {
         // remove any previous canvas elements
-        var canvasElements = document.getElementsByTagName("canvas");
-        for (var i = 0; i < canvasElements.length; i++) {
-          document.body.removeChild(canvasElements[i]);
+        const canvasEle = document.getElementById("created-meme");
+        if (canvasEle) {
+          canvasEle.remove();
         }
 
         var memeImageStr = canvas.toDataURL("image/jpeg", 0.8);
-        
+
         console.log(memeImageStr);
 
         if (!memeImageStr.startsWith("data:image/jpeg;base64,")) {
@@ -321,43 +377,70 @@
         }
 
         // get input value from class "name-input"
-        var name = document.getElementsByClassName("name-input")[0].value;
-        name = name.replace(/</g, "").replace(/>/g, "");
+        var title = document.getElementsByClassName("name-input")[0].value;
+        title = title.replace(/</g, "").replace(/>/g, "");
+        console.log("title:", title);
+        var name = title.replace(/\s+/g, "_").toLowerCase();
         console.log("name:", name);
-        var nameURL = name.replace(/\s+/g, "_").toLowerCase();
-        console.log("nameURL:", nameURL);
+
+        if (name == "" || title == "") {
+          console.log("Error: empty name");
+          return;
+        }
 
         // make POST request to /meme/create with raw text body of
         var jsonBody = `{
+  "title": "${title}",
   "name": "${name}",
-  "nameURL": "${nameURL}",
   "memeImage": "${memeImageStr}"
-}
-`;
+}`;
         console.log(jsonBody);
 
         // TODO: post request to /meme/create
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/meme/create", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(jsonBody);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            console.log("success");
+            console.log(xhr.response);
+            console.log(typeof xhr.response);
 
-        const mainBody = document.getElementsByClassName("main")[0];
+            const mainBody = document.getElementsByClassName("main")[0];
 
-        const output = document.createElement("div");
-        output.className = "created-meme";
-        output.onclick = function () {
-          window.location.href = 'browse.html';
+            const output = document.createElement("div");
+            output.className = "created-meme";
+            output.id = "created-meme";
+            output.onclick = function () {
+              window.location.href = "browse.html";
+            };
+
+            const titleEle = document.createElement("p");
+            titleEle.className = "meme-title";
+            titleEle.innerHTML = "Your Meme:";
+            output.appendChild(titleEle);
+            output.appendChild(canvas);
+            mainBody.appendChild(output);
+          } else if (xhr.readyState == 4 && xhr.status != 200) {
+            console.log("error");
+            console.log(xhr.response);
+            const mainBody = document.getElementsByClassName("main")[0];
+            const output = document.createElement("div");
+            output.className = "created-meme";
+            output.id = "created-meme";
+
+            const titleEle = document.createElement("p");
+            titleEle.className = "meme-title";
+            titleEle.innerHTML = "Failed to save meme";
+            output.appendChild(titleEle);
+            mainBody.appendChild(output);
+          }
+          // reset border of meme-texts after saving
+          for (var i = 0; i < memeTexts.length; i++) {
+            memeTexts[i].style.border = "1px dashed black";
+          }
         };
-        
-        const title = document.createElement("p");
-        title.className = "meme-title";
-        title.innerHTML = "Your Meme:";
-        output.appendChild(title);
-        output.appendChild(canvas);
-        mainBody.appendChild(output);
-
-        // reset border of meme-texts after saving
-        for (var i = 0; i < memeTexts.length; i++) {
-          memeTexts[i].style.border = "1px dashed black";
-        }
-
       });
     }
   </script>
