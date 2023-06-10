@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- <link rel="stylesheet" href="styles.css" /> -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+      @font-face {
+        font-family: Impact;
+        src: url("impact.ttf"), url("Impacted.ttf"), url("unicode.impact.ttf");
+      }
+
+      body {
+        font-family: monospace;
+        background: #f0f0f0;
+      }
+
+      h1 {
+        margin: 0;
+      }
+
+      .main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .header {
+        margin-top: 20px;
+      }
+
+      .navbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 70%;
+        height: 48px;
+        background: #f0f0f0;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .navbar a {
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+        text-decoration: none;
+        color: #000;
+      }
+
+      .navbar a:hover {
+        cursor: pointer;
+        color: #aaa;
+      }
+
+      .meme-display {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 24px;
+        /* padding: 8px; */
+        /* border: 1px solid black; */
+      }
+
+      .meme {
+        position: relative;
+        max-width: 600px;
+        width: 100%;
+      }
+
+      .meme-img {
+        width: 100%;
+        height: auto;
+      }
+
+      .meme-text {
+        position: absolute;
+        top: calc(50% - 1.5em);
+        left: 10px;
+        /* border: none; */
+        border: 1px dashed black;
+        background: transparent;
+        max-width: 500px;
+        max-height: 300px;
+        padding: 8px;
+      }
+
+      .meme-text p {
+        text-align: center;
+        font-size: 1.8em;
+        font-family: Impact, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .meme-text p:hover {
+        cursor: text;
+      }
+
+      .meme-text:hover {
+        cursor: move;
+      }
+
+      .meme-text:focus {
+        outline: none;
+      }
+
+      .tools-area {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        /* width: 220px; */
+        height: 36px;
+        margin-top: 8px;
+      }
+
+      .add-text-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1em;
+        margin-left: 4px;
+        margin-right: 4px;
+      }
+
+      .name-area {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 8px;
+        width: 380px;
+      }
+
+      .name-input {
+        padding: 4px;
+        padding-left: 8px;
+        font-family: monospace;
+        font-size: 16px;
+        border-radius: 8px;
+      }
+
+      .img-upload {
+        margin-left: 90px;
+        margin-top: 24px;
+        margin-bottom: 8px;
+      }
+
+      .created-meme {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .created-meme:hover {
+        cursor: pointer;
+      }
+
+      .meme-title {
+        margin: 0 0 8px 0;
+        font-size: 22px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="navbar">
+        <a href="browse.html">Browse Memes</a>
+        <a href="create.html">Create Meme</a>
+        <a href="ai.html">Randomizer</a>
+      </div>
+      <h1 class="header">Meme Generator</h1>
+
+      <div class="img-upload">
+        <input
+          class="add-text-btn"
+          type="file"
+          name="fileToUpload"
+          id="fileToUpload"
+          accept="image/*"
+          onchange="uploadImage(event)"
+        />
+      </div>
+
+      <div class="meme-display">
+        <div
+          id="capture"
+          class="meme"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        >
+          <!-- <img src="meme.png" alt="" class="meme-img" /> -->
+          <img
+            alt=""
+            class="meme-img"
+          />
+        </div>
+      </div>
+
+      <div class="name-area">
+        <h2>Name your meme:</h2>
+        <input
+          type="text"
+          id="name"
+          placeholder="Name"
+          class="name-input"
+          maxlength="100"
+        />
+      </div>
+
+      <div class="tools-area">
+        <button class="add-text-btn" onclick="addTextBox(event)">
+          Add TextBox
+        </button>
+        <button class="add-text-btn" onclick="removeTextBox(event)">
+          Remove TextBox
+        </button>
+        <button class="add-text-btn" onclick="captureCanvas(event)">
+          Save Meme
+        </button>
+        <!-- <button class="add-text-btn" onclick="clickMe(event)">test</button> -->
+      </div>
+    </div>
+  </body>
+
+  <script>
+    var offsetX, offsetY, dragElement;
+
+    function allowDrop(event) {
+      event.preventDefault();
+    }
+
+    function drag(event, elt) {
+      dragElement = document.getElementById(elt.id);
+      offsetX = event.clientX - dragElement.offsetLeft;
+      offsetY = event.clientY - dragElement.offsetTop;
+    }
+
+    function drop(event) {
+      event.preventDefault();
+      dragElement.style.left = event.clientX - offsetX + "px";
+      dragElement.style.top = event.clientY - offsetY + "px";
+    }
+
+    function addTextBox(event) {
+      event.preventDefault();
+      var meme = document.getElementsByClassName("meme")[0];
+      var input = document.createElement("div");
+      // input.setAttribute("maxlength", "100");
+      input.setAttribute("id", `draggableInput${meme.children.length}`);
+      input.setAttribute("class", "meme-text");
+      input.setAttribute("draggable", "true");
+      input.setAttribute("ondragstart", "drag(event, this)");
+      input.setAttribute("contenteditable", "true");
+      input.innerHTML = "<p>Text Here</p>";
+
+      // check if meme-img src is empty
+      var img = document.getElementsByClassName("meme-img")[0];
+      if (img.src == "") {
+        return;
+      }
+      meme.appendChild(input);
+    }
+
+    function removeTextBox(event) {
+      event.preventDefault();
+      var meme = document.getElementsByClassName("meme")[0];
+      if (meme.children.length > 1) {
+        meme.removeChild(meme.lastChild);
+      }
+    }
+
+    function uploadImage(event) {
+      event.preventDefault();
+      
+      var file = document.getElementById("fileToUpload").files[0];
+      var reader = new FileReader();
+      reader.onloadend = function () {
+        var meme = document.getElementsByClassName("meme")[0];
+        var img = document.getElementsByClassName("meme-img")[0];
+        img.src = reader.result;
+      };
+      if (file) {
+        // check file size
+        if (file.size > 50000000) {
+          alert("File size must be less than 5MB");
+          return;
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function captureCanvas(event) {
+      event.preventDefault();
+      // get children of docuemnt.getElementById("capture") that have class name
+      // "meme-text" and set their border to none
+      var meme = document.getElementsByClassName("meme")[0];
+      var memeTexts = meme.getElementsByClassName("meme-text");
+      for (var i = 0; i < memeTexts.length; i++) {
+        memeTexts[i].style.border = "none";
+      }
+
+      html2canvas(document.querySelector("#capture")).then((canvas) => {
+        // remove any previous canvas elements
+        var canvasElements = document.getElementsByTagName("canvas");
+        for (var i = 0; i < canvasElements.length; i++) {
+          document.body.removeChild(canvasElements[i]);
+        }
+
+        var memeImageStr = canvas.toDataURL("image/jpeg", 0.8);
+        
+        console.log(memeImageStr);
+
+        if (!memeImageStr.startsWith("data:image/jpeg;base64,")) {
+          console.log("Error: bad image data");
+          return;
+        }
+
+        // get input value from class "name-input"
+        var name = document.getElementsByClassName("name-input")[0].value;
+        name = name.replace(/</g, "").replace(/>/g, "");
+        console.log("name:", name);
+        var nameURL = name.replace(/\s+/g, "_").toLowerCase();
+        console.log("nameURL:", nameURL);
+
+        // make POST request to /meme/create with raw text body of
+        var jsonBody = `{
+  "name": "${name}",
+  "nameURL": "${nameURL}",
+  "memeImage": "${memeImageStr}"
+}
+`;
+        console.log(jsonBody);
+
+        // TODO: post request to /meme/create
+
+        const mainBody = document.getElementsByClassName("main")[0];
+
+        const output = document.createElement("div");
+        output.className = "created-meme";
+        output.onclick = function () {
+          window.location.href = 'browse.html';
+        };
+        
+        const title = document.createElement("p");
+        title.className = "meme-title";
+        title.innerHTML = "Your Meme:";
+        output.appendChild(title);
+        output.appendChild(canvas);
+        mainBody.appendChild(output);
+
+        // reset border of meme-texts after saving
+        for (var i = 0; i < memeTexts.length; i++) {
+          memeTexts[i].style.border = "1px dashed black";
+        }
+
+      });
+    }
+  </script>
+</html>
