@@ -139,7 +139,7 @@ void Request_Handler_Meme::sort_meme_time(){
     }    
     std::sort(ordered_time.begin(), ordered_time.end(),
               [](const auto& a, const auto& b) {
-                  return a.first < b.first;
+                  return a.first > b.first;
               });
 }
 
@@ -373,7 +373,7 @@ void Request_Handler_Meme::handle_get(std::string meme_path, reply *http_reply){
     write_base_http(http_reply);
 
     meme_data data;
-    json response_data;
+    auto response_data = json::object();
     std::string json_contents;    
     
     std::string uri = meme_path;
@@ -461,7 +461,7 @@ void Request_Handler_Meme::handle_post(std::string meme_path, std::string ip_add
     write_base_http(http_reply);
 
     std::string uri = meme_path;
-    json json_contents;
+    auto json_contents = json::object();
     
     size_t last_slash_pos = uri.find_last_of('/');
 

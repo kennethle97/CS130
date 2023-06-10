@@ -28,7 +28,7 @@ location /api CRUDHandler{
 }
 
 location /meme MemeHandler{
-    data_path ../public/meme
+    data_path ./integration_tests/public/meme;
 
 }
 location /sleep SleepHandler {
