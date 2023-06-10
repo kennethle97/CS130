@@ -69,15 +69,10 @@ TEST_F(MemeHandlerFactoryTest, MemeFactoryTest) {
 
     Request_Handler_Meme* request_meme_handler = handler_factory.create("/meme", "/meme/create");
     std::string data_path = request_meme_handler->get_data_path();
-
-    boost::filesystem::path tracker_path(data_path + "/meme_id_tracker.txt");
-    std::ofstream file(tracker_path.string());
-    file << 0;
-    file.close();
-    
     
     request_meme_handler->handle_request(test_request, &test_reply);
 
+    boost::filesystem::path tracker_path(data_path + "/meme_id_tracker.txt");
     std::ifstream file_new(tracker_path.string());
     int field_id;
     file_new >> field_id;
@@ -91,7 +86,11 @@ TEST_F(MemeHandlerFactoryTest, MemeFactoryTest) {
     EXPECT_EQ(handler_factory.meme_locks->size(),1);
     EXPECT_EQ(field_id,1);
 
-    boost::filesystem::remove(tracker_path);
+    boost::filesystem::remove (tracker_path);
     boost::filesystem::remove(data_path + "/1.json");
+
+    std::ofstream file(tracker_path.string());
+    file << 0;
+    file.close();
 
 }
